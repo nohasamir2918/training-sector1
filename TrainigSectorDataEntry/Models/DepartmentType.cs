@@ -7,8 +7,6 @@ public partial class DepartmentType
 {
     public int ID { get; set; }
 
-    public int? SpecializationId { get; set; }
-
     public string? NameAr { get; set; }
 
     public string? NameEn { get; set; }
@@ -30,6 +28,4 @@ public partial class DepartmentType
     public DateOnly? UserDeletionDate { get; set; }
 
     public virtual ICollection<Departmentsandbranch> Departmentsandbranches { get; set; } = new List<Departmentsandbranch>();
-
-    public virtual Specialization? Specialization { get; set; }
 }

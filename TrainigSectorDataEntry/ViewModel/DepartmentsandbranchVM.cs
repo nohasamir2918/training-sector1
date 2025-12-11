@@ -32,12 +32,16 @@ namespace TrainigSectorDataEntry.ViewModel
         public int? UserDeletionId { get; set; }
 
         public DateOnly? UserDeletionDate { get; set; }
+    
 
-        public virtual ICollection<DepartmentsandBranchesDetail> DepartmentsandBranchesDetails { get; set; } = new List<DepartmentsandBranchesDetail>();
+
+
+        public virtual ICollection<DepartmentsandBranchesImage> DepartmentsandBranchesImages { get; set; } = new List<DepartmentsandBranchesImage>();
+
         public virtual DepartmentType? DepatmentType { get; set; }
         [ValidateNever]
         public virtual EducationalFacility EducationalFacilities { get; set; } = null!;
         [ValidateNever]
-        public virtual Specialization Specialization { get; set; } = null!;
+        public virtual ICollection<Specialization> Specializations { get; set; } = new List<Specialization>();
     }
 }

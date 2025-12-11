@@ -3,23 +3,21 @@ using System.Collections.Generic;
 
 namespace TrainigSectorDataEntry.Models;
 
-public partial class News
+public partial class SpecializationImage
 {
     public int Id { get; set; }
 
-    public int TrainigSectorId { get; set; }
+    public int SpecializationId { get; set; }
 
-    public string TitleAr { get; set; } = null!;
+    public string ImagePath { get; set; } = null!;
 
-    public string TitleEn { get; set; } = null!;
+    public string? TitleAr { get; set; }
 
-    public string ShortDescriptionAr { get; set; } = null!;
+    public string? TitleEn { get; set; }
 
-    public string ShortDescriptionEn { get; set; } = null!;
+    public string? DescriptionAr { get; set; }
 
-    public string DescriptionAr { get; set; } = null!;
-
-    public string DescriptionEn { get; set; } = null!;
+    public string? DescriptionEn { get; set; }
 
     public bool? IsDeleted { get; set; }
 
@@ -37,5 +35,5 @@ public partial class News
 
     public bool IsActive { get; set; }
 
-    public virtual ICollection<NewsImage> NewsImages { get; set; } = new List<NewsImage>();
+    public virtual Specialization Specialization { get; set; } = null!;
 }

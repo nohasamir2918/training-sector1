@@ -24,8 +24,6 @@ public partial class TrainingSectorDbContext : DbContext
 
     public virtual DbSet<DepartmentType> DepartmentTypes { get; set; }
 
-    public virtual DbSet<DepartmentsandBranchesDetail> DepartmentsandBranchesDetails { get; set; }
-
     public virtual DbSet<DepartmentsandBranchesImage> DepartmentsandBranchesImages { get; set; }
 
     public virtual DbSet<Departmentsandbranch> Departmentsandbranches { get; set; }
@@ -57,6 +55,8 @@ public partial class TrainingSectorDbContext : DbContext
     public virtual DbSet<Slider> Sliders { get; set; }
 
     public virtual DbSet<Specialization> Specializations { get; set; }
+
+    public virtual DbSet<SpecializationImage> SpecializationImages { get; set; }
 
     public virtual DbSet<StagesAndHall> StagesAndHalls { get; set; }
 
@@ -132,22 +132,6 @@ public partial class TrainingSectorDbContext : DbContext
             entity.Property(e => e.NameAr).HasMaxLength(250);
             entity.Property(e => e.NameEn).HasMaxLength(250);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
-
-            entity.HasOne(d => d.Specialization).WithMany(p => p.DepartmentTypes)
-                .HasForeignKey(d => d.SpecializationId)
-                .HasConstraintName("FK_DepartmentType_Specialization");
-        });
-
-        modelBuilder.Entity<DepartmentsandBranchesDetail>(entity =>
-        {
-            entity.Property(e => e.NameAr).HasMaxLength(50);
-            entity.Property(e => e.NameEn).HasMaxLength(50);
-            entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
-
-            entity.HasOne(d => d.DepartmentsandBranches).WithMany(p => p.DepartmentsandBranchesDetails)
-                .HasForeignKey(d => d.DepartmentsandBranchesId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_DepartmentsandBranchesDetails_Departmentsandbranches");
         });
 
         modelBuilder.Entity<DepartmentsandBranchesImage>(entity =>
@@ -156,10 +140,10 @@ public partial class TrainingSectorDbContext : DbContext
             entity.Property(e => e.TitleEn).HasMaxLength(50);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
-            entity.HasOne(d => d.DepartmentsandBranchesDetails).WithMany(p => p.DepartmentsandBranchesImages)
-                .HasForeignKey(d => d.DepartmentsandBranchesDetailsId)
+            entity.HasOne(d => d.Departmentsandbranches).WithMany(p => p.DepartmentsandBranchesImages)
+                .HasForeignKey(d => d.DepartmentsandbranchesId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_DepartmentsandBranchesImages_DepartmentsandBranchesDetails");
+                .HasConstraintName("FK_DepartmentsandBranchesImages_Departmentsandbranches");
         });
 
         modelBuilder.Entity<Departmentsandbranch>(entity =>
@@ -176,11 +160,6 @@ public partial class TrainingSectorDbContext : DbContext
                 .HasForeignKey(d => d.EducationalFacilitiesId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Departmentsandbranches_EducationalFacilities");
-
-            entity.HasOne(d => d.Specialization).WithMany(p => p.Departmentsandbranches)
-                .HasForeignKey(d => d.SpecializationId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Departmentsandbranches_Specialization");
         });
 
         modelBuilder.Entity<EducationalFacility>(entity =>
@@ -256,11 +235,6 @@ public partial class TrainingSectorDbContext : DbContext
             entity.Property(e => e.ShortDescriptionAr).HasMaxLength(50);
             entity.Property(e => e.ShortDescriptionEn).HasMaxLength(50);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
-
-            entity.HasOne(d => d.TrainigSector).WithMany(p => p.News)
-                .HasForeignKey(d => d.TrainigSectorId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_News_TrainingSector");
         });
 
         modelBuilder.Entity<NewsImage>(entity =>
@@ -357,10 +331,23 @@ public partial class TrainingSectorDbContext : DbContext
             entity.Property(e => e.NameEn).HasMaxLength(50);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
-            entity.HasOne(d => d.EducationalFacilities).WithMany(p => p.Specializations)
-                .HasForeignKey(d => d.EducationalFacilitiesId)
+            entity.HasOne(d => d.Departmentsandbranches).WithMany(p => p.Specializations)
+                .HasForeignKey(d => d.DepartmentsandbranchesId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Specialization_EducationalFacilities");
+                .HasConstraintName("FK_Specialization_Departmentsandbranches");
+        });
+
+        modelBuilder.Entity<SpecializationImage>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.TitleAr).HasMaxLength(50);
+            entity.Property(e => e.TitleEn).HasMaxLength(50);
+            entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.Specialization).WithMany(p => p.SpecializationImages)
+                .HasForeignKey(d => d.SpecializationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SpecializationImages_Specialization");
         });
 
         modelBuilder.Entity<StagesAndHall>(entity =>

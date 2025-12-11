@@ -7,7 +7,7 @@ public partial class DepartmentsandBranchesImage
 {
     public int Id { get; set; }
 
-    public int DepartmentsandBranchesDetailsId { get; set; }
+    public int DepartmentsandbranchesId { get; set; }
 
     public string ImagePath { get; set; } = null!;
 
@@ -35,5 +35,5 @@ public partial class DepartmentsandBranchesImage
 
     public bool IsActive { get; set; }
 
-    public virtual DepartmentsandBranchesDetail DepartmentsandBranchesDetails { get; set; } = null!;
+    public virtual Departmentsandbranch Departmentsandbranches { get; set; } = null!;
 }

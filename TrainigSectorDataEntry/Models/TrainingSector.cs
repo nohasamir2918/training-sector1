@@ -35,8 +35,6 @@ public partial class TrainingSector
 
     public virtual ICollection<EducationalFacility> EducationalFacilities { get; set; } = new List<EducationalFacility>();
 
-    public virtual ICollection<News> News { get; set; } = new List<News>();
-
     public virtual ICollection<Slider> Sliders { get; set; } = new List<Slider>();
 
     public virtual ICollection<StagesAndHall> StagesAndHalls { get; set; } = new List<StagesAndHall>();

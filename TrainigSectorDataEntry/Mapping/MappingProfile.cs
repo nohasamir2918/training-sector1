@@ -15,7 +15,7 @@ public class MappingProfile : Profile
         CreateMap<DepartmentType, DepartmentTypeVM>().ReverseMap();
         CreateMap<News, NewsVM>().ReverseMap();
         CreateMap<NewsImage, NewsImageVM>().ReverseMap();
-        //CreateMap<Service, ServiceVM>().ReverseMap();
+        CreateMap<Service, ServiceVM>().ReverseMap();
         CreateMap<HistoryBreif, HistoryBreifVM>().ReverseMap();
         CreateMap<Project, ProjectVM>().ReverseMap();
         CreateMap<QualityCertificate, QualityCertificateVM>().ReverseMap();
@@ -28,11 +28,7 @@ public class MappingProfile : Profile
         CreateMap<SucessStory, SucessStoryVM>().ReverseMap();
         CreateMap<TrainingCoursesType, TrainingCoursesTypeVM>().ReverseMap();
         CreateMap<TrainingCourse, TrainingCourseVM>().ReverseMap();
-        CreateMap<Service, ServiceVM>()
-    .ForMember(dest => dest.EducationalFacilitiesNameAr,
-               opt => opt.MapFrom(src => src.EducationalFacilities.NameAr))
-    .ForMember(dest => dest.EducationalFacilitiesNameEn,
-               opt => opt.MapFrom(src => src.EducationalFacilities.NameEn));
+
 
     }
 }

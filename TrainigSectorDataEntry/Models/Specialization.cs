@@ -7,8 +7,6 @@ public partial class Specialization
 {
     public int Id { get; set; }
 
-    public int EducationalFacilitiesId { get; set; }
-
     public string NameAr { get; set; } = null!;
 
     public string NameEn { get; set; } = null!;
@@ -29,9 +27,9 @@ public partial class Specialization
 
     public DateOnly? UserDeletionDate { get; set; }
 
-    public virtual ICollection<DepartmentType> DepartmentTypes { get; set; } = new List<DepartmentType>();
+    public int DepartmentsandbranchesId { get; set; }
 
-    public virtual ICollection<Departmentsandbranch> Departmentsandbranches { get; set; } = new List<Departmentsandbranch>();
+    public virtual Departmentsandbranch Departmentsandbranches { get; set; } = null!;
 
-    public virtual EducationalFacility EducationalFacilities { get; set; } = null!;
+    public virtual ICollection<SpecializationImage> SpecializationImages { get; set; } = new List<SpecializationImage>();
 }
