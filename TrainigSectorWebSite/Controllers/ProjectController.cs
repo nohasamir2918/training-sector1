@@ -38,24 +38,17 @@ namespace TrainigSectorWebSite.Controllers
           mapPath: _localizer["StudentServices"],
           pageName: _localizer["ExamSchedules"],
           activePage: _localizer["ExamSchedules"]);
-            var ProjectsList = await _ProjectsService.GetAllAsync();
-            var ProjectImagesList = await _ProjectImagesService.GetAllAsync();
 
-  
 
-            
-            foreach (var item in ProjectsList)
-            {
-                if (ProjectImagesList.Where(a => a.ProjectsId == item.Id).ToList().Count > 0)
-                {
+            var projectsList = await _ProjectsService.GetAllAsync(
+              false,
+              x => x.ProjectImages
+          );
 
-                    item.ProjectImages = ProjectImagesList.Where(a => a.ProjectsId == item.Id).ToList();
-                }
-            }
-            var viewModelList = _mapper.Map<List<NewsVM>>(newsList);
 
-            // return View(viewModelList);
+            var viewModelList = _mapper.Map<List<NewsVM>>(projectsList.Where(a=>a.EducationalFacilitiesId==1));
 
+        
 
             // === PAGINATION ===
             int totalItems = viewModelList.Count;
