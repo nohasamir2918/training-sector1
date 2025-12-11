@@ -35,16 +35,14 @@ namespace TrainigSectorWebSite.Controllers
             pageName: _localizer["TrainingHistory"],
             activePage: _localizer["TrainingHistory"]
 );
-            var result = await _HistoryBreif.GetAllAsyncByEducationalFacilitiesId(false, 7, x => x.HistoryBerifImages);
+            var result = await _HistoryBreif.GetAllAsyncByEducationalFacilitiesId(false, ID, x => x.HistoryBerifImages);
 
 
 
 
 
 
-            ViewData["Breadcrumb_MapPath"] = "معامل";
-            ViewData["Breadcrumb_PageName"] = "TrainingHistory";
-            ViewData["Breadcrumb_ActivePage"] = "معامل هندسية";
+         
 
             var viewModelList = _mapper.Map<List<HistoryBreifVM>>(result);
             return View(viewModelList);
