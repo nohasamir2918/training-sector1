@@ -17,7 +17,7 @@ namespace TrainigSectorDataEntry.Repositery
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(bool includeDeleted = false,params Expression<Func<T, object>>[] includes)
+        public async Task<IEnumerable<T>> GetAllAsync(bool includeDeleted = false)
         {
             var query = _dbSet.AsQueryable();
 
@@ -25,10 +25,7 @@ namespace TrainigSectorDataEntry.Repositery
             {
                 query = query.Where(e => EF.Property<bool?>(e, "IsDeleted") != true);
             }
-            foreach (var include in includes)
-            {
-                query = query.Include(include);
-            }
+
             return await query.ToListAsync();
         }
 
@@ -114,5 +111,32 @@ namespace TrainigSectorDataEntry.Repositery
             return await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
         }
 
+
+        public async Task<IEnumerable<T>> GetAllAsyncByEducationalFacilitiesId(bool includeDeleted=false,int EducationalFacilitiesId=0, params Expression<Func<T, object>>[] includes)
+       {
+            var query = _dbSet.AsQueryable();
+
+            // Apply includes
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+
+
+            if (!includeDeleted && typeof(T).GetProperty("IsDeleted") != null)
+            {
+                query = query.Where(e => EF.Property<bool?>(e, "IsDeleted") != true);
+            }
+            if (EducationalFacilitiesId != 0)
+            {
+                query = query.Where(e => EF.Property<int?>(e, "EducationalFacilitiesId") == EducationalFacilitiesId);
+            }
+            return await query.ToListAsync();
+        }
+
+      
     }
 }
