@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Projects" xml:space="preserve">
+    <value>المشروعات</value>
+  </data>
+  <data name="historyMinister" xml:space="preserve">
+    <value>نبذة تاريخية عن مركز اعداد القادة</value>
+  </data>
+  <data name="TainingCourses" xml:space="preserve">
+    <value>دورات تدريبية</value>
+  </data>
+  <data name="TrainingCourseName" xml:space="preserve">
+    <value>أسم الدورة التدريبية</value>
+  </data>
+  <data name="Workshopsandlaboratories" xml:space="preserve">
+    <value>الورش والمعامل</value>
+  </data>
+  <data name="JobConduct" xml:space="preserve">
+    <value>السلوك الوظيفي</value>
+  </data>
+  <data name="OurServices" xml:space="preserve">
+    <value>خدماتنا</value>
+  </data>
+  <data name="Courses" xml:space="preserve">
+    <value>دورات</value>
+  </data>
+  <data name="Theater" xml:space="preserve">
+    <value>مسرح</value>
+  </data>
+  <data name="Halls" xml:space="preserve">
+    <value>قاعات</value>
+  </data>
+  <data name="EducationalFacilities" xml:space="preserve">
+    <value>المنشأت التعليمية</value>
+  </data>
+  <data name="AdvancedTechnicalInstituteForIndustries" xml:space="preserve">
+    <value>المعهد الفني للصناعات المتطورة</value>
+  </data>
+  <data name="HistoricalOverview" xml:space="preserve">
+    <value>نبذة تاريخية</value>
+  </data>
+  <data name="DepartmentsDivisions" xml:space="preserve">
+    <value>الأقسام والشعب</value>
+  </data>
+  <data name="MechanicalDivision" xml:space="preserve">
+    <value>شعبة الميكانيكا</value>
+  </data>
+  <data name="ElectricalElectronicsDivision" xml:space="preserve">
+    <value>شعبة الكهرباء والإلكترونيات</value>
+  </data>
+  <data name="ComputerDivision" xml:space="preserve">
+    <value>شعبة الحاسبات</value>
+  </data>
+  <data name="ChemistryDivision" xml:space="preserve">
+    <value>شعبة الكيمياء</value>
+  </data>
+  <data name="BasicSciencesDivision" xml:space="preserve">
+    <value>شعبة العلوم الأساسية</value>
+  </data>
+  <data name="MechatronicsDivision" xml:space="preserve">
+    <value>شعبة ميكاترونيكس</value>
+  </data>
+  <data name="LabsWorkshops" xml:space="preserve">
+    <value>المعامل و الورش</value>
+  </data>
+  <data name="StudentServices" xml:space="preserve">
+    <value>خدمات طلابية</value>
+  </data>
+  <data name="StudySchedules" xml:space="preserve">
+    <value>الجداول الدراسية</value>
+  </data>
+  <data name="ExamSchedules" xml:space="preserve">
+    <value>جداول إمتحانات</value>
+  </data>
+  <data name="StudentActivities" xml:space="preserve">
+    <value>أنشطة طلابية</value>
+  </data>
+  <data name="AnnouncementsAlerts" xml:space="preserve">
+    <value>إعلانات وتنبيهات</value>
+  </data>
+  <data name="StudentResults" xml:space="preserve">
+    <value>نتائج الطلاب</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>الجودة</value>
+  </data>
+  <data name="TechnologicalCollege" xml:space="preserve">
+    <value>الكلية التكنولوجيه</value>
+  </data>
+  <data name="CampusDepartments" xml:space="preserve">
+    <value>أقسام المجمع</value>
+  </data>
+  <data name="HelwanSecondarySchoolForAppliedTechnology" xml:space="preserve">
+    <value>مدرسة حلوان الثانوية للتكنولوجيا التطبيقية</value>
+  </data>
+  <data name="SchoolDepartments" xml:space="preserve">
+    <value>أقسام المدرسة</value>
+  </data>
+  <data name="ElSalamAppliedTechnologySecondarySchool" xml:space="preserve">
+    <value>مدرسة الثانوية للتكنولوجيا التطبيقية بالسلام</value>
+  </data>
+  <data name="TrainingFacilities" xml:space="preserve">
+    <value>المنشأت التدريبية</value>
+  </data>
+  <data name="LeadershipDevelopmentCenter" xml:space="preserve">
+    <value>مركز إعداد القادة</value>
+  </data>
+  <data name="TrainingCourses" xml:space="preserve">
+    <value>الدورات التدريبية</value>
+  </data>
+  <data name="Labs" xml:space="preserve">
+    <value>معامل</value>
+  </data>
+  <data name="EngineeringLabs" xml:space="preserve">
+    <value>معامل هندسية</value>
+  </data>
+  <data name="ChemicalLabs" xml:space="preserve">
+    <value>معامل كميائية</value>
+  </data>
+  <data name="Workshops" xml:space="preserve">
+    <value>ورش</value>
+  </data>
+  <data name="ProductionEngineeringWorkshops" xml:space="preserve">
+    <value>ورش هندسة الإنتاج</value>
+  </data>
+  <data name="MinistryOfMilitaryProduction" xml:space="preserve">
+    <value>وزارة الإنتاج الحربي</value>
+  </data>
+  <data name="MinistryOfHigherEducation" xml:space="preserve">
+    <value>وزارة التعليم العالي</value>
+  </data>
+  <data name="MinistryOfEducation" xml:space="preserve">
+    <value>وزارة التربية والتعليم</value>
+  </data>
+  <data name="EgyptianAcademyForEngineering" xml:space="preserve">
+    <value>الأكاديمية المصرية للهندسة</value>
+  </data>
+  <data name="QuickNavigation" xml:space="preserve">
+    <value>التصفح السريع</value>
+  </data>
+  <data name="CommunityParticipation" xml:space="preserve">
+    <value>مشاركات مجتمعية</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>الأخبار</value>
+  </data>
+  <data name="ComplaintsSuggestions" xml:space="preserve">
+    <value>شكاوي ومقترحات</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>اتصل بنا</value>
+  </data>
+  <data name="TrainingCoursesGuide" xml:space="preserve">
+    <value>دليل الدورات التدريبية</value>
+  </data>
+  <data name="SuccessStory" xml:space="preserve">
+    <value>قصة نجاح</value>
+  </data>
+  <data name="MainPage" xml:space="preserve">
+    <value>الصفحة الرئيسية</value>
+  </data>
+  <data name="TrainingHistory" xml:space="preserve">
+    <value>نبذة تاريخية</value>
+  </data>
+</root>

@@ -1,0 +1,89 @@
+﻿
+@model IEnumerable<TrainigSectorDataEntry.ViewModel.ServiceVM>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.Extensions.Localization
+
+
+@inject IStringLocalizer<SharedResource> Localizer
+@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+}
+@{
+    var breadcrumb = (TrainigSectorWebSite.ViewModel.Breadcrumb)ViewData["Breadcrumb"];
+    }
+<!--=== Container Part ===-->
+<div class="wrapper" dir="@(culture == "ar" ? "rtl" : "ltr")">
+<div class="container content height-500 ">
+    <div class="profile">
+        <div class="profile-body">
+            <div class="profile-back">
+                <div class=" row headline-center-v2 headline-center-v2-dark title">
+                    <h2 class="color-orange">@Localizer["StudentServices"]</h2>
+                    <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <ul class="list-unstyled row portfolio-box">
+                            <li class="col-md-6 md-margin-bottom-50">
+                                    <a class="thumbnail fancybox" data-rel="gallery" href="/ExamSchedules/Index">
+                                    <img class="full-width img-responsive img-bordered" src="../assets/img/main/schedual1.jpg" alt="">
+                                    <span class="portfolio-box-in">
+                                        <i class="rounded-x fa fa-link"></i>
+                                    </span>
+                                </a>
+                                <div class="headline-left margin-bottom-10"><h3 class="headline-brd">@Localizer["ExamSchedules"]</h3></div>
+                            </li>
+                            <li class="col-md-6 md-margin-bottom-50">
+                                    <a class="thumbnail fancybox" data-rel="gallery" href="/StudySchedules/Index" >
+                                    <img class="full-width img-responsive img-bordered" src="../assets/img/main/sched.jpg" alt="">
+                                    <span class="portfolio-box-in">
+                                        <i class="rounded-x fa fa-link"></i>
+                                    </span>
+                                </a>
+                                <div class="headline-left margin-bottom-10"><h3 class="headline-brd">@Localizer["StudySchedules"]</h3></div>
+
+
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <ul class="list-unstyled row portfolio-box">
+                            <li class="col-md-6 md-margin-bottom-50">
+                                    <a class="thumbnail fancybox" data-rel="gallery" href="/Announcements/Index">
+                                    <img class="full-width img-responsive img-bordered" src="../assets/img/main/alert1.jpg" alt="">
+                                    <span class="portfolio-box-in">
+                                        <i class="rounded-x fa fa-link"></i>
+                                    </span>
+                                </a>
+                                    <div class="headline-left margin-bottom-10"><h3 class="headline-brd">@Localizer["AnnouncementsAlerts"]</h3></div>
+                            </li>
+                            <li class="col-md-6 md-margin-bottom-50">
+                                    <a class="thumbnail fancybox" data-rel="gallery" href="/StudentActivities/Index">
+                                    <img class="full-width img-responsive img-bordered" src="../assets/img/main/activity2.jpg" alt="">
+                                    <span class="portfolio-box-in">
+                                        <i class="rounded-x fa fa-link"></i>
+                                    </span>
+                                </a>
+                                <div class="headline-left margin-bottom-10"><h3 class="headline-brd">@Localizer["StudentActivities"]</h3></div>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+</div>
+
+

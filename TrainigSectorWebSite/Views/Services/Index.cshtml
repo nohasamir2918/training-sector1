@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TrainigSectorDataEntry.ViewModel.ServiceVM>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.Extensions.Localization
+
+
+@inject IStringLocalizer<SharedResource> Localizer
+@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+
+}
+@{
+    var breadcrumb = (TrainigSectorWebSite.ViewModel.Breadcrumb)ViewData["Breadcrumb"];
+}
+
+
+
+    <!--=== Container Part ===-->
+    <div class="wrapper" dir="@(culture == "ar" ? "rtl" : "ltr")">
+
+    <div class="container content">
+        <div class="bg">
+            <div class="history-p">
+                <div class="headline-center-v2 headline-center-v2-dark title">
+                    <h2 class="color-orange">@Localizer["StudentServices"]</h2>
+                    <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
+                </div>
+                <ul class="row block-grid-v2 margin-bottom-25">
+
+                    @foreach (var Services in Model)
+                    {
+                        <li class="col-md-4 ">
+                            <a href="/StudentServiceInstitute/Index">
+                                <div class="easy-block-v1">
+                                    <img class="img-responsive" src="/Services/GetImage?fileName=@Services.ImagePath" alt="">
+                                    <div class="easy-block-v1-badge rgba-purple">
+                                        @((culture == "ar") ? Services.EducationalFacilities.NameAr : Services.EducationalFacilities.NameEn)
+                                     @*    @Localizer["HelwanSecondarySchoolForAppliedTechnology"] *@
+                                    </div>
+                                </div>
+                                <div class="block-grid-v2-info rounded-bottom">
+                                    <p>
+                                        @((culture == "ar") ? Services.TitleAr : Services.TitleEn)
+                                    </p>
+
+                                </div>
+                            </a>
+                        </li>
+                    }
+              
+
+                </ul>
+            </div><!--/container-->
+            <!--=== Container Part ===-->
+
+        </div>
+    </div>
+</div>

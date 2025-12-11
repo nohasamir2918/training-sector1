@@ -1,0 +1,583 @@
+﻿
+@using Microsoft.AspNetCore.Localization
+@using System.Globalization
+
+
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var currentCulture = requestCulture?.RequestCulture.Culture.TwoLetterISOLanguageName ?? "ar";
+    var isArabic = currentCulture == "ar";
+    var switchTo = isArabic ? "en" : "ar";
+    var switchText = isArabic ? "English" : "العربية";
+}
+@{
+    var breadcrumb = (TrainigSectorWebSite.ViewModel.Breadcrumb)ViewData["Breadcrumb"];
+}
+
+
+
+<!DOCTYPE html>
+<html lang="@currentCulture" dir="@(isArabic ? "rtl" : "ltr")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @Localizer["TrainingSectorMoMP"]</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="المعهد الفني للصناعات المتطورة , ثانوي عام, ثانوي صنايع,معهد الإنتاج الحربي,المعهد بالسلام ,المعهد بالنهضة,معاهد متوسطه,معهد فني">
+
+	
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/assets/img/logo.ico">
+    <!-- Web Fonts -->
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="~/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="~/assets/css/headers/header-default.css">
+    <link rel="stylesheet" href="~/assets/css/footers/footer-v1.css">
+    <link rel="stylesheet" href="~/assets/css/headers/header-v5.css">
+	<!-- CSS Implementing Plugins -->
+	
+    <link rel="stylesheet" href="~/assets/plugins/animate.css">
+    <link rel="stylesheet" href="~/assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="~/assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fancybox/source/jquery.fancybox.css">
+    <link rel="stylesheet" href="~/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="~/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+    <link rel="stylesheet" href="~/assets/plugins/parallax-slider/css/parallax-slider.css">
+    <link rel="stylesheet" href="~/assets/plugins/fancybox/source/jquery.fancybox.css">
+    <link rel="stylesheet" href="~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/assets/plugins/revolution-slider/rs-plugin/css/settings.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="~/assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
+    <link rel="stylesheet" href="~/assets/css/pages/profile.css">
+    <script src="~/assets/plugins/counter/jquery.counterup.min.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/counter/waypoints.min.js" type="text/javascript"></script>
+    <!-- CSS Page Style -->
+
+
+    <link rel="stylesheet" href="~/assets/css/pages/page_search.css">
+
+
+    <!-- CSS Theme -->
+    <link rel="stylesheet" href="~/assets/css/theme-colors/default.css" id="style_color">
+    <link rel="stylesheet" href="~/assets/css/theme-skins/dark.css">
+    <link rel="stylesheet" href="~/assets/css/fonts/DroidArabicKufi/css/Ar-fonts.css">
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+
+
+
+
+
+
+
+  
+	<script src="~/assets/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            App.init();
+            RevolutionSlider500.initRSfullWidth500();
+            RevolutionSlider.initRSfullWidth();
+            FancyBox.initFancybox();
+            ContactPage.initMap();
+            ContactPage.initPanorama();
+            OwlCarousel.initOwlCarousel();
+            Datepicker.initDatepicker();
+            App.initCounter();
+            Masking.initMasking();
+            Validation.initValidation();
+            CheckoutForm.initCheckoutForm();
+        });
+    </script>
+ 
+  
+    <script>
+
+        function SwitchToArabic() {
+
+            var CurrentURL = window.location.href;
+
+            CurrentURL = CurrentURL.replace("Ar", "En");
+            window.location.href = CurrentURL
+
+
+
+
+        }
+
+    </script>
+</head>
+<body>
+    @using Microsoft.AspNetCore.Localization
+    @using Microsoft.AspNetCore.Http
+    @using System.Globalization
+@using Microsoft.Extensions.Localization
+    
+
+    <form id="form1" runat="server">
+        <div class="wrapper">
+
+            <!--=== Header v5 ===-->
+            <div class="header-v5">
+                <!-- Topbar v3 -->
+                <div class="topbar-v3">
+                    <div class="container">
+                        <div class="row topbar mar-top-5">
+                            <center>
+
+                                <ul class="loginbar col-md-2 pull-left hidden-xs">
+
+                                  
+                                </ul>
+
+                                <ul class="col-md-6 list-inline right-topbar head1 margin-top-20">
+                                   
+                                   
+                           
+
+                                    <li>
+                                        <icon class="fa fa-file fa-c"></icon>
+                                        <a href="http://www.momp.gov.eg/Ar/career.pdf" target="_blank">
+                                            @Localizer["JobConduct"]
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-users  fa-c"></i>
+                                       125
+                                    </li>
+                                    
+                                    <li>
+                                        <i class="fa fa-globe"></i>
+                                      @*   <a href="#" onclick="SwitchToArabic()">English</a>
+ *@
+                                        
+                                        <a href="@Url.Action("SetLanguage", "Home", new { culture = switchTo, returnUrl = Context.Request.Path })">
+                                            @switchText
+                                        </a>
+
+
+                                    </li>
+                                </ul>
+
+                                <ul class="col-md-4  loginbar pull-right hidden-xs">
+
+                                    <a href="/Home/Index">
+                                        <img class="img-responsive col-md-2 col-xs-2 col-sm-1 pull-right logo" src="~/assets/img/TrainingSectorlog1.png" rel="gallery2" alt="" style="width: 180px">
+                                    </a>
+
+                                   
+                                </ul>
+
+
+                            </center>
+                        </div>
+                    </div>
+                    <!--/container-->
+                </div>
+                <!-- End Topbar v3 -->
+                <!-- Navbar -->
+                <div class="navbar navbar-default mega-menu" role="navigation">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse navbar-responsive-collapse">
+
+                            <ul class="nav navbar-nav" style="padding: 0;">
+
+
+                                <!-- خدماتنا -->
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle menu-color" data-toggle="dropdown">
+                                        @Localizer["OurServices"]
+                                    </a>
+                                    <ul class="dropdown-menu ">
+                                        <li><a href="/CoursesTraining/Index">@Localizer["Courses"]</a></li>
+                                        <li><a href="/RoomStage/Index">@Localizer["Theater"]</a></li>
+                                        <li><a href="/RoomStage/Index">@Localizer["Halls"]</a></li>
+                                    </ul>
+                                </li>
+
+
+                                <!-- المنشآت التعليمية -->
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle menu-color" data-toggle="dropdown">
+                                        @Localizer["EducationalFacilities"]
+                                    </a>
+
+                                    <ul class="dropdown-menu ">
+
+
+                                        <!-- المعهد الفني للصناعات المتطورة -->
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">@Localizer["AdvancedTechnicalInstituteForIndustries"]</a>
+
+                                            <ul class="dropdown-menu ">
+                                                <li><a href="/History/Index">@Localizer["HistoricalOverview"]</a></li>
+
+                                                <!-- الأقسام -->
+                                                <li class="dropdown-submenu">
+                                                    <a href="javascript:void(0);">@Localizer["DepartmentsDivisions"]</a>
+
+                                                    <ul class="dropdown-menu sub-width">
+                                                        <li><a href="/Department/Index">@Localizer["MechanicalDivision"]</a></li>
+                                                        <li><a href="/Department/Index">@Localizer["ElectricalElectronicsDivision"]</a></li>
+                                                        <li><a href="/Department/Index">@Localizer["ComputerDivision"]</a></li>
+                                                        <li><a href="/Department/Index">@Localizer["ChemistryDivision"]</a></li>
+                                                        <li><a href="/Department/Index">@Localizer["BasicSciencesDivision"]</a></li>
+                                                        <li><a href="/Department/Index">@Localizer["MechatronicsDivision"]</a></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li><a href="/Labs/Index">@Localizer["Workshopsandlaboratories"]</a></li>
+
+                                                <!-- خدمات طلابية -->
+                                                <li class="dropdown-submenu">
+                                                    <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
+
+                                                    <ul class="dropdown-menu sub-width">
+                                                        <li><a href="/StudySchedules/Index">@Localizer["StudySchedules"]</a></li>
+                                                        <li><a href="/ExamSchedules/Index">@Localizer["ExamSchedules"]</a></li>
+                                                        <li><a href="/StudentActivities/Index">@Localizer["StudentActivities"]</a></li>
+                                                        <li><a href="/Announcements/Index">@Localizer["AnnouncementsAlerts"]</a></li>
+                                                        <li><a href="/StudentResults/Index">@Localizer["StudentResults"]</a></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li><a href="/Quality/Index">@Localizer["Quality"]</a></li>
+                                                <li><a href="/Project/Index">@Localizer["Projects"]</a></li>
+                                            </ul>
+
+                                        </li>
+
+
+                                        <!-- الكلية التكنولوجية -->
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">@Localizer["TechnologicalCollege"]</a>
+
+                                            <ul class="dropdown-menu ">
+                                                <li><a href="/CollectionHistory/Index">@Localizer["HistoricalOverview"]</a></li>
+                                                <li><a href="/Department/Index">@Localizer["CampusDepartments"]</a></li>
+
+                                                <li class="dropdown-submenu">
+                                                    <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
+
+                                                    <ul class="dropdown-menu sub-width">
+                                                        <li><a href="/StudySchedules/Index">@Localizer["StudySchedules"]</a></li>
+                                                        <li><a href="/ExamSchedules/Index">@Localizer["ExamSchedules"]</a></li>
+                                                        <li><a href="/StudentActivities/Index">@Localizer["StudentActivities"]</a></li>
+                                                        <li><a href="/Announcements/Index">@Localizer["AnnouncementsAlerts"]</a></li>
+                                                        <li><a href="/StudentResults/Index">@Localizer["StudentResults"]</a></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li><a href="/Project/Index">@Localizer["Projects"]</a></li>
+                                            </ul>
+                                        </li>
+
+
+                                        <!-- مدرسة حلوان الثانوية للتكنولوجيا التطبيقية -->
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">@Localizer["HelwanSecondarySchoolForAppliedTechnology"]</a>
+
+                                            <ul class="dropdown-menu ">
+                                                <li><a href="/History/Index">@Localizer["HistoricalOverview"]</a></li>
+                                                <li><a href="/Department/Index">@Localizer["SchoolDepartments"]</a></li>
+
+                                                <li class="dropdown-submenu">
+                                                    <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
+                                                    <ul class="dropdown-menu sub-width">
+                                                        <li><a href="/StudySchedules/Index">@Localizer["StudySchedules"]</a></li>
+                                                        <li><a href="/ExamSchedules/Index">@Localizer["ExamSchedules"]</a></li>
+                                                        <li><a href="/StudentActivities/Index">@Localizer["StudentActivities"]</a></li>
+                                                        <li><a href="/Announcements/Index">@Localizer["AnnouncementsAlerts"]</a></li>
+                                                        <li><a href="/StudentResults/Index">@Localizer["StudentResults"]</a></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li><a href="/Project/Index">@Localizer["Projects"]</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                        <!-- مدرسة السلام للتكنولوجيا التطبيقية -->
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">@Localizer["ElSalamAppliedTechnologySecondarySchool"]</a>
+
+                                            <ul class="dropdown-menu ">
+                                                <li><a href="/History/Index">@Localizer["HistoricalOverview"]</a></li>
+                                                <li><a href="/Department/Index">@Localizer["SchoolDepartments"]</a></li>
+
+                                                <li class="dropdown-submenu">
+                                                    <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
+                                                    <ul class="dropdown-menu sub-width">
+                                                        <li><a href="/StudySchedules/Index">@Localizer["StudySchedules"]</a></li>
+                                                        <li><a href="/ExamSchedules/Index">@Localizer["ExamSchedules"]</a></li>
+                                                        <li><a href="/StudentActivities/Index">@Localizer["StudentActivities"]</a></li>
+                                                        <li><a href="/Announcements/Index">@Localizer["AnnouncementsAlerts"]</a></li>
+                                                        <li><a href="/StudentResults/Index">@Localizer["StudentResults"]</a></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li><a href="/Project/Index">@Localizer["Projects"]</a></li>
+                                            </ul>
+
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+
+
+                                <!-- المنشآت التدريبية -->
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle menu-color" data-toggle="dropdown">
+                                        @Localizer["TrainingFacilities"]
+                                    </a>
+
+                                    <ul class="dropdown-menu ">
+
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">@Localizer["LeadershipDevelopmentCenter"]</a>
+                                            <ul class="dropdown-menu sub-width">
+                                                <li><a href="/History/Index">@Localizer["HistoricalOverview"]</a></li>
+                                                <li><a href="/CoursesTraining/Index">@Localizer["TrainingCourses"]</a></li>
+                                                <li><a href="/Project/Index">@Localizer["Projects"]</a></li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">@Localizer["Labs"]</a>
+                                            <ul class="dropdown-menu sub-width">
+                                                <li><a href="/Labs/Index">@Localizer["EngineeringLabs"]</a></li>
+                                                <li><a href="/Labs/Index">@Localizer["ChemicalLabs"]</a></li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown-submenu">
+                                            <a href="javascript:void(0);">@Localizer["Workshops"]</a>
+                                            <ul class="dropdown-menu sub-width">
+                                                <li><a href="/Labs/Index">@Localizer["ProductionEngineeringWorkshops"]</a></li>
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+
+                                <!-- Home Icon -->
+                                <li>
+                                    <a href="/Home/Index" class="pad-right-10">
+                                        <icon class="fa fa-home " style="font-size: 30px !important; color: #e67e22;"></icon>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+
+                        <!--/navbar-collapse-->
+                    </div>
+                </div>
+                <!-- End Navbar -->
+            </div>
+            <!--=== End Header v5 ===-->
+            <!--=== Breadcrumbs ===-->
+            @if (breadcrumb != null)
+            {
+                <div class="breadcrumbs">
+                    <div class="container">
+                        <h1 class="pull-right">@breadcrumb.PageName</h1>
+
+                        <ul class="hidden-verysmall pull-left breadcrumb row">
+                            <li><a href="#">@breadcrumb.MapPath</a></li>
+                            <li class="active">@breadcrumb.ActivePage</li>
+                        </ul>
+                    </div>
+                </div>
+            }
+
+            <!--=== End Breadcrumbs ===-->
+                @RenderBody()
+            <!--=== Footer Version 1 ===-->
+            <!--=== Footer Version 1 ===-->
+            <div id="footer-v1" class="footer-v1">
+                <div id="Div1" class="footer-v1">
+                    <div class="footer">
+                        <div class="container">
+                            <div class="row">
+
+                                <!-- Logo -->
+                                <div class="col-md-3 ">
+                                    <a href="/Home/Index">
+                                        <img class="img-responsive" src="~/assets/img/log1-T.png" rel="gallery2" alt="">
+                                    </a>
+                                </div>
+
+                                <!-- Important Sites -->
+                                <div class="col-md-3 ">
+                                    <div class="headline">
+                                        <h2>@Localizer["QuickNavigation"]</h2>
+                                    </div>
+                                    <ul class="list-unstyled link-list">
+                                        <li><a target="_blank" href="http://www.momp.gov.eg">@Localizer["MinistryOfMilitaryProduction"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                        <li><a target="_blank" href="http://portal.mohesr.gov.eg">@Localizer["MinistryOfHigherEducation"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                        <li><a target="_blank" href="https://moe.gov.eg/">@Localizer["MinistryOfEducation"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                        <li><a target="_blank" href="http://www.eaeat-academy.edu.eg/">@Localizer["EgyptianAcademyForEngineering"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Quick Navigation 1 -->
+                                <div class="col-md-3  ">
+                                    <div class="headline">
+                                        <h2>@Localizer["QuickNavigation"]</h2>
+                                    </div>
+                                    <ul class="list-unstyled link-list">
+                                        <li><a href="/Services/Index">@Localizer["CommunityParticipation"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                        <li><a href="/News/Index">@Localizer["News"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                        <li><a href="/Opinion/Index">@Localizer["ComplaintsSuggestions"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                        <li><a href="/ContactUs/Index">@Localizer["ContactUs"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Quick Navigation 2 -->
+                                <div class="col-md-3  ">
+                                    <div class="headline">
+                                        <h2>@Localizer["QuickNavigation"]</h2>
+                                    </div>
+                                    <ul class="list-unstyled link-list">
+                                        <li><a href="/TrainingHistory/Index">@Localizer["HistoricalOverview"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                        <li><a href="/Quality/Index">@Localizer["Quality"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                        <li><a href="/CoursesTraining/Index">@Localizer["TrainingCoursesGuide"]</a><i class="fa fa-angle-left pull-left"></i></li>
+                                        <li><a href="/VideoStory/Index">@Localizer["SuccessStory"]</a><i class="fa fa-angle-left pull-left"></i></li>
+
+                                        <br />
+                                        <a href="#">
+                                            <img src="~/assets/img/qr-code.png" width="100" height="100" />
+                                        </a>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Copyright -->
+                    <div class="copyright">
+                        <div class="container">
+                            <div class="row">
+                                <center>
+                                    <div class="col-md-10 ">
+                                        <p>
+                                            @Localizer["Copyright"]
+                                            <a>@Localizer["InformationSystemsCenter"]</a> |
+                                            <a>@Localizer["MinistryOfMilitaryProduction"]</a> &copy; 2018
+                                        </p>
+                                    </div>
+                                </center>
+
+                                <div class="col-md-2" style="margin-top: 10px;">
+                                    <center>
+                                        <i class="fa fa-facebook fa-c" style="border: 1px solid orange; border-radius: 50% !important; padding: 5px;"></i>
+                                        <a target="_blank" href="https://www.facebook.com/قطاع-التدريب-وزارة-الانتاج-الحربى-الصفحة-الرسمية-1344901388989797/" style="color: #fff;">Facebook</a>
+                                    </center>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--=== End Footer Version 1 ===-->
+            <!--=== End Footer Version 1 ===-->
+
+        </div>
+
+
+
+
+        <!-- JS Global Compulsory -->
+        <script type="text/javascript" src="~/assets/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/jquery/jquery-migrate.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <!-- JS Implementing Plugins -->
+        <script type="text/javascript" src="~/assets/plugins/back-to-top.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/smoothScroll.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/jquery.parallax.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/parallax-slider/js/modernizr.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/counter/waypoints.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/counter/jquery.counterup.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+
+        <!-- JS Customization -->
+        <script type="text/javascript" src="~/assets/js/custom.js"></script>
+        <!-- JS Page Level -->
+        <script type="text/javascript" src="~/assets/js/app.js"></script>
+
+        <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio/cube-portfolio-2.js"></script>
+
+        <script type="text/javascript" src="~/assets/js/plugins/datepicker.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/style-switcher.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/parallax-slider.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio/cube-portfolio-lightbox-edit.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio/cube-portfolio-2-ns.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/fancy-box.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/progress-bar.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/owl-carousel.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                App.init();
+                ParallaxSlider.initParallaxSlider();
+                OwlCarousel.initOwlCarousel();
+                FancyBox.initFancybox();
+                ProgressBar.initProgressBarHorizontal();
+            });
+        </script>
+
+        
+
+
+    </form>
+
+
+
+
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

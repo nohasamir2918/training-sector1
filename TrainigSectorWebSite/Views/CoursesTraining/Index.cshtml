@@ -1,0 +1,44 @@
+﻿@using Microsoft.Extensions.Localization
+
+
+@inject IStringLocalizer<TrainigSectorWebSite.SharedResource> SharedLocalizer
+<div class="container content height-500">
+    <div class="profile">
+        <div class="profile-body">
+            <div class="profile-bio">
+                <div id="sky-form3" class="sky-form">
+                    
+                        <div class="row">
+                            <div class="headline-center-v2 headline-center-v2-dark title">
+                            <h2 class="color-orange">@SharedLocalizer["TainingCourses"]</h2>
+                                <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2"></section>
+                            <section class="col col-8 ">
+                                <label class="input col col-9">
+                                   
+                                <select class="form-control">
+                                    <option value="">دورة 1</option>
+                                    <option value="">دورة 2</option>
+                                    <option value="">دورة 3</option>
+                                </select>
+                                <i class="icon-append fa fa-chevron-circle-down"></i>
+                                </label>
+                                <div class="label resault col col-3">اسم الدورة</div>
+
+                            </section>
+
+                            <section class="col col-2"></section>
+                        </div>
+                        
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+  </div>
