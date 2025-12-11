@@ -12,8 +12,8 @@ namespace TrainigSectorDataEntry.Services
             _repository = repository;
         }
 
-        public Task<IEnumerable<T>> GetAllAsync(bool includeDeleted = false) =>
-            _repository.GetAllAsync(includeDeleted);
+        public Task<IEnumerable<T>> GetAllAsync(bool includeDeleted = false, params Expression<Func<T, object>>[] includes) =>
+            _repository.GetAllAsync(includeDeleted, includes);
 
         public Task<T?> GetByIdAsync(int id) =>
             _repository.GetByIdAsync(id);

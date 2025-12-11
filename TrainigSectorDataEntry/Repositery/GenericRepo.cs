@@ -17,9 +17,20 @@ namespace TrainigSectorDataEntry.Repositery
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(bool includeDeleted = false)
+        public async Task<IEnumerable<T>> GetAllAsync(bool includeDeleted = false, params Expression<Func<T, object>>[] includes)
         {
             var query = _dbSet.AsQueryable();
+
+            // Apply includes
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+
+
 
             if (!includeDeleted && typeof(T).GetProperty("IsDeleted") != null)
             {
