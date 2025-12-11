@@ -43,8 +43,6 @@ public partial class EducationalFacility
 
     public virtual ICollection<Service> Services { get; set; } = new List<Service>();
 
-    public virtual ICollection<Specialization> Specializations { get; set; } = new List<Specialization>();
-
     public virtual ICollection<StudentActivite> StudentActivites { get; set; } = new List<StudentActivite>();
 
     public virtual ICollection<StudentsTimeTable> StudentsTimeTables { get; set; } = new List<StudentsTimeTable>();

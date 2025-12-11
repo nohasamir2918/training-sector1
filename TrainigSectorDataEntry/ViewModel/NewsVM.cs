@@ -8,7 +8,7 @@ namespace TrainigSectorDataEntry.ViewModel
         public int Id { get; set; }
 
         [Required(ErrorMessage = ".برجاء اختيار اسم الجهة")]
-        public int? TrainigSectorId { get; set; }
+        public int TrainigSectorId { get; set; }
 
         [Required(ErrorMessage = ".برجاء ادخال عنوان الخبر باللغة العربية")]
         [RegularExpression(@"^[\u0600-\u06FF\s]+$", ErrorMessage = ".يجب كتابة لغة عربية فقط")]
@@ -52,7 +52,7 @@ namespace TrainigSectorDataEntry.ViewModel
 
         public DateOnly? UserDeletionDate { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         public virtual ICollection<NewsImage> NewsImages { get; set; } = new List<NewsImage>();
 

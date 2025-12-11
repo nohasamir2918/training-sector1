@@ -10,8 +10,7 @@ namespace TrainigSectorDataEntry.ViewModel
 
         [Required(ErrorMessage = ".برجاء اختيار اسم المنشأة التعليمية")]
         public int EducationalFacilitiesId { get; set; }
-        public string EducationalFacilitiesNameAr { get; set; }
-        public string EducationalFacilitiesNameEn { get; set; }
+
 
         [Required(ErrorMessage = ".برجاء ادخال العنوان باللغة العربية")]
         [RegularExpression(@"^[\u0600-\u06FF\s]+$", ErrorMessage = ".يجب كتابة لغة عربية فقط")]
@@ -50,8 +49,7 @@ namespace TrainigSectorDataEntry.ViewModel
 
         public DateOnly? UserDeletionDate { get; set; }
 
-        public virtual EducationalFacility? EducationalFacilities { get; set; }
-
+        public virtual EducationalFacility? EducationalFacilities { get; set; } = null!;
         public IFormFile? UploadedImage { get; set; }
     }
 }

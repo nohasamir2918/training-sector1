@@ -37,11 +37,15 @@ namespace TrainigSectorDataEntry.ViewModel
 
         public DateOnly? UserDeletionDate { get; set; }
 
-        public virtual ICollection<DepartmentType> DepartmentTypes { get; set; } = new List<DepartmentType>();
+      
 
-        public virtual ICollection<Departmentsandbranch> Departmentsandbranches { get; set; } = new List<Departmentsandbranch>();
-        [ValidateNever]
-        public virtual EducationalFacility EducationalFacilities { get; set; } = null!;
+
+
+        public int DepartmentsandbranchesId { get; set; }
+
+        public virtual Departmentsandbranch Departmentsandbranches { get; set; } = null!;
+
+        public virtual ICollection<SpecializationImage> SpecializationImages { get; set; } = new List<SpecializationImage>();
     }
 }
 

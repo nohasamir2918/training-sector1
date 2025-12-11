@@ -38,10 +38,11 @@ namespace TrainigSectorDataEntry.ViewModel
         public DateOnly? UserDeletionDate { get; set; }
 
         public bool IsActive { get; set; }
-        [ValidateNever]
-        public virtual DepartmentsandBranchesDetail DepartmentsandBranchesDetails { get; set; } = null!;
+   
         [Required]
         public List<IFormFile>? UploadedImages { get; set; }
+
+        public virtual Departmentsandbranch Departmentsandbranches { get; set; } = null!;
 
     }
 }
