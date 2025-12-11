@@ -41,6 +41,11 @@ namespace TrainigSectorDataEntry.Services
         {
             return await _repository.GetByIdAsync(id, includes);
         }
+
+        public async Task<IEnumerable<T>>  GetAllAsyncByEducationalFacilitiesId(bool includeDeleted, int EducationalFacilitiesId, params Expression<Func<T, object>>[] includes)
+        {
+            return await _repository.GetAllAsyncByEducationalFacilitiesId(includeDeleted, EducationalFacilitiesId, includes);
+        }
     }
 }
 
