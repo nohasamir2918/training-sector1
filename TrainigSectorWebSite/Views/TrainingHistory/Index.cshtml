@@ -1,4 +1,16 @@
-﻿<div class=" container content  ">
+﻿@model IEnumerable<TrainigSectorDataEntry.ViewModel.HistoryBreifVM>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.Extensions.Localization
+
+
+@inject IStringLocalizer<SharedResource> Localizer
+@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+}
+@{
+    var breadcrumb = (TrainigSectorWebSite.ViewModel.Breadcrumb)ViewData["Breadcrumb"];
+}
+<div class=" container content  ">
 
     <div class="profile">
         <div class="profile-body">
@@ -7,42 +19,92 @@
                     <fieldset>
 
 
-                        <div class="row">
-                            <div class="col-md-4">
-                                <center>
+                        @foreach (var item in Model)
+                        {
+                            var title = culture == "ar" ? item.TitleAr : item.TitleEn;
+                            var description = culture == "ar" ? item.DescriptionAr : item.DescriptionEn;
+
+                            string carouselId = $"carousel-{item.Id}";
+                            string thumbnailGalleryId = $"gallery-{item.Id}";
+
+                            <div class="row">
+                                <div class="col-md-4">
+
                                     <section>
-                                        <!--=== View Album V2 ===-->
+                                        <div class="high-rated techs">
 
-                                        <img alt="" src="..\assets\training-img\Patterns\train.png" class="img-responsive vision-img " style="margin-top:45px;">
+                                            <div id="@carouselId" class="carousel slide" data-ride="carousel">
 
+                                                <!-- Indicators -->
+                                                <ol class="carousel-indicators">
+                                                    @for (int i = 0; i < item.HistoryBerifImages.Count; i++)
+                                                    {
+                                                        <li class="rounded-x @(i == 0 ? "active" : "")"
+                                                            data-target="#@carouselId"
+                                                            data-slide-to="@i">
+                                                        </li>
+                                                    }
+                                                </ol>
 
-                                        <!--=== End View Album V2 ===-->
+                                                <!-- Images -->
+                                                <div class="carousel-inner">
+                                                    @for (int i = 0; i < item.HistoryBerifImages.Count; i++)
+                                                    {
+                                                        var img = item.HistoryBerifImages.ElementAt(i);
+                                                        <div class="item @(i == 0 ? "active" : "")">
+                                                            <img class="img-responsive img-bordered"
+                                                                 src="@img.ImagePath"
+                                                                 alt="">
+                                                        </div>
+                                                    }
+                                                </div>
+
+                                            </div>
+
+                                        </div>
                                     </section>
-                                </center>
+
+                                    <!-- Thumbnail Gallery -->
+                                    <div class="col-sm-1 v-album">
+                                        <ul class="list-unstyled">
+
+                                            @foreach (var img in item.HistoryBerifImages)
+                                            {
+                                                <li>
+                                                    <a class="fancybox"
+                                                       data-rel="gallery-@item.Id"
+                                                       title="@title"
+                                                       href="@img.ImagePath">
+                                                        <img class="img-responsive"
+                                                             src="@img.ImagePath"
+                                                             alt="">
+                                                        <span class="portfolio-box-v2-in"></span>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                                <!-- Text Section -->
+                                <div class="col-md-8">
+
+                                    <div class="headline-center-v2 headline-center-v2-dark title">
+                                        <h2 class="color-orange">@title</h2>
+                                        <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
+                                    </div>
+
+                                    <p class="bg margin-bottom-25">
+                                        @description
+                                    </p>
+
+                                </div>
                             </div>
-                            <div class="col-md-8">
+                        }
 
-                                <div class=" headline-center-v2 headline-center-v2-dark title">
-                                    <h2 class="color-orange"> نبذة تاريخية عن قطاع التدريب</h2>
-                                    <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
-                                </div><!--/Headline Center V2-->
-                                <p class="bg margin-bottom-25">
-                                    يعتبر قطاع التدريب أحد القطاعات التابعة لوزارة الإنتاج الحربي والقطاع منوط بإمداد قطاع الإنتاج الحربي بالعمالة الفنية منذ عام 1957م (قطاع عام) وتم تحويله إلي قطاع حكومي عام 1988م بنفس المهام بــقــرار الـــســـيــد / رئــيـــس الـجــمــهـــوريــة مـــع زيـــادة حجم المنشآت والأعداد القائمة علي العملية التدريبية بالقطاع ( عملي / نظري ).
-                                </p>
 
-                                <p class="bg">
-                                    ونظراً للتطور التكنولوجي المتسارع تم إضافة معهد فني صناعي فوق المتوسط ، مجمع تكنولوجي ، مركز تدريب مهني بحلوان وتم تحويله إلي مدرسة ثانوية فنية للتعليم المزدوج عام 1995م لمواكبة التطور المقابل بشركات الإنتاج الحربي والتي يقترب عدد العمالة الفنية والإدارية بها أكثر من 35 ألف عامل ولذا فقطاع التدريب هو الجهة القائمة علي إعداد ، رفع كفاءة الكوادر الفنية والإدارية بقطاع الإنتاج الحربي من شركات ووحدات تابعة وذلك رفعاً من علي كاهل الدولة وأيضاً نظراً للتطور التقني والتكنولوجي المتسارع في العلوم الحديثة في العقود الثلاثة الأخيرة فإن الكوادر الموجودة بقطاع الإنتاج الحربي لا تغطي التطور المتسارع فيتم الأستعانة من الجامعات والجهات العلمية من خارج قطاع الإنتاج الحربي لسد الفجوة العلمية بقطاع الإنتاج الحربي.
-                                </p>
-
-                                <p class="bg margin-bottom-25">
-                                    ويقوم قطاع التدريب أيضاً تخفيفاً عن كاهل الدولة بتأهيل القيادات العليا ، الوسطي ، المتوسطة بمركز إعداد القادة بقطاع التدريب لجميع المستويات الإدارية بقطاع الإنتاج الحربي وذلك بإستقدام كوادر علمية لأن هذه الكوادر هي قيادات المستقبل بقطاع الإنتاج الحربي.
-                                </p>
-                                <p class="bg margin-bottom-25">
-                                    يعتبر قطاع التدريب مركزاً علمياً وقد استفاد قطاع الإنتاج الحربي من الإمكانات الموجودة به وأيضاً لعمل بعثات خارجية في مجالات متعددة علي سبيل المثال برنامج قادة التغيير من الشباب والذي استفاد منه عدد (25) من شباب الإنتاج الحربي بتأهيلهم في أكاديمية (AVIC) الصينية  للحصول علي أفضل العلوم الإدارية التي تخدم قطاع الإنتاج الحربي والدولة وفقاً للتوجيهات السياسية للإهتمام بالشباب لتحسين قطاع الإنتاج الحربي.
-                                </p>
-
-                            </div>
-                        </div>
                     </fieldset>
                 </div>
             </div>

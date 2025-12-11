@@ -1,23 +1,32 @@
-﻿<div class=" container content height-500">
+﻿@using TrainigSectorDataEntry.ViewModel
+  @model IEnumerable<QualityCertificateVM>
+
+@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+}
+
+
+<div class=" container content height-500">
     <div class="profile">
         <div class="profile-body">
             <div class="profile-bio">
 
                 <br>
+              
                 <div class="row">
-                    <div class="col-md-4">
-                        <img src="../assets/img/1.jpg" class="img-responsive img-bordered" alt="">
-                        <span class="text-left">Environmental Management System</span>
 
-                    </div>
-                    <div class="col-md-4">
-                        <img src="../assets/img/2.jpg" class="img-responsive img-bordered" alt="">
-                        <span class="text-left">Occupational Health &amp; Safety Management System</span>
-                    </div>
-                    <div class="col-md-4">
-                        <img src="../assets/img/3.jpg" class="img-responsive img-bordered" alt="">
-                        <span class="text-left">Quality Management System</span>
-                    </div>
+                    @foreach (var item in Model)
+                    {
+                        var certificateName = culture == "ar" ? item.TitleAr : item.TitleEn;
+
+                        <div class="col-md-4">
+                            <img src="@item.ImagePath" class="img-responsive img-bordered" alt="@certificateName" />
+
+                            <span class="text-left">
+                                @certificateName
+                            </span>
+                        </div>
+                    }
 
                 </div>
                 <br>
