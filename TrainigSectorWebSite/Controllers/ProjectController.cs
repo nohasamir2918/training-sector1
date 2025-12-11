@@ -20,10 +20,10 @@ namespace TrainigSectorWebSite.Controllers
         IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
         private readonly ILoggerRepository _logger;
-        public ProjectController(IStringLocalizer<SharedResource> localizer, IGenericService<ProjectVM> ProjectsService, IGenericService<ProjectImageVM> ProjectImagesService, IMapper mapper, ILoggerRepository logger)
+        public ProjectController(IStringLocalizer<SharedResource> localizer, IGenericService<ProjectVM> ProjectsService, IMapper mapper, ILoggerRepository logger)
         {
             _ProjectsService = ProjectsService;
-            _ProjectImagesService = ProjectImagesService;
+           
             
             _localizer = localizer;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace TrainigSectorWebSite.Controllers
 
         }
 
-        public async Task<IActionResult> Index1(int page = 1, int pageSize = 9)
+        public async Task<IActionResult> Index(int Id=0,int page = 1, int pageSize = 9)
         {
 
             SetBreadcrumb(
@@ -40,13 +40,14 @@ namespace TrainigSectorWebSite.Controllers
           activePage: _localizer["ExamSchedules"]);
 
 
-            var projectsList = await _ProjectsService.GetAllAsync(
+            var projectsList = await _ProjectsService.GetAllAsyncByEducationalFacilitiesId(
               false,
+              Id,
               x => x.ProjectImages
           );
 
 
-            var viewModelList = _mapper.Map<List<NewsVM>>(projectsList.Where(a=>a.EducationalFacilitiesId==1));
+            var viewModelList = _mapper.Map<List<NewsVM>>(projectsList);
 
         
 

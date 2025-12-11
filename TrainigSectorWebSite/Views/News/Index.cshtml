@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="news-v2-desc bg-color-light rtl">
                                         <h3>
-                                            <a class="new-color">@((culture == "ar") ? news.TitleAr : news.TitleEn)</a>
+                                            <a href="/NewsDetails/Index/@news.Id" class="new-color">@((culture == "ar") ? news.TitleAr : news.TitleEn)</a>
                                         </h3>
                                         <p>@((culture == "ar") ? news.ShortDescriptionAr : news.ShortDescriptionEn)</p>
                                     </div>
