@@ -1,23 +1,64 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using TrainigSectorDataEntry.Interface;
+using TrainigSectorDataEntry.Models;
+using TrainigSectorDataEntry.ViewModel;
 
 namespace TrainigSectorWebSite.Controllers
 {
-    public class CoursesTrainingController : Controller
+    public class CoursesTrainingController : BaseController
     {
         IStringLocalizer<SharedResource> _localizer;
-        public CoursesTrainingController(IStringLocalizer<SharedResource> localizer)
+        private readonly IMapper _mapper;
+        private readonly IGenericService<TrainingCourse> _TrainingCourse;
+        private readonly IGenericService<TrainingCoursesType> _TrainingCoursesType;
+        public CoursesTrainingController(IStringLocalizer<SharedResource> localizer, IGenericService<TrainingCoursesType> trainingCoursesType, IGenericService<TrainingCourse> TrainingCourse, IMapper mapper)
         {
             _localizer = localizer;
+            _TrainingCoursesType = trainingCoursesType;
+            _TrainingCourse = TrainingCourse;
+            _mapper = mapper;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            {
-                ViewData["Breadcrumb_MapPath"] = "مركز إعداد القادة";
+            SetBreadcrumb(
+           mapPath: _localizer["MainPage"],
+           pageName: _localizer["دورات تدريبية"],
+           activePage: _localizer["دورات تدريبية"]
+);
+
+
+
+            var TrainingCoursesTypeResult = await _TrainingCoursesType.GetAllAsync();
+            var viewModelList = _mapper.Map<List<TrainingCoursesTypeVM>>(TrainingCoursesTypeResult);
+         
+            ViewData["Breadcrumb_MapPath"] = "مركز إعداد القادة";
                 ViewData["Breadcrumb_PageName"] = "الدورات التدريبية";
                 ViewData["Breadcrumb_ActivePage"] = "الدورات التدريبية";
-                return View();
-            }
+
+
+
+            return View(viewModelList);
+
         }
+        [HttpGet]
+        public async Task<IActionResult> GetCoursesByType(int typeId)
+        {
+            var courses = await _TrainingCourse.GetAllAsync();
+
+            var result = courses
+                .Where(x => x.TrainigCoursesTypesId == typeId )
+                .Select((x, index) => new
+                {
+                    Index = index + 1,
+                    Name = x.NameAr,
+                    FilePath = x.FilePath
+                });
+
+            return Json(result);
+        }
+
+
     }
 }

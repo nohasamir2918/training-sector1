@@ -279,4 +279,52 @@
   <data name="TrainingHistory" xml:space="preserve">
     <value>Training History</value>
   </data>
+  <data name="Title" xml:space="preserve">
+    <value>Your Opinion Matters</value>
+  </data>
+  <data name="FormTitle" xml:space="preserve">
+    <value>Message Form</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Telephone" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="TelRequired" xml:space="preserve">
+    <value>Telephone is required</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="MessageRequired" xml:space="preserve">
+    <value>Message is required</value>
+  </data>
+  <data name="FileRequired" xml:space="preserve">
+    <value>File is required</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Message sent successfully</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Copyright</value>
+  </data>
+  <data name="InformationSystemsCenter" xml:space="preserve">
+    <value>Information Systems Center</value>
+  </data>
 </root>
