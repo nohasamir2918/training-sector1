@@ -13,14 +13,14 @@ namespace TrainigSectorWebSite.Controllers
     {
         
 
-        private readonly IGenericService<ProjectVM> _ProjectsService;
-        private readonly IGenericService<ProjectImageVM> _ProjectImagesService;
+        private readonly IGenericService<Project> _ProjectsService;
+      
 
     
         IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
         private readonly ILoggerRepository _logger;
-        public ProjectController(IStringLocalizer<SharedResource> localizer, IGenericService<ProjectVM> ProjectsService, IMapper mapper, ILoggerRepository logger)
+        public ProjectController(IStringLocalizer<SharedResource> localizer, IGenericService<Project> ProjectsService, IMapper mapper, ILoggerRepository logger)
         {
             _ProjectsService = ProjectsService;
            
@@ -33,21 +33,51 @@ namespace TrainigSectorWebSite.Controllers
 
         public async Task<IActionResult> Index(int Id=0,int page = 1, int pageSize = 9)
         {
+            if (Id==1)
+            {
+                SetBreadcrumb(
+                 mapPath: _localizer["LeadershipDevelopmentCenter"],
+                 pageName: _localizer["Projects"],
+                 activePage: _localizer["Projects"]);
+            }
+            else if (Id == 2)
+            {
+                SetBreadcrumb(
+                mapPath: _localizer["AdvancedTechnicalInstituteForIndustries"],
+                pageName: _localizer["Projects"],
+                activePage: _localizer["Projects"]);
+            }
+            else if (Id==3)
+            {
+                SetBreadcrumb(
+                mapPath: _localizer["ElSalamAppliedTechnologySecondarySchool"],
+                pageName: _localizer["Projects"],
+                activePage: _localizer["Projects"]);
+                
+            }
+            else if (Id == 4)
+            {
+                SetBreadcrumb(
+                mapPath: _localizer["HelwanSecondarySchoolForAppliedTechnology"],
+                pageName: _localizer["Projects"],
+                activePage: _localizer["Projects"]);
+            }
+            else
+            {
+                SetBreadcrumb(
+                mapPath: _localizer["TechnologicalCollege"],
+                pageName: _localizer["Projects"],
+                activePage: _localizer["Projects"]);
+            }
 
-            SetBreadcrumb(
-          mapPath: _localizer["StudentServices"],
-          pageName: _localizer["ExamSchedules"],
-          activePage: _localizer["ExamSchedules"]);
+                var projectsList = await _ProjectsService.GetAllAsyncByEducationalFacilitiesId(
+                      false,
+                      Id,
+                      x => x.ProjectImages
+                  );
 
 
-            var projectsList = await _ProjectsService.GetAllAsyncByEducationalFacilitiesId(
-              false,
-              Id,
-              x => x.ProjectImages
-          );
-
-
-            var viewModelList = _mapper.Map<List<NewsVM>>(projectsList);
+            var viewModelList = _mapper.Map<List<ProjectVM>>(projectsList);
 
         
 
