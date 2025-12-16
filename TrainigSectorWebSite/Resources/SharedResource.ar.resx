@@ -279,4 +279,52 @@
   <data name="TrainingHistory" xml:space="preserve">
     <value>نبذة تاريخية</value>
   </data>
+  <data name="Title" xml:space="preserve">
+    <value>رأيك يهمنا</value>
+  </data>
+  <data name="FormTitle" xml:space="preserve">
+    <value>نموذج رسالة</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="Telephone" xml:space="preserve">
+    <value>التليفون</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>موضوع الرسالة</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>إرفاق ملف</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>إرسال</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>الاسم مطلوب</value>
+  </data>
+  <data name="TelRequired" xml:space="preserve">
+    <value>التليفون مطلوب</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>البريد الإلكتروني مطلوب</value>
+  </data>
+  <data name="MessageRequired" xml:space="preserve">
+    <value>موضوع الرسالة مطلوب</value>
+  </data>
+  <data name="FileRequired" xml:space="preserve">
+    <value>يرجى إرفاق ملف</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>تم إرسال رسالتك بنجاح</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>حقوق النشر محفوظة</value>
+  </data>
+  <data name="InformationSystemsCenter" xml:space="preserve">
+    <value>شركة نظم المعلومات والحواسب</value>
+  </data>
 </root>
