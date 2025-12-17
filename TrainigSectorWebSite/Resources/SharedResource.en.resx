@@ -327,4 +327,10 @@
   <data name="InformationSystemsCenter" xml:space="preserve">
     <value>Information Systems Center</value>
   </data>
+  <data name="NewsDetails" xml:space="preserve">
+    <value>News Details</value>
+  </data>
+  <data name="ThreaterAndHalls" xml:space="preserve">
+    <value>Stages and Halls</value>
+  </data>
 </root>

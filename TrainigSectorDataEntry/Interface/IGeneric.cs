@@ -7,7 +7,7 @@ namespace TrainigSectorDataEntry.Interface
     {
         Task<IEnumerable<T>> GetAllAsync(bool includeDeleted = false, params Expression<Func<T, object>>[] includes);
         Task<IEnumerable<T>> GetAllAsyncByEducationalFacilitiesId(bool includeDeleted = false, int EducationalFacilitiesId=0, params Expression<Func<T, object>>[] includes);
-        Task<T?> GetByIdAsync(int id);
+        Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes);
         Task AddAsync(T entity, IFormFile? imageFile = null);
         Task UpdateAsync(T entity, IFormFile? imageFile = null);
         Task SoftDeleteAsync(int id);

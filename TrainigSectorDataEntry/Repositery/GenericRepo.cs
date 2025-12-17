@@ -40,12 +40,24 @@ namespace TrainigSectorDataEntry.Repositery
             return await query.ToListAsync();
         }
 
-      
 
-        public async Task<T?> GetByIdAsync(int id)
-        {
-            return await _dbSet.FindAsync(id);
-        }
+
+    //    public async Task<T?> GetByIdAsync(
+    //int id,
+    //params Expression<Func<T, object>>[] includes)
+    //    {
+    //        IQueryable<T> query = _dbSet;
+
+    //        if (includes != null)
+    //        {
+    //            foreach (var include in includes)
+    //            {
+    //                query = query.Include(include);
+    //            }
+    //        }
+
+    //        return await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
+    //    }
 
         public async Task AddAsync(T entity)
         {
@@ -61,7 +73,7 @@ namespace TrainigSectorDataEntry.Repositery
 
         public async Task DeleteAsync(int id)
         {
-            var entity = await GetByIdAsync(id);
+            var entity = await GetByIdAsync(id, Array.Empty<Expression<Func<T, object>>>());
             if (entity != null && typeof(T).GetProperty("IsDeleted") != null)
             {
                 typeof(T).GetProperty("IsDeleted")!.SetValue(entity, true);
@@ -82,7 +94,7 @@ namespace TrainigSectorDataEntry.Repositery
 
         private async Task SetActiveStatus(int id, bool isActive)
         {
-            var entity = await GetByIdAsync(id);
+            var entity = await GetByIdAsync(id,null);
             if (entity != null && typeof(T).GetProperty("IsActive") != null)
             {
                 typeof(T).GetProperty("IsActive")!.SetValue(entity, isActive);

@@ -41,5 +41,6 @@ namespace TrainigSectorDataEntry.ViewModel
         [ValidateNever]
         public virtual TrainingSector TrainigSector { get; set; } = null!;
         public IFormFile? UploadedImage { get; set; }
+        public StagesAndHall Room { get; set; }
     }
 }

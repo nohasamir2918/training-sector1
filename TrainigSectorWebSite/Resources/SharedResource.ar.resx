@@ -327,4 +327,10 @@
   <data name="InformationSystemsCenter" xml:space="preserve">
     <value>شركة نظم المعلومات والحواسب</value>
   </data>
+  <data name="NewsDetails" xml:space="preserve">
+    <value>تفاصيل الأخبار</value>
+  </data>
+  <data name="ThreaterAndHalls" xml:space="preserve">
+    <value>المسرح والقاعات</value>
+  </data>
 </root>
