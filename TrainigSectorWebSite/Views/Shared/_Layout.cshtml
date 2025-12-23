@@ -1,6 +1,7 @@
 ﻿
 @using Microsoft.AspNetCore.Localization
 @using System.Globalization
+@using TrainigSectorDataEntry.ViewModel
 
 
 
@@ -74,11 +75,17 @@
     <link rel="stylesheet" href="~/assets/css/theme-skins/dark.css">
     <link rel="stylesheet" href="~/assets/css/fonts/DroidArabicKufi/css/Ar-fonts.css">
     <!-- CSS Customization -->
-    <link rel="stylesheet" href="~/assets/css/custom.css">
 
 
-
-
+@if (currentCulture=="ar")
+    {
+        <link rel="stylesheet" href="~/assets/css/custom.css">
+    }
+    else 
+    {
+        <link rel="stylesheet" href="~/assets/css/custom.css">
+        <link rel="stylesheet" href="~/assets/css/customEn.css">
+    }        
 
 
 
@@ -123,7 +130,7 @@
     @using Microsoft.AspNetCore.Localization
     @using Microsoft.AspNetCore.Http
     @using System.Globalization
-@using Microsoft.Extensions.Localization
+    @using Microsoft.Extensions.Localization
     
 
   
@@ -241,12 +248,13 @@
                                                     <a href="javascript:void(0);">@Localizer["DepartmentsDivisions"]</a>
 
                                                     <ul class="dropdown-menu sub-width">
-                                                        <li><a href="/Department/Index">@Localizer["MechanicalDivision"]</a></li>
+                                                    @await Component.InvokeAsync("Menu");
+                                                      @*   <li><a href="/Department/Index">@Localizer["MechanicalDivision"]</a></li>
                                                         <li><a href="/Department/Index">@Localizer["ElectricalElectronicsDivision"]</a></li>
                                                         <li><a href="/Department/Index">@Localizer["ComputerDivision"]</a></li>
                                                         <li><a href="/Department/Index">@Localizer["ChemistryDivision"]</a></li>
                                                         <li><a href="/Department/Index">@Localizer["BasicSciencesDivision"]</a></li>
-                                                        <li><a href="/Department/Index">@Localizer["MechatronicsDivision"]</a></li>
+                                                        <li><a href="/Department/Index">@Localizer["MechatronicsDivision"]</a></li> *@
                                                     </ul>
                                                 </li>
 
@@ -305,7 +313,7 @@
 
                                             <ul class="dropdown-menu ">
                                                 <li><a href="/TrainingHistory/Index/4">@Localizer["HistoricalOverview"]</a></li>
-                                                <li><a href="/Department/Index">@Localizer["SchoolDepartments"]</a></li>
+                                            <li><a href="/Department/Index?EducationFacility=2">@Localizer["SchoolDepartments"]</a></li>
 
                                                 <li class="dropdown-submenu">
                                                     <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
@@ -330,7 +338,7 @@
 
                                             <ul class="dropdown-menu ">
                                                 <li><a href="/TrainingHistory/Index/3">@Localizer["HistoricalOverview"]</a></li>
-                                                <li><a href="/Department/Index">@Localizer["SchoolDepartments"]</a></li>
+                                            <li><a href="/Department/Index?EducationFacility=3">@Localizer["SchoolDepartments"]</a></li>
 
                                                 <li class="dropdown-submenu">
                                                     <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
@@ -524,38 +532,38 @@
 
 
         <!-- JS Global Compulsory -->
-        <script type="text/javascript" src="../assets/plugins/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
-    <script type="text/javascript" src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
         <!-- JS Implementing Plugins -->
-    <script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
-    <script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-    <script type="text/javascript" src="../assets/plugins/jquery.parallax.js"></script>
-    <script type="text/javascript" src="../assets/plugins/parallax-slider/js/modernizr.js"></script>
-        <script type="text/javascript" src="../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-        <script type="text/javascript" src="../assets/plugins/counter/waypoints.min.js"></script>
-    <script type="text/javascript" src="../assets/plugins/counter/jquery.counterup.min.js"></script>
-    <script type="text/javascript" src="../assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="../assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script type="text/javascript" src="../assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-    <script type="text/javascript" src="../assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
-    <script type="text/javascript" src="../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/back-to-top.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/smoothScroll.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/jquery.parallax.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/parallax-slider/js/modernizr.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/counter/waypoints.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/counter/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="~/assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 
         <!-- JS Customization -->
-    <script type="text/javascript" src="../assets/js/custom.js"></script>
+    <script type="text/javascript" src="~/assets/js/custom.js"></script>
         <!-- JS Page Level -->
-    <script type="text/javascript" src="../assets/js/app.js"></script>
+    <script type="text/javascript" src="~/assets/js/app.js"></script>
 
-        <script type="text/javascript" src="../assets/js/plugins/cube-portfolio/cube-portfolio-2.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio/cube-portfolio-2.js"></script>
 
-    <script type="text/javascript" src="../assets/js/plugins/datepicker.js"></script>
-        <script type="text/javascript" src="../assets/js/plugins/style-switcher.js"></script>
-        <script type="text/javascript" src="../assets/js/plugins/parallax-slider.js"></script>
-        <script type="text/javascript" src="../assets/js/plugins/cube-portfolio/cube-portfolio-lightbox-edit.js"></script>
-    <script type="text/javascript" src="../assets/js/plugins/cube-portfolio/cube-portfolio-2-ns.js"></script>
-        <script type="text/javascript" src="../assets/js/plugins/fancy-box.js"></script>
-    <script type="text/javascript" src="../assets/js/plugins/progress-bar.js"></script>
-    <script type="text/javascript" src="../assets/js/plugins/owl-carousel.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/datepicker.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/style-switcher.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/parallax-slider.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio/cube-portfolio-lightbox-edit.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio/cube-portfolio-2-ns.js"></script>
+        <script type="text/javascript" src="~/assets/js/plugins/fancy-box.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/progress-bar.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/owl-carousel.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 App.init();

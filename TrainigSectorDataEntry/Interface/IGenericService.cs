@@ -13,6 +13,12 @@ namespace TrainigSectorDataEntry.Interface
         Task ActivateAsync(int id);
         Task DeactivateAsync(int id);
         Task<IEnumerable<T>> GetDropdownListAsync();
+        Task<List<T>> GetManyAllAsyncByEducationalFacilitiesId(
+    bool isDeleted,
+    int educationalFacilitiesId,
+    Func<IQueryable<T>, IQueryable<T>> include = null
+);
+
 
     }
 }

@@ -20,7 +20,7 @@ public class MappingProfile : Profile
         CreateMap<Project, ProjectVM>().ReverseMap();
         CreateMap<QualityCertificate, QualityCertificateVM>().ReverseMap();
         CreateMap<Slider, SliderVM>().ReverseMap();
-        CreateMap<Specialization, SpecializationVM>().ReverseMap();
+      
         CreateMap<StagesAndHall, StagesAndHallVM>().ReverseMap();
         CreateMap<StudentActivite, StudentActiviteVM>().ReverseMap();
         CreateMap<EducationalLevel, EducationalLevelVM>().ReverseMap();
@@ -28,7 +28,19 @@ public class MappingProfile : Profile
         CreateMap<SucessStory, SucessStoryVM>().ReverseMap();
         CreateMap<TrainingCoursesType, TrainingCoursesTypeVM>().ReverseMap();
         CreateMap<TrainingCourse, TrainingCourseVM>().ReverseMap();
+     
+        CreateMap<Departmentsandbranch, MenuVm>().ReverseMap();
 
+        CreateMap<Specialization, SpecializationVM>()
+    .ForMember(d => d.SpecializationImages,
+               o => o.MapFrom(s => s.SpecializationImages))
+    .ReverseMap();
+        CreateMap<Departmentsandbranch, DepartmentsandBranchesDetailVM>()
+    .ForMember(d => d.Specializations,
+               o => o.MapFrom(s => s.Specializations))
+    .ForMember(d => d.DepartmentsandBranchesImages,
+               o => o.MapFrom(s => s.DepartmentsandBranchesImages));
 
+       
     }
 }

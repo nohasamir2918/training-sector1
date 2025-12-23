@@ -43,6 +43,12 @@ namespace TrainigSectorDataEntry.Services
         {
             return await _repository.GetAllAsyncByEducationalFacilitiesId(includeDeleted, EducationalFacilitiesId, includes);
         }
+        public async Task<List<T>> GetManyAllAsyncByEducationalFacilitiesId( bool isDeleted, int educationalFacilitiesId, Func<IQueryable<T>, IQueryable<T>> include = null)
+        {
+            return await _repository.GetManyAllAsyncByEducationalFacilitiesId(isDeleted, educationalFacilitiesId,null);
+        }
+  
+
     }
 }
 

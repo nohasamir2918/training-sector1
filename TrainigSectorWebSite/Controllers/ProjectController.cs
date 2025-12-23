@@ -74,10 +74,11 @@ namespace TrainigSectorWebSite.Controllers
                       false,
                       Id,
                       x => x.ProjectImages
+
                   );
 
 
-            var viewModelList = _mapper.Map<List<ProjectVM>>(projectsList);
+            avar viewModelList = _mapper.Map<List<ProjectVM>>(projectsList);
 
         
 
@@ -96,7 +97,7 @@ namespace TrainigSectorWebSite.Controllers
             return View(pagedData);
 
 
-            return View();
+            
         }
 
         private readonly string _basePath = @"D:\"; // Change to your folder

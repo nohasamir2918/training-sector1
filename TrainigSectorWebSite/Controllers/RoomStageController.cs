@@ -34,10 +34,7 @@ namespace TrainigSectorWebSite.Controllers
          activePage: _localizer["Theater"]
 );
 
-                var StagesList = await _StagesAndHall.GetAllAsync(
-            false,
-            x => x.Equals(null)
-        );
+                var StagesList = await _StagesAndHall.GetAllAsyncByEducationalFacilitiesId(false);
                 var viewModelList = _mapper.Map<List<StagesAndHallVM>>(StagesList.Where(a=>a.ISStage==false));
 
                 // === PAGINATION ===
@@ -50,7 +47,7 @@ namespace TrainigSectorWebSite.Controllers
                 ViewBag.Page = page;
                 ViewBag.PageSize = pageSize;
                 ViewBag.TotalPages = totalPages;
-                ViewBag.title = _localizer["Threater"];
+                ViewBag.title = _localizer["Theater"];
                 return View(pagedData);
             }
             else if (Id == 2)
@@ -61,10 +58,7 @@ namespace TrainigSectorWebSite.Controllers
  activePage: _localizer["Halls"]
 );
 
-                var StagesList = await _StagesAndHall.GetAllAsync(
-            false,
-            x => x.Equals(null)
-        );
+                var StagesList = await _StagesAndHall.GetAllAsyncByEducationalFacilitiesId(false);
                 var viewModelList = _mapper.Map<List<StagesAndHallVM>>(StagesList.Where(a => a.ISStage == true));
 
                 // === PAGINATION ===

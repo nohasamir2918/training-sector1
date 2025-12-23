@@ -1,0 +1,15 @@
+﻿@using System.Globalization
+@using TrainigSectorDataEntry.ViewModel
+@model List<MenuVm>
+
+@{
+    var culture = CultureInfo.CurrentCulture.Name; // ar | en-US | en
+}
+@foreach (var item in Model)
+{
+    <li>
+        <a href="/Department/Index?EducationFacility=1&id=@item.Id">
+            @(culture.StartsWith("ar") ? item.NameAr : item.NameEn)
+        </a>
+    </li>
+}
