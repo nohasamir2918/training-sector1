@@ -1,4 +1,15 @@
-﻿<div class=" container content height-500">
+﻿@model IEnumerable<TrainigSectorDataEntry.ViewModel.StudentActiviteVM>
+@using Microsoft.Extensions.Localization
+
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+
+@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+}
+
+<div class=" container content height-500">
     <div class="profile">
         <div class="profile-body">
             <div class="profile-bio">
@@ -9,7 +20,7 @@
                             <div class="col-md-12">
                                 <div class="headline-center-v2 headline-center-v2-dark title">
                                     <h2 class="color-orange">
-                                        أنشطة طلابية
+                                        @Localizer["StudentActivities"]
                                     </h2>
                                     <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
                                 </div>
@@ -18,99 +29,41 @@
 
 
                         <div class="row" style="align-items: center; display: flex; direction: ltr;">
-                            <div class="col-md-4 ">
+                            @foreach (var activity in Model)
+                            {
+                                <div class="col-md-4 ">
 
-                                <section>
-                                    <!--=== Img V2 ===-->
+                                    <section>
+                                        <!--=== Img V2 ===-->
 
-                                    <div class="high-rated techs">
+                                        <div class="high-rated techs">
 
-                                        <div class="item">
-                                            <img class="img-responsive img-bordered " alt="" src="../assets/img/log1-T.png">
+                                            <div class="item">
+                                                <img class="img-responsive img-bordered " alt="" src="/StudentActivities/GetImage?fileName=@activity.ImagePath">
 
-                                        </div>
-
-                                    </div>
-                                    <div class="bg margin-bottom-25">
-                                        <div class="blog-twitter-inner">
-                                            <dl class="dl-horizontal">
-
-                                                <dd>
-                                                    هو أحد المؤسسات العلمية المتميزة التابعة لوزارة الإنتاج الحربي وتحت اشراف وزارة التعليم العالى
-                                                </dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-
-                                    <!--=== End Img V2 ===-->
-                                </section>
-
-
-
-                            </div>
-
-                            <div class="col-md-4 ">
-
-                                <section>
-                                    <!--=== Img V2 ===-->
-
-                                    <div class="high-rated techs">
-
-                                        <div class="item">
-                                            <img class="img-responsive img-bordered " alt="" src="../assets/img/log1-T.png">
+                                            </div>
 
                                         </div>
+                                        <div class="bg margin-bottom-25">
+                                            <div class="blog-twitter-inner">
+                                                <dl class="dl-horizontal">
 
-                                    </div>
-                                    <div class="bg margin-bottom-25">
-                                        <div class="blog-twitter-inner">
-                                            <dl class="dl-horizontal">
-
-                                                <dd>
-                                                    هو أحد المؤسسات العلمية المتميزة التابعة لوزارة الإنتاج الحربي وتحت اشراف وزارة التعليم العالى
-                                                </dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-
-                                    <!--=== End Img V2 ===-->
-                                </section>
-
-
-
-                            </div>
-
-                            <div class="col-md-4 ">
-
-                                <section>
-                                    <!--=== Img V2 ===-->
-
-                                    <div class="high-rated techs">
-
-                                        <div class="item">
-                                            <img class="img-responsive img-bordered " alt="" src="../assets/img/log1-T.png">
-
+                                                    <dd>
+                                                        @((culture == "ar") ? @activity.DescriptionAr : @activity.DescriptionEn)
+                                                    
+                                                    </dd>
+                                                </dl>
+                                            </div>
                                         </div>
 
-                                    </div>
-                                    <div class="bg margin-bottom-25">
-                                        <div class="blog-twitter-inner">
-                                            <dl class="dl-horizontal">
-
-                                                <dd>
-                                                    هو أحد المؤسسات العلمية المتميزة التابعة لوزارة الإنتاج الحربي وتحت اشراف وزارة التعليم العالى
-                                                </dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-
-                                    <!--=== End Img V2 ===-->
-                                </section>
+                                        <!--=== End Img V2 ===-->
+                                    </section>
 
 
 
-                            </div>
-
+                                </div>
+                            }
+                            
 
 
                         </div>

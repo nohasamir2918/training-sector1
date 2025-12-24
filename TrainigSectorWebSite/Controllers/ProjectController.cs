@@ -78,7 +78,7 @@ namespace TrainigSectorWebSite.Controllers
                   );
 
 
-            avar viewModelList = _mapper.Map<List<ProjectVM>>(projectsList);
+            var viewModelList = _mapper.Map<List<ProjectVM>>(projectsList);
 
         
 

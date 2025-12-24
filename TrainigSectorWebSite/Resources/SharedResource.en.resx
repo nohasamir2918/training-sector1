@@ -333,4 +333,7 @@
   <data name="ThreaterAndHalls" xml:space="preserve">
     <value>Stages and Halls</value>
   </data>
+  <data name="Alerts" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
 </root>

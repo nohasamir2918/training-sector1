@@ -333,4 +333,7 @@
   <data name="ThreaterAndHalls" xml:space="preserve">
     <value>المسرح والقاعات</value>
   </data>
+  <data name="Alerts" xml:space="preserve">
+    <value>تنبيهات</value>
+  </data>
 </root>
