@@ -63,10 +63,9 @@
     <link rel="stylesheet" href="~/assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
     <link rel="stylesheet" href="~/assets/css/pages/profile.css">
     <script src="~/assets/plugins/counter/jquery.counterup.min.js" type="text/javascript"></script>
-    <script src="~/assets/plugins/counter/waypoints.min.js" type="text/javascript"></script>
     <!-- CSS Page Style -->
 
-
+    <script src="~/assets/plugins/counter/waypoints.min.js"></script>
     <link rel="stylesheet" href="~/assets/css/pages/page_search.css">
 
 
@@ -85,28 +84,29 @@
     {
         <link rel="stylesheet" href="~/assets/css/custom.css">
         <link rel="stylesheet" href="~/assets/css/customEn.css">
-    }        
+    }
 
 
 
-  
-	<script src="~/assets/jquery/jquery.min.js"></script>
+
+    <script src="~/assets/ArAJax/jquery.min.js" type="text/javascript"></script>
+
 
     <script type="text/javascript">
         jQuery(document).ready(function () {
-            App.init();
-            RevolutionSlider500.initRSfullWidth500();
-            RevolutionSlider.initRSfullWidth();
-            FancyBox.initFancybox();
-            ContactPage.initMap();
-            ContactPage.initPanorama();
-            OwlCarousel.initOwlCarousel();
-            Datepicker.initDatepicker();
-            App.initCounter();
-            Masking.initMasking();
-            Validation.initValidation();
-            CheckoutForm.initCheckoutForm();
-        });
+             App.init();
+             RevolutionSlider500.initRSfullWidth500();
+             RevolutionSlider.initRSfullWidth();
+             FancyBox.initFancybox();
+             ContactPage.initMap();
+             ContactPage.initPanorama();
+             OwlCarousel.initOwlCarousel();
+             Datepicker.initDatepicker();
+             App.initCounter();
+             Masking.initMasking();
+             Validation.initValidation();
+             CheckoutForm.initCheckoutForm();
+         });
     </script>
  
   
@@ -528,65 +528,63 @@
 
         </div>
 
+    <!-- jQuery (مرة واحدة فقط) -->
+    <script src="~/assets/plugins/jquery/jquery.min.js"></script>
+    <script src="~/assets/plugins/jquery/jquery-migrate.min.js"></script>
+
+    <!-- Bootstrap (نسخة jQuery القديمة) -->
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Modernizr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
 
+    <!-- da-slider -->
+    <script src="~/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
 
-        <!-- JS Global Compulsory -->
-    <script type="text/javascript" src="~/assets/plugins/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="~/assets/plugins/jquery/jquery-migrate.min.js"></script>
-    <script type="text/javascript" src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-        <!-- JS Implementing Plugins -->
-    <script type="text/javascript" src="~/assets/plugins/back-to-top.js"></script>
-    <script type="text/javascript" src="~/assets/plugins/smoothScroll.js"></script>
-    <script type="text/javascript" src="~/assets/plugins/jquery.parallax.js"></script>
-    <script type="text/javascript" src="~/assets/plugins/parallax-slider/js/modernizr.js"></script>
-        <script type="text/javascript" src="~/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-        <script type="text/javascript" src="~/assets/plugins/counter/waypoints.min.js"></script>
-    <script type="text/javascript" src="~/assets/plugins/counter/jquery.counterup.min.js"></script>
-    <script type="text/javascript" src="~/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="~/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script type="text/javascript" src="~/assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-    <script type="text/javascript" src="~/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
-    <script type="text/javascript" src="~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+    <!-- Plugins -->
+    <script src="~/assets/plugins/jquery.parallax.js"></script>
+    <script src="~/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+    <script src="~/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
 
-        <!-- JS Customization -->
-    <script type="text/javascript" src="~/assets/js/custom.js"></script>
-        <!-- JS Page Level -->
-    <script type="text/javascript" src="~/assets/js/app.js"></script>
+    <!-- App -->
+    <script src="~/assets/js/app.js"></script>
+    <script src="~/assets/js/custom.js"></script>
 
-        <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio/cube-portfolio-2.js"></script>
+    <!-- Init -->
+    <script>
+        jQuery(function () {
+            App.init();
 
-    <script type="text/javascript" src="~/assets/js/plugins/datepicker.js"></script>
-        <script type="text/javascript" src="~/assets/js/plugins/style-switcher.js"></script>
-        <script type="text/javascript" src="~/assets/js/plugins/parallax-slider.js"></script>
-        <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio/cube-portfolio-lightbox-edit.js"></script>
-    <script type="text/javascript" src="~/assets/js/plugins/cube-portfolio/cube-portfolio-2-ns.js"></script>
-        <script type="text/javascript" src="~/assets/js/plugins/fancy-box.js"></script>
-    <script type="text/javascript" src="~/assets/js/plugins/progress-bar.js"></script>
-    <script type="text/javascript" src="~/assets/js/plugins/owl-carousel.js"></script>
-        <script type="text/javascript">
-            jQuery(document).ready(function () {
-                App.init();
-                ParallaxSlider.initParallaxSlider();
-                OwlCarousel.initOwlCarousel();
-                FancyBox.initFancybox();
-                ProgressBar.initProgressBarHorizontal();
+            $('#da-slider').cslider({
+                autoplay: true,
+                interval: 5000,
+                bgincrement: 50
             });
-        </script>
-
-        
-
-
-    
+        });
+    </script>
 
 
 
+ 
+
+    <!-- Modernizr (مطلوب) -->
+    <script src="~/assets/js/modernizr.custom.28468.js"></script>
+    <script src="~/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+    <script>
+        $(function () {
+            $('#da-slider').cslider({
+                autoplay: true,
+                interval: 5000,
+                bgincrement: 50
+            });
+        });
+    </script>
 
 
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

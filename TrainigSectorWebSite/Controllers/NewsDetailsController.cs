@@ -46,7 +46,7 @@ namespace TrainigSectorWebSite.Controllers
 
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = Path.Combine(_basePath, fileName);
+            var fullPath = @"D:\"+ fileName;
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();

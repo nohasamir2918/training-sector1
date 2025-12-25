@@ -1008,8 +1008,8 @@ section {
 }
 
 .high-rated .carousel-indicators {
-    top: 10px;
-    left: 65%;
+    top: 80%;
+    left: 50%;
     text-align: right;
 }
 
