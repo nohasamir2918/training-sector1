@@ -7,7 +7,9 @@
 body, html, *, h1, h2, h3, h4, h5, h6, a, p, li {
     font-family: 'creatodisplay-black' !important;
 }
-
+.fa {
+    font-family: 'Fontawesome' !important;
+}
 .link-list a {
     font-size: 12px;
 }

@@ -15,8 +15,8 @@ namespace TrainigSectorDataEntry.Services
         public Task<IEnumerable<T>> GetAllAsync(bool includeDeleted = false, params Expression<Func<T, object>>[] includes) =>
             _repository.GetAllAsync(includeDeleted, includes);
 
-        public Task<T?> GetByIdAsync(int id) =>
-            _repository.GetByIdAsync(id);
+        public Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes) =>
+            _repository.GetByIdAsync(id, includes);
 
         public Task AddAsync(T entity) =>
             _repository.AddAsync(entity);
@@ -37,15 +37,18 @@ namespace TrainigSectorDataEntry.Services
             
             return _repository.GetAllAsync(includeDeleted: false);
         }
-        public async Task<T?> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
-        {
-            return await _repository.GetByIdAsync(id, includes);
-        }
+   
 
         public async Task<IEnumerable<T>>  GetAllAsyncByEducationalFacilitiesId(bool includeDeleted, int EducationalFacilitiesId, params Expression<Func<T, object>>[] includes)
         {
             return await _repository.GetAllAsyncByEducationalFacilitiesId(includeDeleted, EducationalFacilitiesId, includes);
         }
+        public async Task<List<T>> GetManyAllAsyncByEducationalFacilitiesId( bool isDeleted, int educationalFacilitiesId, Func<IQueryable<T>, IQueryable<T>> include = null)
+        {
+            return await _repository.GetManyAllAsyncByEducationalFacilitiesId(isDeleted, educationalFacilitiesId,null);
+        }
+  
+
     }
 }
 

@@ -2,7 +2,7 @@
 
 namespace TrainigSectorDataEntry.ViewModel
 {
-    public class DepartmentsandBranchesDetailVM
+    public class MenuVm
     {
         public int Id { get; set; }
 
@@ -36,6 +36,6 @@ namespace TrainigSectorDataEntry.ViewModel
 
         public virtual EducationalFacility EducationalFacilities { get; set; } = null!;
 
-        public virtual ICollection<SpecializationVM> Specializations { get; set; } = new List<SpecializationVM>();
+        public virtual ICollection<Specialization> Specializations { get; set; } = new List<Specialization>();
     }
 }

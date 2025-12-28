@@ -45,7 +45,7 @@ namespace TrainigSectorDataEntry.ViewModel
 
         public virtual Departmentsandbranch Departmentsandbranches { get; set; } = null!;
 
-        public virtual ICollection<SpecializationImage> SpecializationImages { get; set; } = new List<SpecializationImage>();
+        public virtual ICollection<SpecializationImageVM> SpecializationImages { get; set; } = new List<SpecializationImageVM>();
     }
 }
 

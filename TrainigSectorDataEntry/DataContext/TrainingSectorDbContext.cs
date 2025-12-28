@@ -87,7 +87,6 @@ public partial class TrainingSectorDbContext : DbContext
             //ignore
         }
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AlertsAndAdvertisment>(entity =>
@@ -267,10 +266,9 @@ public partial class TrainingSectorDbContext : DbContext
             entity.Property(e => e.TitleEn).HasMaxLength(50);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
-            entity.HasOne(d => d.Projects).WithMany(p => p.ProjectImages)
-                .HasForeignKey(d => d.ProjectsId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ProjectDetailsImages_ProjectDetailsImages");
+            entity.HasOne(d => d.Project).WithMany(p => p.ProjectImages)
+                .HasForeignKey(d => d.ProjectId)
+                .HasConstraintName("FK_ProjectImages_Projects");
         });
 
         modelBuilder.Entity<QualityCertificate>(entity =>

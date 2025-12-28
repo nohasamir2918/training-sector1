@@ -16,8 +16,7 @@ namespace TrainigSectorWebSite.Controllers
 
 
             ViewData["Breadcrumb_MapPath"] = mapPath;
-            ViewData["Breadcrumb_PageName"] = "معامل كيميائية";
-            ViewData["Breadcrumb_ActivePage"] = "معامل كيميائية";
+            
         }
     }
 

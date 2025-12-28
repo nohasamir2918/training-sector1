@@ -1,0 +1,171 @@
+﻿
+<link href="~/assets/ZoomImg/dist/remodal-default-theme.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/ZoomImg/dist/remodal.css" rel="stylesheet" type="text/css" />
+
+<div class="container content height-500">
+    <div class="profile">
+        <div class="profile-body">
+            <div class="profile-bio">
+                <div id="sky-form3" class="sky-form">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <center>
+                                    <section>
+                                        <!--=== View Album V2 ===-->
+
+                                        <div class="margin-bottom-25">
+
+
+                                            <div>
+
+
+                                                <div class="carousel slide carousel-v1" id="myCarousel-13">
+                                                    <div class="carousel-inner">
+                                                        <div class="item" height="302px">
+                                                            <center>
+                                                                <img alt="" src="~/assets/img/SpecializationLab/Image_29.jpg" height="302px" width="600px">
+                                                            </center>
+                                                            <div class="carousel-caption">
+                                                                <h4 class="color-orange">معمل التحكم الهيدروليكي</h4>
+                                                            </div>
+                                                        </div>
+                                                        <div class="item" height="302px">
+                                                            <center>
+                                                                <img alt="" src="~/assets/img/SpecializationLab/Image_30.jpg" height="302px" width="600px">
+                                                            </center>
+                                                            <div class="carousel-caption">
+                                                                <h4 class="color-orange">معمل التحكم النيوماتي</h4>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="item active" height="302px">
+                                                            <center>
+                                                                <img alt="" src="~/assets/img/SpecializationLab/Image_31.jpg" height="302px" width="600px">
+                                                            </center>
+                                                            <div class="carousel-caption">
+                                                                <h4 class="color-orange">معمل عناصر الاحساس والقياس</h4>
+                                                            </div>
+                                                        </div>
+                                                        <div class="item">
+                                                            <center>
+                                                                <img alt="" src="~/assets/img/SpecializationLab/Image_32.jpg" height="302px" width="600px">
+                                                            </center>
+                                                            <div class="carousel-caption">
+                                                                <h4 class="color-orange">ورشة الهيدروليك والنيوماتيك</h4>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="carousel-arrow">
+                                                        <a data-slide="prev" href="#myCarousel-13" class="left carousel-control"><i class="fa fa-angle-left"></i></a><a data-slide="next" href="#myCarousel-13" class="right carousel-control"><i class="fa fa-angle-right"></i></a>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+                                                <div>
+
+                                                    <div id="myModal" class="modal">
+
+                                                        <!-- Modal content -->
+                                                        <div class="modal-content">
+                                                            <center>
+                                                                <span class="close">×</span>
+                                                                <img id="ContentPlaceHolder1_Image1" class="img-responsive img-bordered full-width" alt="" src="">
+
+                                                            </center>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="remodal-bg remodal-is-closed">
+                                                    </div>
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </section>
+                                </center>
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="about-me headline news-tilte ">
+                                    <h3>
+                                        <span id="ContentPlaceHolder1_LabTite" class="title ">
+                                            تفاصيل المشروع
+                                        </span>
+
+                                    </h3>
+                                </div>
+                                <div class="bg  margin-bottom-15">
+                                    <span id="ContentPlaceHolder1_LabDes">
+                                        تفاصيل المشروع
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="remodal" data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+    <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+    <div>
+
+
+        <asp:Image ID="Image2" runat="server" class="img-responsive img-bordered full-width" alt="" />
+    </div>
+
+</div>
+
+
+<script src="~/ArAJax/jquery.min.js" type="text/javascript"></script>
+
+
+<script>    window.jQuery || document.write('<script src="~/ArAJax/jquery.min.js"><\/script>')</script>
+<script src="~/assets/ZoomImg/dist/remodal.js"></script>
+<script>
+    $(document).on('opening', '.remodal', function () {
+        console.log('opening');
+    });
+
+    $(document).on('opened', '.remodal', function () {
+        console.log('opened');
+    });
+
+    $(document).on('closing', '.remodal', function (e) {
+        console.log('closing' + (e.reason ? ', reason: ' + e.reason : ''));
+    });
+
+    $(document).on('closed', '.remodal', function (e) {
+        console.log('closed' + (e.reason ? ', reason: ' + e.reason : ''));
+    });
+
+    $(document).on('confirmation', '.remodal', function () {
+        console.log('confirmation');
+    });
+
+    $(document).on('cancellation', '.remodal', function () {
+        console.log('cancellation');
+    });
+
+
+</script>
+

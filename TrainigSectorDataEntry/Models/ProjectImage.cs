@@ -7,7 +7,7 @@ public partial class ProjectImage
 {
     public int Id { get; set; }
 
-    public int ProjectsId { get; set; }
+    public int? ProjectId { get; set; }
 
     public string? TitleAr { get; set; }
 
@@ -35,5 +35,5 @@ public partial class ProjectImage
 
     public bool IsActive { get; set; }
 
-    public virtual Project Projects { get; set; } = null!;
+    public virtual Project? Project { get; set; }
 }

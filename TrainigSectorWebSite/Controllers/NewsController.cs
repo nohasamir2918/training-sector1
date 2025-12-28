@@ -37,24 +37,14 @@ namespace TrainigSectorWebSite.Controllers
             pageName: _localizer["News"],
             activePage: _localizer["News"]
 );
-            var newsList = await _newsService.GetAllAsync();
-            var newsImagesList = await _newsImagesService.GetAllAsync();
-
-            var sectors = await _trainingSectorService.GetDropdownListAsync();
-
-            ViewBag.TrainingSectorList = new SelectList(sectors, "Id", "NameAr");
-            foreach (var item in newsList)
-            {
-                if (newsImagesList.Where(a => a.NewsId == item.Id).ToList().Count > 0)
-                {
-
-                    item.NewsImages = newsImagesList.Where(a => a.NewsId == item.Id).ToList();
-                }
-            }
+           
+            var newsList = await _newsService.GetAllAsync(
+             false,
+             x => x.NewsImages
+         );
             var viewModelList = _mapper.Map<List<NewsVM>>(newsList);
 
-           // return View(viewModelList);
-
+           
 
             // === PAGINATION ===
             int totalItems = viewModelList.Count;
@@ -79,13 +69,13 @@ namespace TrainigSectorWebSite.Controllers
         //    ViewData["Breadcrumb_ActivePage"] = "معامل هندسية";
         //    return View();
         //}
-
+        
 
         private readonly string _basePath = @"D:\"; // Change to your folder
        
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = Path.Combine(_basePath, fileName);
+            var fullPath = @"D:\"+  fileName;
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();

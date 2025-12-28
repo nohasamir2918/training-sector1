@@ -1,4 +1,5 @@
 ﻿Scaffold-DbContext "Server=MAI;Database=TrainingSectorDB;TrustServerCertificate=True;Integrated Security=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context TrainingSectorDbContext -ContextDir DataContext -UseDatabaseNames -Force
+Scaffold-DbContext "Server=MAI;Database=TrainingSectorDB;User Id=TrainingSectorDB;Password=TrainingSectorDB@123;TrustServerCertificate=True;Integrated Security=False;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context TrainingSectorDbContext -ContextDir DataContext -UseDatabaseNames -Force
 
 
 
