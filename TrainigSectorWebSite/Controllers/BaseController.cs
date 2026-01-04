@@ -5,6 +5,9 @@ namespace TrainigSectorWebSite.Controllers
 {
     public class BaseController : Controller
     {
+
+
+
         protected void SetBreadcrumb(string mapPath, string pageName, string activePage)
         {
             ViewData["Breadcrumb"] = new Breadcrumb
