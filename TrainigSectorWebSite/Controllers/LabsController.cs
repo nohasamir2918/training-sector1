@@ -30,63 +30,42 @@ namespace TrainigSectorWebSite.Controllers
             _mapper = mapper;
             _logger = logger;
         }
-        public async Task<IActionResult> Index(int Id = 0, int page = 1, int pageSize = 9)
+        public async Task<IActionResult> Index(int EducationFacility=0 ,int Id = 0, int page = 1, int pageSize = 9)
         {
 
-            if (Id == 1)
+           
+            var departments = await _context.Departmentsandbranches
+                .Include(x => x.DepartmentsandBranchesImages)
+                .Where(x => x.IsActive && x.IsDeleted != true && x.Id==Id)
+                .ToListAsync();
+            
+             if (EducationFacility == 7&& departments.FirstOrDefault().DepatmentTypeID==1)
             {
                 SetBreadcrumb(
-                 mapPath: _localizer["LeadershipDevelopmentCenter"],
-                 pageName: _localizer["LabsWorkshops"],
-                 activePage: _localizer["LabsWorkshops"]);
+                mapPath: _localizer["TrainingFacilities"],
+                pageName: _localizer["Labs"],
+                activePage: _localizer["Labs"]);
             }
-            else if (Id == 2)
+            else if (EducationFacility == 7 && departments.FirstOrDefault().DepatmentTypeID == 3)
             {
                 SetBreadcrumb(
-                mapPath: _localizer["AdvancedTechnicalInstituteForIndustries"],
-                pageName: _localizer["LabsWorkshops"],
-                activePage: _localizer["LabsWorkshops"]);
+                mapPath: _localizer["TrainingFacilities"],
+                pageName: _localizer["Workshops"],
+                activePage: _localizer["Workshops"]);
             }
-            else if (Id == 3)
-            {
-                SetBreadcrumb(
-                mapPath: _localizer["ElSalamAppliedTechnologySecondarySchool"],
-                pageName: _localizer["LabsWorkshops"],
-                activePage: _localizer["LabsWorkshops"]);
-
-            }
-            else if (Id == 4)
-            {
-                SetBreadcrumb(
-                mapPath: _localizer["HelwanSecondarySchoolForAppliedTechnology"],
-                pageName: _localizer["LabsWorkshops"],
-                activePage: _localizer["LabsWorkshops"]);
-            }
-            else
-            {
-                SetBreadcrumb(
-                mapPath: _localizer["TechnologicalCollege"],
-                pageName: _localizer["LabsWorkshops"],
-                activePage: _localizer["LabsWorkshops"]);
-            }
-
-
-            var projectsList = await _context.Departmentsandbranches
- .Where(x => (x.DepatmentTypeID == 1|| x.DepatmentTypeID == 3))
- .Include(x => x.Specializations)
-     .ThenInclude(s => s.SpecializationImages)
- .ToListAsync();
+            var vm = _mapper.Map<List<DepartmentsandbranchVM>>(departments);
+           
 
 
 
-            var viewModelList = _mapper.Map<List<ProjectVM>>(projectsList);
+           
 
 
 
             // === PAGINATION ===
-            int totalItems = viewModelList.Count;
+            int totalItems = vm.Count;
             int totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
-            var pagedData = viewModelList
+            var pagedData = vm
                             .Skip((page - 1) * pageSize)
                             .Take(pageSize)
             .ToList();

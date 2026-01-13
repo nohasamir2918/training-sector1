@@ -4,11 +4,12 @@
 
 @{
     var culture = CultureInfo.CurrentCulture.Name; // ar | en-US | en
+	var modeledit = Model.Where(a => a.DepatmentTypeID == 1).ToList();
 }
-@foreach (var item in Model)
+@foreach (var item in modeledit)
 {
     <li>
-        <a href="/Department/Index?EducationFacility=2&id=@item.Id">
+        <a href="/Labs/Index?EducationFacility=7&id=@item.Id">
             @(culture.StartsWith("ar") ? item.NameAr : item.NameEn)
         </a>
     </li>
