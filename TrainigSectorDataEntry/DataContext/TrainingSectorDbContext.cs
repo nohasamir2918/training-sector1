@@ -234,6 +234,11 @@ public partial class TrainingSectorDbContext : DbContext
             entity.Property(e => e.ShortDescriptionAr).HasMaxLength(50);
             entity.Property(e => e.ShortDescriptionEn).HasMaxLength(50);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.TrainigSector).WithMany(p => p.News)
+                .HasForeignKey(d => d.TrainigSectorId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_News_TrainingSector");
         });
 
         modelBuilder.Entity<NewsImage>(entity =>
@@ -337,7 +342,6 @@ public partial class TrainingSectorDbContext : DbContext
 
         modelBuilder.Entity<SpecializationImage>(entity =>
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.TitleAr).HasMaxLength(50);
             entity.Property(e => e.TitleEn).HasMaxLength(50);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");

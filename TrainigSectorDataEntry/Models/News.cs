@@ -38,4 +38,6 @@ public partial class News
     public bool IsActive { get; set; }
 
     public virtual ICollection<NewsImage> NewsImages { get; set; } = new List<NewsImage>();
+
+    public virtual TrainingSector TrainigSector { get; set; } = null!;
 }
