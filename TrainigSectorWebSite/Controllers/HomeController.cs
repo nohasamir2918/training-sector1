@@ -13,11 +13,12 @@ namespace TrainigSectorWebSite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IGenericService<TrainingSector> _trainingSectorService;
-
-        public HomeController(ILogger<HomeController> logger, IGenericService<TrainingSector> trainingSectorService)
+        private readonly IGenericService<Slider> _sliderService;
+        public HomeController(ILogger<HomeController> logger, IGenericService<TrainingSector> trainingSectorService, IGenericService<Slider> sliderService)
         {
             _logger = logger;
             _trainingSectorService = trainingSectorService;
+            _sliderService = sliderService;
         }
         public IActionResult SetLanguage(string culture, string returnUrl = null)
         {
@@ -38,11 +39,12 @@ namespace TrainigSectorWebSite.Controllers
             return LocalRedirect(returnUrl ?? Url.Action("Index", "Home"));
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
+            var sliders = await _sliderService
+                .GetAllAsync();
 
-            return View();
+            return View(sliders);
         }
 
         public IActionResult Privacy()
