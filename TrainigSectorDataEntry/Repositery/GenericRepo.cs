@@ -18,6 +18,7 @@ namespace TrainigSectorDataEntry.Repositery
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(bool includeDeleted = false, params Expression<Func<T, object>>[] includes)
+        
         {
             var query = _dbSet.AsQueryable();
 
@@ -40,8 +41,24 @@ namespace TrainigSectorDataEntry.Repositery
             return await query.ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _dbSet
+                .Where(filter)
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<T>> GetByFilterAsync(
+        Expression<Func<T, bool>> filter,
+        bool includeDeleted = false,
+        params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet.Where(filter);
 
+            foreach (var include in includes)
+                query = query.Include(include);
 
+            return await query.ToListAsync();
+        }
         //    public async Task<T?> GetByIdAsync(
         //int id,
         //params Expression<Func<T, object>>[] includes)

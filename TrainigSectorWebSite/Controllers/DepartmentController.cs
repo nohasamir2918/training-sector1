@@ -107,11 +107,10 @@ namespace TrainigSectorWebSite.Controllers
 
 
         }
-        private readonly string _basePath = @"D:\"; // Change to your folder
-
+       
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = Path.Combine(_basePath, fileName);
+            var fullPath = @"D:\" + fileName;
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();

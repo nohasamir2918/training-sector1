@@ -1,85 +1,167 @@
-﻿<div id="ContentPlaceHolder1_UpdatePanel1">
+﻿@model TrainigSectorDataEntry.ViewModel.StudyScheduleVM
 
+<div class="container content">
+    <h2 class="text-center text-warning">الجداول الدراسية</h2>
 
-    <div class="container content height-500">
-        <div class="profile">
-            <div class="profile-body">
-                <div class="profile-bio">
-                    <div id="sky-form3" class="sky-form">
-                        <fieldset>
+    <form asp-action="DownloadSchedule" method="post">
 
-                            <div class="row">
-                                <div class="headline-center-v2 headline-center-v2-dark title">
-                                    <h2 class="color-orange">الجداول الدراسية </h2>
-                                    <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
-                                </div>
-                            </div>
+        <input type="hidden" asp-for="EducationalFacilitiesId" />
 
-
-                            <div id="Div1" class="sky-form">
-                                <fieldset>
-                                    <section class="row">
-                                        <section class="col col-2"></section>
-                                        <section class="col col-8 row">
-                                            <label class="input col col-9">
-                                                <i class="icon-append fa fa-chevron-circle-down"></i>
-                                                <select name="ctl00$ContentPlaceHolder1$DropClass" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$DropClass\',\'\')', 0)" id="ContentPlaceHolder1_DropClass" class="form-control">
-                                                    <option selected="selected" value="0">-- اختر الفصل الدراسي --</option>
-                                                    <option value="9">أولى</option>
-                                                    <option value="10">ثانية</option>
-
-                                                </select>
-
-                                            </label>
-                                            <div class="label resault col col-3">المستوى الدراسي</div>
-
-                                        </section>
-
-
-
-                                    </section>
-                                    <section class="row">
-                                        <section class="col col-2"></section>
-                                        <section class="col col-8 row">
-                                            <label class="input col col-9">
-                                                <i class="icon-append fa fa-chevron-circle-down"></i>
-                                                <select name="ctl00$ContentPlaceHolder1$DropSpecify" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$DropSpecify\',\'\')', 0)" id="ContentPlaceHolder1_DropSpecify" class="form-control">
-                                                    <option selected="selected" value="0">-- اختر التخصص --</option>
-                                                    <option value="4">ميكانيكا</option>
-                                                    <option value="5">كهرباء والكترونيات</option>
-                                                    <option value="6">حاسبات</option>
-                                                    <option value="7">كيمياء</option>
-
-                                                </select>
-
-                                            </label>
-                                            <div id="ContentPlaceHolder1_Specify" class="label resault col col-3">التخصص</div>
-
-                                        </section>
-
-
-
-
-
-                                    </section>
-
-
-
-                                </fieldset>
-
-
-                                <footer class="text-center">
-                                </footer>
-
-
-                            </div>
-                        </fieldset>
-
-                    </div>
-                </div>
-            </div>
+        <!-- السنة -->
+        <div class="form-group">
+            <label>السنة الدراسية</label>
+            <select asp-for="EducationalLevelId"
+                    asp-items="ViewBag.EducationalLevelList"
+                    class="form-control">
+                <option value="">-- اختر السنة الدراسية --</option>
+            </select>
         </div>
 
+        <!-- الترم -->
+        <div class="form-group">
+            <label>الفصل الدراسي</label>
+            <select asp-for="TermId"
+                    asp-items="ViewBag.TermList"
+                    class="form-control">
+                <option value="">-- اختر الفصل الدراسي --</option>
+            </select>
+        </div>
 
-    </div>
+        <!-- القسم (دايمًا موجود) -->
+        <div class="form-group">
+            <label>القسم</label>
+            <select asp-for="DepartmentsandbranchesId"
+                    asp-items="ViewBag.Departments"
+                    class="form-control"
+                    id="departmentDropdown">
+                <option value="">-- اختر القسم --</option>
+            </select>
+
+        </div>
+
+        <!-- التخصص (للمعهد فقط) -->
+        @if (ViewBag.IsInstitute)
+        {
+            <div class="form-group">
+                <label>التخصص</label>
+                <select asp-for="SpecializationId"
+                        class="form-control"
+                        id="specializationDropdown">
+                    <option value="">-- اختر التخصص --</option>
+                </select>
+            </div>
+        }
+        else
+        {
+            <input type="hidden" asp-for="SpecializationId" value="0" />
+        }
+
+        <br />
+
+        <button type="submit" class="btn btn-success btn-block" id="downloadBtn" style="display:none;">
+            تحميل الجدول
+        </button>
+
+    </form>
+    <script>
+
+        $('form').submit(function (e) {
+
+            var level = $('#EducationalLevelId').val();
+            var term = $('#TermId').val();
+            var department = $('#departmentDropdown').val();
+            var isInstitute = '@ViewBag.IsInstitute' === 'True';
+            var specialization = $('#specializationDropdown').val();
+
+            if (!level || !term || !department) {
+                alert('من فضلك اختاري السنة والترم والقسم');
+                e.preventDefault();
+                return;
+            }
+
+            if (isInstitute && !specialization) {
+                alert('من فضلك اختاري التخصص');
+                e.preventDefault();
+            }
+        });
+    </script>
+
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+    $(document).ready(function () {
+
+        function checkFile() {
+            var level = $('#EducationalLevelId').val();
+            var term = $('#TermId').val();
+            var department = $('#departmentDropdown').val();
+            var specialization = $('#specializationDropdown').val() || 0;
+
+            if (!level || !term || !department) {
+                $('#downloadBtn').hide();
+                return;
+            }
+
+            $.ajax({
+                url: '@Url.Action("CheckScheduleExists", "StudySchedules")',
+                type: 'GET',
+                data: {
+                    educationalLevelId: level,
+                    termId: term,
+                    departmentsandbranchesId: department,
+                    specializationId: specialization
+                },
+                success: function (data) {
+                    if (data.exists) {
+                        $('#downloadBtn').show();
+                    } else {
+                        $('#downloadBtn').hide();
+                    }
+                },
+                error: function () {
+                    $('#downloadBtn').hide();
+                }
+            });
+        }
+
+        // تحقق عند تغيير أي Dropdown
+        $('#EducationalLevelId, #TermId, #departmentDropdown, #specializationDropdown').change(function () {
+            checkFile();
+        });
+
+        // لأول مرة
+        checkFile();
+    });
+
+    $('#departmentDropdown').change(function () {
+
+        var departmentId = $(this).val();
+        var specializationDropdown = $('#specializationDropdown');
+
+        specializationDropdown.empty();
+        specializationDropdown.append('<option value="">-- اختر التخصص --</option>');
+
+        if (departmentId === '') {
+            return;
+        }
+
+        $.ajax({
+            url: '@Url.Action("GetSpecializationsByDepartment", "StudySchedules")',
+            type: 'GET',
+            data: { departmentId: departmentId },
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    specializationDropdown.append(
+                        '<option value="' + item.id + '">' + item.name + '</option>'
+                    );
+                });
+            },
+            error: function () {
+                alert('حدث خطأ أثناء تحميل التخصصات');
+            }
+        });
+    });
+</script>
+
+

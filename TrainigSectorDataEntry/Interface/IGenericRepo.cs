@@ -21,7 +21,10 @@ namespace TrainigSectorDataEntry.Interface
     Func<IQueryable<T>, IQueryable<T>> include = null
 );
 
-
+        Task<IEnumerable<T>> GetByFilterAsync(
+      Expression<Func<T, bool>> filter,
+      bool includeDeleted = false,
+      params Expression<Func<T, object>>[] includes);
 
     }
 }
