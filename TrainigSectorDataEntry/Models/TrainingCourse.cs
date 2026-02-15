@@ -13,7 +13,9 @@ public partial class TrainingCourse
 
     public string? NameEn { get; set; }
 
-    public string FilePath { get; set; } = null!;
+    public string? FilePathEn { get; set; }
+
+    public string FilePathAr { get; set; } = null!;
 
     public bool? IsActive { get; set; }
 

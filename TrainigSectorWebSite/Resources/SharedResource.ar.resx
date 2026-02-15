@@ -226,7 +226,7 @@
     <value>الدورات التدريبية</value>
   </data>
   <data name="Labs" xml:space="preserve">
-    <value>معامل</value>
+    <value>المعامل</value>
   </data>
   <data name="EngineeringLabs" xml:space="preserve">
     <value>معامل هندسية</value>
@@ -235,7 +235,7 @@
     <value>معامل كميائية</value>
   </data>
   <data name="Workshops" xml:space="preserve">
-    <value>ورش</value>
+    <value>الورش</value>
   </data>
   <data name="ProductionEngineeringWorkshops" xml:space="preserve">
     <value>ورش هندسة الإنتاج</value>

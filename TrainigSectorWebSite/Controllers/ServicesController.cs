@@ -38,8 +38,7 @@ namespace TrainigSectorWebSite.Controllers
 
 
             var services = await _Services.GetAllAsync(
-                    false,
-                    x => x.EducationalFacilities
+                    false
                 );
             //foreach (var item in viewModelList)
             //{
