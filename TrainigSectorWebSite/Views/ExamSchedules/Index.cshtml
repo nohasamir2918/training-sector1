@@ -1,92 +1,167 @@
-﻿
-<div class="row margin-top-20">
-    <div class="col-md-12">
-        <h2 class="text-center color-orange">السنة الأولى</h2>
-    </div>
+﻿@model TrainigSectorDataEntry.ViewModel.StudyScheduleVM
+
+<div class="container content">
+    <h2 class="text-center text-warning">جداول الامتحانات</h2>
+
+    <form asp-action="DownloadSchedule" method="post">
+
+        <input type="hidden" asp-for="EducationalFacilitiesId" />
+
+        <!-- السنة -->
+        <div class="form-group">
+            <label>السنة الدراسية</label>
+            <select asp-for="EducationalLevelId"
+                    asp-items="ViewBag.EducationalLevelList"
+                    class="form-control">
+                <option value="">-- اختر السنة الدراسية --</option>
+            </select>
+        </div>
+
+        <!-- الترم -->
+        <div class="form-group">
+            <label>الفصل الدراسي</label>
+            <select asp-for="TermId"
+                    asp-items="ViewBag.TermList"
+                    class="form-control">
+                <option value="">-- اختر الفصل الدراسي --</option>
+            </select>
+        </div>
+
+        <!-- القسم (دايمًا موجود) -->
+        <div class="form-group">
+            <label>القسم</label>
+            <select asp-for="DepartmentsandbranchesId"
+                    asp-items="ViewBag.Departments"
+                    class="form-control"
+                    id="departmentDropdown">
+                <option value="">-- اختر القسم --</option>
+            </select>
+
+        </div>
+
+        <!-- التخصص (للمعهد فقط) -->
+        @if (ViewBag.IsInstitute)
+        {
+            <div class="form-group">
+                <label>التخصص</label>
+                <select asp-for="SpecializationId"
+                        class="form-control"
+                        id="specializationDropdown">
+                    <option value="">-- اختر التخصص --</option>
+                </select>
+            </div>
+        }
+        else
+        {
+            <input type="hidden" asp-for="SpecializationId" value="0" />
+        }
+
+        <br />
+
+        <button type="submit" class="btn btn-success btn-block" id="downloadBtn" style="display:none;">
+            تحميل الجدول
+        </button>
+
+    </form>
+    <script>
+
+        $('form').submit(function (e) {
+
+            var level = $('#EducationalLevelId').val();
+            var term = $('#TermId').val();
+            var department = $('#departmentDropdown').val();
+            var isInstitute = '@ViewBag.IsInstitute' === 'True';
+            var specialization = $('#specializationDropdown').val();
+
+            if (!level || !term || !department) {
+                alert('من فضلك اختاري السنة والترم والقسم');
+                e.preventDefault();
+                return;
+            }
+
+            if (isInstitute && !specialization) {
+                alert('من فضلك اختاري التخصص');
+                e.preventDefault();
+            }
+        });
+    </script>
+
 </div>
-<br>
-<div class="row">
-    <div class="col-md-6">
-        <img id="ContentPlaceHolder1_imgExam" class="img-responsive img-bordered">
-        <center>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-            <ul class="list-unstyled">
-                <!-- portfolio-box-v2-->
-                <li>
+<script>
+    $(document).ready(function () {
 
-                    <div id="ContentPlaceHolder1_divfancy" href="../assets/img/123.jpg" class="fancybox img-zoom " data-rel="gallery">
-                        <i class="fa fa-search-plus "></i>
-                    </div>
-                </li>
+        function checkFile() {
+            var level = $('#EducationalLevelId').val();
+            var term = $('#TermId').val();
+            var department = $('#departmentDropdown').val();
+            var specialization = $('#specializationDropdown').val() || 0;
 
+            if (!level || !term || !department) {
+                $('#downloadBtn').hide();
+                return;
+            }
 
+            $.ajax({
+                url: '@Url.Action("CheckScheduleExists", "StudySchedules")',
+                type: 'GET',
+                data: {
+                    educationalLevelId: level,
+                    termId: term,
+                    departmentsandbranchesId: department,
+                    specializationId: specialization
+                },
+                success: function (data) {
+                    if (data.exists) {
+                        $('#downloadBtn').show();
+                    } else {
+                        $('#downloadBtn').hide();
+                    }
+                },
+                error: function () {
+                    $('#downloadBtn').hide();
+                }
+            });
+        }
 
-            </ul>
-        </center>
+        // تحقق عند تغيير أي Dropdown
+        $('#EducationalLevelId, #TermId, #departmentDropdown, #specializationDropdown').change(function () {
+            checkFile();
+        });
 
-    </div>
-    <div class="col-md-6">
-        <img src="../assets/img/345.jpg" class="img-responsive img-bordered" alt="">
-        <center>
-            <ul class="list-unstyled">
-                <!-- portfolio-box-v2-->
-                <li>
-                    <div id="ContentPlaceHolder1_divZoom" class="fancybox img-zoom " data-rel="gallery" href="../assets/img/345.jpg">
-                        <i class="fa fa-search-plus "></i>
-                    </div>
-                </li>
+        // لأول مرة
+        checkFile();
+    });
 
+    $('#departmentDropdown').change(function () {
 
+        var departmentId = $(this).val();
+        var specializationDropdown = $('#specializationDropdown');
 
-            </ul>
-        </center>
+        specializationDropdown.empty();
+        specializationDropdown.append('<option value="">-- اختر التخصص --</option>');
 
-    </div>
-</div>
+        if (departmentId === '') {
+            return;
+        }
 
-
-
-<div class="row margin-top-20">
-    <div class="col-md-12">
-        <h2 class="text-center color-orange">السنة الثانية</h2>
-    </div>
-</div>
-<br>
-<div class="row">
-    <div class="col-md-6">
-        <img src="../assets/img/456.jpg" class="img-responsive img-bordered" alt="">
-        <center>
-            <ul class="list-unstyled">
-                <!-- portfolio-box-v2-->
-                <li>
-                    <div class="fancybox img-zoom " data-rel="gallery" href="../assets/img/456.jpg">
-                        <i class="fa fa-search-plus "></i>
-                    </div>
-                </li>
-
-
-
-            </ul>
-        </center>
-
-
-    </div>
-    <div class="col-md-6">
-        <img src="../assets/img/789.jpg" class="img-responsive img-bordered" alt="">
-        <center>
-            <ul class="list-unstyled">
-                <!-- portfolio-box-v2-->
-                <li>
-                    <div class="fancybox img-zoom " data-rel="gallery" href="../assets/img/789.jpg">
-                        <i class="fa fa-search-plus "></i>
-                    </div>
-                </li>
-
+        $.ajax({
+            url: '@Url.Action("GetSpecializationsByDepartment", "StudySchedules")',
+            type: 'GET',
+            data: { departmentId: departmentId },
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    specializationDropdown.append(
+                        '<option value="' + item.id + '">' + item.name + '</option>'
+                    );
+                });
+            },
+            error: function () {
+                alert('حدث خطأ أثناء تحميل التخصصات');
+            }
+        });
+    });
+</script>
 
 
-            </ul>
-        </center>
-
-    </div>
-</div>
-<br>
