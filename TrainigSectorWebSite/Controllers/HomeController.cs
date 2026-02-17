@@ -41,6 +41,8 @@ namespace TrainigSectorWebSite.Controllers
 
         public async Task<IActionResult> Index()
         {
+
+
             var sliders = await _sliderService
                 .GetAllAsync();
 

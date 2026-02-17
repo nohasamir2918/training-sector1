@@ -51,5 +51,18 @@ namespace TrainigSectorWebSite.Controllers
 
 
         }
+        private readonly string _basePath = @"D:\"; // Change to your folder
+
+        public IActionResult GetImage(string fileName)
+        {
+            var fullPath = @"D:\" + fileName;
+
+            if (!System.IO.File.Exists(fullPath))
+                return NotFound();
+
+            var fileBytes = System.IO.File.ReadAllBytes(fullPath);
+            var contentType = "image/jpeg"; // Change if you have png/gif
+            return File(fileBytes, contentType);
+        }
     }
 }
