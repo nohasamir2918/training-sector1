@@ -60,6 +60,8 @@ public partial class TrainingSectorDbContext : DbContext
 
     public virtual DbSet<StagesAndHall> StagesAndHalls { get; set; }
 
+    public virtual DbSet<StagesAndHallsImage> StagesAndHallsImages { get; set; }
+
     public virtual DbSet<StudentActivite> StudentActivites { get; set; }
 
     public virtual DbSet<StudentTablesAttachment> StudentTablesAttachments { get; set; }
@@ -110,7 +112,7 @@ public partial class TrainingSectorDbContext : DbContext
 
         modelBuilder.Entity<ComplaintsAndSuggestion>(entity =>
         {
-            entity.Property(e => e.Name).HasMaxLength(50);
+            entity.Property(e => e.Name).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.TrainigSector).WithMany(p => p.ComplaintsAndSuggestions)
@@ -123,10 +125,10 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
-            entity.HasOne(d => d.TrainigSector).WithMany(p => p.ContactUs)
-                .HasForeignKey(d => d.TrainigSectorId)
+            entity.HasOne(d => d.EducationalFacilities).WithMany(p => p.ContactUs)
+                .HasForeignKey(d => d.EducationalFacilitiesId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ContactUs_TrainingSector");
+                .HasConstraintName("FK_ContactUs_EducationalFacilities");
         });
 
         modelBuilder.Entity<DepartmentType>(entity =>
@@ -135,15 +137,15 @@ public partial class TrainingSectorDbContext : DbContext
 
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.IsDeleted).HasDefaultValue(false);
-            entity.Property(e => e.NameAr).HasMaxLength(250);
-            entity.Property(e => e.NameEn).HasMaxLength(250);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
         });
 
         modelBuilder.Entity<DepartmentsandBranchesImage>(entity =>
         {
-            entity.Property(e => e.TitleAr).HasMaxLength(50);
-            entity.Property(e => e.TitleEn).HasMaxLength(50);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.Departmentsandbranches).WithMany(p => p.DepartmentsandBranchesImages)
@@ -154,8 +156,8 @@ public partial class TrainingSectorDbContext : DbContext
 
         modelBuilder.Entity<Departmentsandbranch>(entity =>
         {
-            entity.Property(e => e.NameAr).HasMaxLength(50);
-            entity.Property(e => e.NameEn).HasMaxLength(50);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.DepatmentType).WithMany(p => p.Departmentsandbranches)
@@ -170,8 +172,8 @@ public partial class TrainingSectorDbContext : DbContext
 
         modelBuilder.Entity<EducationalFacility>(entity =>
         {
-            entity.Property(e => e.NameAr).HasMaxLength(50);
-            entity.Property(e => e.NameEn).HasMaxLength(50);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.TrainigSector).WithMany(p => p.EducationalFacilities)
@@ -184,8 +186,8 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.ToTable("EducationalLevel");
 
-            entity.Property(e => e.NameAr).HasMaxLength(50);
-            entity.Property(e => e.NameEn).HasMaxLength(50);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.EducationalFacilities).WithMany(p => p.EducationalLevels)
@@ -220,12 +222,10 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.ToTable("HistoryBreif");
 
-            entity.Property(e => e.DescriptionAr).HasMaxLength(50);
-            entity.Property(e => e.DescriptionEn).HasMaxLength(50);
-            entity.Property(e => e.NameAr).HasMaxLength(50);
-            entity.Property(e => e.NameEn).HasMaxLength(50);
-            entity.Property(e => e.TitleAr).HasMaxLength(50);
-            entity.Property(e => e.TitleEn).HasMaxLength(50);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.EducationalFacilities).WithMany(p => p.HistoryBreifs)
@@ -238,8 +238,8 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.IsDeleted).HasDefaultValue(false);
-            entity.Property(e => e.ShortDescriptionAr).HasMaxLength(50);
-            entity.Property(e => e.ShortDescriptionEn).HasMaxLength(50);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.TrainigSector).WithMany(p => p.News)
@@ -260,8 +260,8 @@ public partial class TrainingSectorDbContext : DbContext
 
         modelBuilder.Entity<Project>(entity =>
         {
-            entity.Property(e => e.TitleAr).HasMaxLength(50);
-            entity.Property(e => e.TitleEn).HasMaxLength(50);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.EducationalFacilities).WithMany(p => p.Projects)
@@ -274,8 +274,8 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_ProjectDetailsImages");
 
-            entity.Property(e => e.TitleAr).HasMaxLength(50);
-            entity.Property(e => e.TitleEn).HasMaxLength(50);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.Project).WithMany(p => p.ProjectImages)
@@ -287,8 +287,8 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_Quality}ertificates");
 
-            entity.Property(e => e.TitleAr).HasMaxLength(50);
-            entity.Property(e => e.TitleEn).HasMaxLength(50);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.EducationalFacilities).WithMany(p => p.QualityCertificates)
@@ -309,22 +309,17 @@ public partial class TrainingSectorDbContext : DbContext
 
         modelBuilder.Entity<Service>(entity =>
         {
-            entity.Property(e => e.TitleAr).HasMaxLength(50);
-            entity.Property(e => e.TitleEn).HasMaxLength(50);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
-
-            entity.HasOne(d => d.EducationalFacilities).WithMany(p => p.Services)
-                .HasForeignKey(d => d.EducationalFacilitiesId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Services_EducationalFacilities");
         });
 
         modelBuilder.Entity<Slider>(entity =>
         {
             entity.ToTable("Slider");
 
-            entity.Property(e => e.TitleAr).HasMaxLength(50);
-            entity.Property(e => e.TitleEn).HasMaxLength(50);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.TrainigSector).WithMany(p => p.Sliders)
@@ -337,8 +332,8 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.ToTable("Specialization");
 
-            entity.Property(e => e.NameAr).HasMaxLength(50);
-            entity.Property(e => e.NameEn).HasMaxLength(50);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.Departmentsandbranches).WithMany(p => p.Specializations)
@@ -349,8 +344,8 @@ public partial class TrainingSectorDbContext : DbContext
 
         modelBuilder.Entity<SpecializationImage>(entity =>
         {
-            entity.Property(e => e.TitleAr).HasMaxLength(50);
-            entity.Property(e => e.TitleEn).HasMaxLength(50);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.Specialization).WithMany(p => p.SpecializationImages)
@@ -364,12 +359,24 @@ public partial class TrainingSectorDbContext : DbContext
             entity.ToTable(tb => tb.HasComment(""));
 
             entity.Property(e => e.ISStage).HasComment("");
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.TrainigSector).WithMany(p => p.StagesAndHalls)
                 .HasForeignKey(d => d.TrainigSectorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_StagesAndHalls_TrainingSector");
+        });
+
+        modelBuilder.Entity<StagesAndHallsImage>(entity =>
+        {
+            entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.StagesAndHalls).WithMany(p => p.StagesAndHallsImages)
+                .HasForeignKey(d => d.StagesAndHallsId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_StagesAndHallsImages_StagesAndHallsImages");
         });
 
         modelBuilder.Entity<StudentActivite>(entity =>
@@ -433,6 +440,8 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.ToTable("SucessStory");
 
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.TrainigSector).WithMany(p => p.SucessStories)
@@ -447,8 +456,8 @@ public partial class TrainingSectorDbContext : DbContext
 
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.IsDeleted).HasDefaultValue(false);
-            entity.Property(e => e.NameAr).HasMaxLength(250);
-            entity.Property(e => e.NameEn).HasMaxLength(250);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
         });
 
@@ -456,15 +465,15 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.Property(e => e.IsActive).HasDefaultValue(true);
             entity.Property(e => e.IsDeleted).HasDefaultValue(false);
-            entity.Property(e => e.NameAr).HasMaxLength(250);
-            entity.Property(e => e.NameEn).HasMaxLength(250);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
         });
 
         modelBuilder.Entity<TrainingCourse>(entity =>
         {
-            entity.Property(e => e.NameAr).HasMaxLength(50);
-            entity.Property(e => e.NameEn).HasMaxLength(50);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.TrainigCoursesTypes).WithMany(p => p.TrainingCourses)
@@ -477,8 +486,8 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_TrainigCourses");
 
-            entity.Property(e => e.NameAr).HasMaxLength(50);
-            entity.Property(e => e.NameEn).HasMaxLength(50);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
 
             entity.HasOne(d => d.TrainingSector).WithMany(p => p.TrainingCoursesTypes)
@@ -491,8 +500,8 @@ public partial class TrainingSectorDbContext : DbContext
         {
             entity.ToTable("TrainingSector");
 
-            entity.Property(e => e.NameAr).HasMaxLength(50);
-            entity.Property(e => e.NameEn).HasMaxLength(50);
+            entity.Property(e => e.NameAr).HasMaxLength(500);
+            entity.Property(e => e.NameEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
         });
 

@@ -12,10 +12,12 @@ namespace TrainigSectorDataEntry.ViewModel
         public string? NameAr { get; set; }
 
         public string? NameEn { get; set; }
-        [ValidateNever]
-        public string FilePath { get; set; } = null!;
 
-        public bool IsActive { get; set; }
+        public string? FilePathEn { get; set; }
+
+        public string FilePathAr { get; set; } = null!;
+
+        public bool? IsActive { get; set; }
 
         public bool? IsDeleted { get; set; }
 
@@ -30,6 +32,8 @@ namespace TrainigSectorDataEntry.ViewModel
         public int? UserDeletionId { get; set; }
 
         public DateOnly? UserDeletionDate { get; set; }
+
+        
 
         [ValidateNever]
         public virtual TrainingCoursesType TrainigCoursesTypes { get; set; } = null!;

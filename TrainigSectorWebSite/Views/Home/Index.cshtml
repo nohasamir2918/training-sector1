@@ -1,4 +1,10 @@
-﻿
+﻿@using TrainigSectorDataEntry.Models
+@model List<Slider>
+
+@{
+    bool isArabic = System.Threading.Thread.CurrentThread.CurrentCulture
+                        .TwoLetterISOLanguageName == "ar";
+}
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -16,95 +22,56 @@
 
 
 <!--=== Slider ===-->
-<div class="slider-inner"> 
-    <div id="da-slider" class="da-slider ">
-        <div class="da-slide da-slide-current">
-            <h2><br /><i>مركز اعداد القادة </i></h2>
-            <p class="p-slider"><i>يهدف المركز الى تطوير البرامج التدريبية  النوعية</i> <br /> <i>ودعم سياسات التطوير والتدريب التقني والمهني</i> <br /> <i>والإرتقاء بالقدرة التنافسية للموارد البشرية بالإنتاج الحربي</i></p>
-            <div class="da-img">
-                
+<div class="slider-inner">
+    <div id="da-slider" class="da-slider">
 
-                <img alt="" src="~/assets/img/kyady.jpg" class="img-responsive vision-img " style="height:300px;" />
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var title = isArabic ? Model[i].TitleAr : Model[i].TitleEn;
+            var desc = isArabic ? Model[i].DescriptionAr : Model[i].DescriptionEn;
+
+            <div class="da-slide @(i == 0 ? "da-slide-current" : "")">
+
+                <h2>
+                    <br />
+                    <i>@title</i>
+                </h2>
+
+                @if (!string.IsNullOrWhiteSpace(desc))
+                {
+                    <p class="p-slider">
+                        <i>@Html.Raw(desc.Replace("\n", "<br />"))</i>
+                    </p>
+                }
+
+                <div class="da-img">
+                    @if (Model[i].IsVideo.Value)
+                    {
+                        <iframe src="@Model[i].FilePath"
+                                width="530"
+                                height="300"
+                                frameborder="0"
+                                allowfullscreen>
+                        </iframe>
+                    }
+                    else
+                    {
+                        <img src="@Url.Content(Model[i].FilePath)"
+                             class="img-responsive vision-img"
+                             style="height:300px;" />
+                    }
+                </div>
 
             </div>
-        </div>
-        <div class="da-slide ">
-            <h2>
-                <br />
-                <i>المعهد الفني للصناعات المتطورة</i>
-            </h2>
-            <p class="p-slider">
-                <i>يقدم خدمة تعليمية وتدريبية وفقاً لمعايير </i> <br />
-                <i>الهيئة القومية لضمان جودة التعليم </i><br />
-                <i> ويتميز الخريج بالكفاءة الفنية وميزة تنافسية في مجال العمل</i>
-            </p>
-            <div class="da-img">
-                
-
-                <iframe src="https://www.youtube.com/embed/PLw1odU4m64" width="530" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-
-              
-            </div>
-        </div>
-
-        <div class="da-slide">
-            <h2><br /><i>المجمع التكنولوجي المتكامل </i></h2>
-            <p class="p-slider">
-                <i>النهوض بالتعليم الفني كمركز نموذجي متكامل </i> <br />
-                <i>يلبي إحتياجات سوق العمل ونقل الخبرة</i> <br />
-                <i> من المؤسسات التعليمية العالمية في مجال التعليم الفني</i>
-            </p>
-            <div class="da-img">
-                <iframe src="https://www.youtube.com/embed/MJNBkKze5_8" width="530" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-            </div>
-        </div>
-        <div class="da-slide">
-            <h2><i>مدرسة حلوان الثانوية للتكنولوجيا التطبيقية</i> <br /> <i> للتعليم المزدوج</i></h2>
-            <p class="p-slider">
-                <i>تأهيل وتدريب الطلبة على مهارات العمل  داخل المنشآت الصناعية </i> <br />
-                <i>حاصلة على  شهادة  الجودة من الهيئة المصرية لإعتماد جودة التعليم  </i>
-            </p>
-            <div class="da-img">
-                <iframe src="https://www.youtube.com/embed/FlmS3HaSKVY" width="530" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-
-              
-            </div>
-        </div>
-
-        <div class="da-slide">
-
-            <h2><i>التقديم والقبول لدفعه جديدة  </i> <br /> <i> بمدرسة السلام للتكنولوجيا التطبيقية </i></h2>
-
-
-            <div class="da-img">
-                <a href="News.aspx" target="_blank">
-                    <img class="img-responsive" src="~/assets/training-img/Elsalam.jpg" alt="image01" style="width:530px; height:300px;" />
-                </a>
-            </div>
-        </div>
-
-        <div class="da-slide">
-
-            <h2><i>التقديم والقبول لدفعه جديدة  </i> <br /> <i> بمدرسة حلوان الثانوية للتكنولوجيا التطبيقية </i></h2>
-
-
-            <div class="da-img">
-                <a href="/New/Index" target="_blank">
-                    <img class="img-responsive" src="~/assets/training-img/helwan2.jpg" alt="image01" style="width:530px; height:300px;" />
-                </a>
-            </div>
-        </div>
-
+        }
 
         <div class="da-arrows">
             <span class="da-arrows-next"></span>
             <span class="da-arrows-prev"></span>
-
         </div>
-       
+
     </div>
-</div>
-<!--=== End Slider ===-->
+</div><!--=== End Slider ===-->
 <!--/Start wrapper-->
 <div class="wrapper">
 

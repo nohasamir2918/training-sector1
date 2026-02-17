@@ -15,7 +15,12 @@
     var switchText = isArabic ? "English" : "العربية";
 }
 @{
-    var breadcrumb = (TrainigSectorWebSite.ViewModel.Breadcrumb)ViewData["Breadcrumb"];
+    TrainigSectorWebSite.ViewModel.Breadcrumb breadcrumb = null;
+
+    if (ViewData["Breadcrumb"] is TrainigSectorWebSite.ViewModel.Breadcrumb b)
+    {
+        breadcrumb = b;
+    }
 }
 
 
@@ -25,7 +30,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - @Localizer["TrainingSectorMoMP"]</title>
+    <title> @Localizer["TrainingSectorMoMP"]</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -421,19 +426,19 @@
             </div>
             <!--=== End Header v5 ===-->
             <!--=== Breadcrumbs ===-->
-            @if (breadcrumb != null)
-            {
-                <div class="breadcrumbs">
-                    <div class="container">
-                        <h1 class="pull-right">@breadcrumb.PageName</h1>
+             @if (breadcrumb != null)
+                {
+                    <div class="breadcrumbs">
+                        <div class="container">
+                            <h1 class="pull-right">@breadcrumb.PageName</h1>
 
-                        <ul class="hidden-verysmall pull-left breadcrumb row">
-                            <li><a href="#">@breadcrumb.MapPath</a></li>
-                            <li class="active">@breadcrumb.ActivePage</li>
-                        </ul>
+                            <ul class="hidden-verysmall pull-left breadcrumb row">
+                                <li><a href="#">@breadcrumb.MapPath</a></li>
+                                <li class="active">@breadcrumb.ActivePage</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            }
+                } 
 
             <!--=== End Breadcrumbs ===-->
                 @RenderBody()

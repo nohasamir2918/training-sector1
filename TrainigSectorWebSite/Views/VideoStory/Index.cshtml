@@ -34,7 +34,8 @@
                                
                                @if (!string.IsNullOrEmpty(item.ImagePath))
                                 {
-                                    <img src="@item.ImagePath" class="img-responsive img-bordered" alt="">
+
+                                    <img src="/VideoStory/GetImage?fileName=@item.ImagePath" class="img-responsive img-bordered" alt="">
                                 }
 
                             </div>

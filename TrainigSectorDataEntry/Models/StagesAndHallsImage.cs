@@ -3,21 +3,13 @@ using System.Collections.Generic;
 
 namespace TrainigSectorDataEntry.Models;
 
-public partial class Service
+public partial class StagesAndHallsImage
 {
     public int Id { get; set; }
 
-    public string? TitleAr { get; set; }
+    public int StagesAndHallsId { get; set; }
 
-    public string? TitleEn { get; set; }
-
-    public string ImagePath { get; set; } = null!;
-
-    public string? DescriptionAr { get; set; }
-
-    public string? DescriptionEn { get; set; }
-
-    public bool IsActive { get; set; }
+    public string? ImagePath { get; set; }
 
     public bool? IsDeleted { get; set; }
 
@@ -33,5 +25,7 @@ public partial class Service
 
     public DateOnly? UserDeletionDate { get; set; }
 
-    public bool? Type { get; set; }
+    public bool IsActive { get; set; }
+
+    public virtual StagesAndHall StagesAndHalls { get; set; } = null!;
 }

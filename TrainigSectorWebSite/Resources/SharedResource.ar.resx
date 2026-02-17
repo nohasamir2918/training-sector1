@@ -336,4 +336,7 @@
   <data name="Alerts" xml:space="preserve">
     <value>تنبيهات</value>
   </data>
+  <data name="TrainingSectorMoMP" xml:space="preserve">
+    <value>قطاع التدريب – وزارة الإنتاج الحربي</value>
+  </data>
 </root>

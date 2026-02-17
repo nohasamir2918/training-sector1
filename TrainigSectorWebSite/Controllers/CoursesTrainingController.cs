@@ -53,7 +53,7 @@ namespace TrainigSectorWebSite.Controllers
                 {
                     Index = index + 1,
                     Name = x.NameAr,
-                    FilePath = x.FilePath
+                    FilePath = x.FilePathAr
                 });
 
             return Json(result);

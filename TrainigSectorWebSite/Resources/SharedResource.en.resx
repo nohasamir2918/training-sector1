@@ -336,4 +336,7 @@
   <data name="Alerts" xml:space="preserve">
     <value>Alerts</value>
   </data>
+  <data name="TrainingSectorMoMP" xml:space="preserve">
+    <value>Training Sector – Ministry of Military Production</value>
+  </data>
 </root>
