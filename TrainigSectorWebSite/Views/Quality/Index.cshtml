@@ -20,7 +20,7 @@
                         var certificateName = culture == "ar" ? item.TitleAr : item.TitleEn;
 
                         <div class="col-md-4">
-                            <img src="@item.ImagePath" class="img-responsive img-bordered" alt="@certificateName" />
+                            <img src="/Quality/GetImage?fileName=@item.ImagePath" class="img-responsive img-bordered" alt="@certificateName" />
 
                             <span class="text-left">
                                 @certificateName
@@ -31,9 +31,9 @@
                 </div>
                 <br>
                 <br>
-                <div class="row">
+                @* <div class="row">
                     <div class="col-md-12">    <center><a href="ISO.pdf" target="_blank" class="btn-u btn-u-xs btn-u-dark ">شهادات الجودة</a></center> </div>
-                </div>
+                </div> *@
                 <br>
             </div>
 

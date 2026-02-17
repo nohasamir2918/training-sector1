@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Localization;
 using TrainigSectorDataEntry.Interface;
 using TrainigSectorDataEntry.Models;
+using TrainigSectorDataEntry.Services;
 using TrainigSectorDataEntry.ViewModel;
+
+
 
 namespace TrainigSectorWebSite.Controllers
 {
@@ -15,14 +18,14 @@ namespace TrainigSectorWebSite.Controllers
         private readonly IGenericService<Specialization> _SpecializationService;
         private readonly IGenericService<StudentTablesAttachment> _StudentTablesAttachmentService;
         private readonly IGenericService<Departmentsandbranch> _DepartmentsService;
-
+        private readonly IFileStorageService _fileStorageService;
         public StudySchedulesController(
             IStringLocalizer<SharedResource> localizer,
             IGenericService<EducationalLevel> educationalLevelService,
             IGenericService<Term> termService,
             IGenericService<Specialization> specializationService,
             IGenericService<StudentTablesAttachment> studentTablesAttachmentService,
-            IGenericService<Departmentsandbranch> departmentsService)
+            IGenericService<Departmentsandbranch> departmentsService, IFileStorageService fileStorageService)
         {
             _localizer = localizer;
             _EducationalLevelService = educationalLevelService;
@@ -30,6 +33,7 @@ namespace TrainigSectorWebSite.Controllers
             _SpecializationService = specializationService;
             _StudentTablesAttachmentService = studentTablesAttachmentService;
             _DepartmentsService = departmentsService;
+            _fileStorageService = fileStorageService;
         }
 
         // Id = EducationalFacilitiesId
@@ -110,39 +114,96 @@ namespace TrainigSectorWebSite.Controllers
 
 
 
+        //[HttpPost]
+        //public async Task<IActionResult> DownloadSchedule(StudyScheduleVM model)
+        //{
+
+
+        //    var files = await _StudentTablesAttachmentService.GetByFilterAsync(x =>
+        //        x.EducationalLevelId == model.EducationalLevelId &&
+        //        x.TermsId == model.TermId &&
+        //        x.DepartmentsandbranchesId == model.DepartmentsandbranchesId &&
+        //        x.TableTypeId == 1 &&
+        //        (
+        //            model.SpecializationId == 0 ||     // مدرسة
+        //            x.SpecializationId == model.SpecializationId // معهد
+        //        ) &&
+        //        x.IsActive &&
+        //        x.IsDeleted != true
+        //    );
+
+        //    var attachment = files.FirstOrDefault();
+
+        //    if (attachment == null || string.IsNullOrEmpty(attachment.FilePath))
+        //        return NotFound("لا يوجد جدول مطابق للاختيارات");
+        //    _fileStorageService.GetFileAsync()
+        //    var fullPath = Path.Combine(
+        //        Directory.GetCurrentDirectory(),
+        //        "wwwroot",
+        //        attachment.FilePath
+        //    );
+
+
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DownloadSchedule(StudyScheduleVM model)
         {
-            var files = await _StudentTablesAttachmentService.GetByFilterAsync(x =>
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var fileEntity = await _StudentTablesAttachmentService.GetByFilterAsync(x =>
                 x.EducationalLevelId == model.EducationalLevelId &&
                 x.TermsId == model.TermId &&
                 x.DepartmentsandbranchesId == model.DepartmentsandbranchesId &&
-                x.TableTypeId == 1 &&
                 (
-                    model.SpecializationId == 0 ||     // مدرسة
-                    x.SpecializationId == model.SpecializationId // معهد
+                    model.SpecializationId == 0 ||
+                    x.SpecializationId == model.SpecializationId
                 ) &&
                 x.IsActive &&
                 x.IsDeleted != true
             );
 
-            var attachment = files.FirstOrDefault();
+            if (fileEntity == null || string.IsNullOrEmpty(fileEntity.FirstOrDefault().FilePath))
+            {
+                TempData["Error"] = "لا يوجد ملف مطابق للاختيارات";
+                return RedirectToAction(nameof(Index));
+            }
 
-            if (attachment == null || string.IsNullOrEmpty(attachment.FilePath))
-                return NotFound("لا يوجد جدول مطابق للاختيارات");
-
+            //var fullPath = Path.Combine(
+            //    Directory.GetCurrentDirectory(),
+            //    "wwwroot",
+            //    fileEntity.FilePath
+            //);
             var fullPath = Path.Combine(
-                Directory.GetCurrentDirectory(),
-                "wwwroot",
-                attachment.FilePath
-            );
+               Directory.GetCurrentDirectory(),
+               "wwwroot",
+               ""
+           );
+            if (!System.IO.File.Exists(fullPath))
+            {
+                TempData["Error"] = "الملف غير موجود";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var fileStream = new FileStream(fullPath, FileMode.Open, FileAccess.Read);
 
             return File(
-                System.IO.File.ReadAllBytes(fullPath),
+                fileStream,
                 "application/octet-stream",
                 Path.GetFileName(fullPath)
             );
         }
+
+
+        //    return File(
+        //        System.IO.File.ReadAllBytes(fullPath),
+        //        "application/octet-stream",
+        //        Path.GetFileName(fullPath)
+        //    );
+        //}
 
         [HttpGet]
         public async Task<IActionResult> GetSpecializationsByDepartment(int departmentId)

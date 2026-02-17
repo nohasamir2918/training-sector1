@@ -46,7 +46,7 @@ namespace TrainigSectorWebSite.Controllers
 
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = @"D:\"+ fileName;
+            var fullPath = @"D:\SharedStorageTrainigSector\" + fileName;
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();
