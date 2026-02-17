@@ -4,7 +4,7 @@
 
 @{
     var culture = CultureInfo.CurrentCulture.Name; // ar | en-US | en
-	var modeledit = Model.Where(a => a.DepatmentTypeID == 1).ToList();
+	var modeledit = Model.Where(a => a.DepatmentTypeID == 1 || a.DepatmentTypeID==4).ToList();
 }
 @foreach (var item in modeledit)
 {
