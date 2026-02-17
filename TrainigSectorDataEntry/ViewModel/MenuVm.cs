@@ -9,7 +9,8 @@ namespace TrainigSectorDataEntry.ViewModel
         public int EducationalFacilitiesId { get; set; }
 
         public int? DepatmentTypeID { get; set; }
-
+        public string? DepartmentNameAr { get; set; }
+        public string? DepartmentNameEn { get; set; }
         public string NameAr { get; set; } = null!;
 
         public string NameEn { get; set; } = null!;

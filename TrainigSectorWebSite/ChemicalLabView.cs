@@ -8,7 +8,7 @@ using TrainigSectorDataEntry.ViewModel;
 
 namespace TrainigSectorWebSite
 {
-    public class LabsViewComponent : ViewComponent
+    public class ChemicalLabViewComponent : ViewComponent
     {
         private readonly IGenericService<Departmentsandbranch> _Departmentsandbranch;
 
@@ -17,7 +17,7 @@ namespace TrainigSectorWebSite
         IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
         private readonly ILoggerRepository _logger;
-        public LabsViewComponent(IGenericService<Departmentsandbranch> Departmentsandbranch, IStringLocalizer<SharedResource> localizer, IMapper mapper, ILoggerRepository logger)
+        public ChemicalLabViewComponent(IGenericService<Departmentsandbranch> Departmentsandbranch, IStringLocalizer<SharedResource> localizer, IMapper mapper, ILoggerRepository logger)
         {
             _Departmentsandbranch = Departmentsandbranch;
             _localizer = localizer;
@@ -34,8 +34,5 @@ namespace TrainigSectorWebSite
 
             return View(menusList);
         }
-
-
-
     }
 }
