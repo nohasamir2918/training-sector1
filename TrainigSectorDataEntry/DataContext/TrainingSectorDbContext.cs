@@ -102,6 +102,7 @@ public partial class TrainingSectorDbContext : DbContext
             //ignore
         }
     }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AlertsAndAdvertisment>(entity =>

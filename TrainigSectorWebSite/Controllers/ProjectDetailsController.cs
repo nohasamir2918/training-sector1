@@ -111,9 +111,9 @@ private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change 
 
 public IActionResult GetImage(string fileName)
     {
-        var fullPath = Path.Combine(_basePath, fileName);
+        var fullPath = Path.Combine(_basePath, fileName).Replace("\\", "/");
 
-        if (!System.IO.File.Exists(fullPath))
+            if (!System.IO.File.Exists(fullPath))
             return NotFound();
 
         var provider = new FileExtensionContentTypeProvider();
@@ -122,8 +122,8 @@ public IActionResult GetImage(string fileName)
         {
             contentType = "application/octet-stream"; // default لو مش معروف
         }
-
-        var fileBytes = System.IO.File.ReadAllBytes(fullPath);
+         
+            var fileBytes = System.IO.File.ReadAllBytes(fullPath);
         return File(fileBytes, contentType);
     }
 
