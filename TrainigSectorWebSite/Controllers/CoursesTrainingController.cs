@@ -70,7 +70,24 @@ namespace TrainigSectorWebSite.Controllers
                 return NotFound();
 
             var fileBytes = System.IO.File.ReadAllBytes(fullPath);
-            var contentType = "application/octet-stream"; // Change if you have png/gif
+            var ext = Path.GetExtension(fullPath).ToLower();
+            var contentType = ext switch
+            {
+                ".jpg" or ".jpeg" => "image/jpeg",
+                ".png" => "image/png",
+                ".gif" => "image/gif",
+                ".pdf" => "application/pdf",
+                ".doc" => "application/msword",
+                ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                ".xls" => "application/vnd.ms-excel",
+                ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                ".txt" => "text/plain",
+                _ => "application/octet-stream"
+            };
+
+
+
+          
             return File(fileBytes, contentType);
         }
     }

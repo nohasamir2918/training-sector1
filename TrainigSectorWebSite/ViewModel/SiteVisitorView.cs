@@ -15,7 +15,7 @@
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
-        {
+         {
             const string sessionKey = "VisitorId";
              var sector = await _trainingSectorService.GetByIdAsync(1);
             // لو session = null → زائر جديد

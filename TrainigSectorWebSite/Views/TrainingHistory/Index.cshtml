@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<TrainigSectorDataEntry.ViewModel.HistoryBreifVM>
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @using Microsoft.Extensions.Localization
-
-
 @inject IStringLocalizer<SharedResource> Localizer
+
 @{
     var culture = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 }
-@{
-    var breadcrumb = (TrainigSectorWebSite.ViewModel.Breadcrumb)ViewData["Breadcrumb"];
-}
-<div class=" container content  ">
+
+<link href="~/assets/ZoomImg/dist/remodal-default-theme.css" rel="stylesheet" />
+<link href="~/assets/ZoomImg/dist/remodal.css" rel="stylesheet" />
+
+<div class="container content">
 
     <div class="profile">
         <div class="profile-body">
@@ -18,35 +18,33 @@
                 <div id="sky-form3" class="sky-form">
                     <fieldset>
 
-
                         @foreach (var item in Model)
                         {
                             var title = culture == "ar" ? item.TitleAr : item.TitleEn;
                             var description = culture == "ar" ? item.DescriptionAr : item.DescriptionEn;
 
                             string carouselId = $"carousel-{item.Id}";
-                            string thumbnailGalleryId = $"gallery-{item.Id}";
 
-                            <div class="row">
+                            <div class="row mb-4" style="direction:@(culture == "ar" ? "rtl" : "ltr")">
+
+                                <!-- ================== Carousel Images ================== -->
                                 <div class="col-md-4">
-
                                     <section>
                                         <div class="high-rated techs">
-
                                             <div id="@carouselId" class="carousel slide" data-ride="carousel">
 
                                                 <!-- Indicators -->
                                                 <ol class="carousel-indicators">
                                                     @for (int i = 0; i < item.HistoryBerifImages.Count; i++)
                                                     {
-                                                        <li class="rounded-x @(i == 0 ? "active" : "")"
-                                                            data-target="#@carouselId"
-                                                            data-slide-to="@i">
+                                                        <li data-target="#@carouselId"
+                                                            data-slide-to="@i"
+                                                            class="@(i == 0 ? "active" : "")">
                                                         </li>
                                                     }
                                                 </ol>
 
-                                                <!-- Images -->
+                                                <!-- Carousel Images -->
                                                 <div class="carousel-inner">
                                                     @for (int i = 0; i < item.HistoryBerifImages.Count; i++)
                                                     {
@@ -54,56 +52,57 @@
                                                         <div class="item @(i == 0 ? "active" : "")">
                                                             <img class="img-responsive img-bordered"
                                                                  src="/TrainingHistory/GetImage?fileName=@img.ImagePath"
-                                                                 alt="">
+                                                                 alt="@title"
+                                                                 style="cursor:pointer;"
+                                                                 onclick="openModal('/TrainingHistory/GetImage?fileName=@img.ImagePath')" />
                                                         </div>
                                                     }
                                                 </div>
 
+                                                <!-- Controls -->
+                                                <a class="left carousel-control" href="#@carouselId" data-slide="prev">
+                                                    <i class="fa fa-angle-left"></i>
+                                                </a>
+                                                <a class="right carousel-control" href="#@carouselId" data-slide="next">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
                                             </div>
-
                                         </div>
                                     </section>
 
-                                    <!-- Thumbnail Gallery -->
-                                    <div class="col-sm-1 v-album">
+                                    <!-- ================== Thumbnail Gallery ================== -->
+                                    <div class="v-album mt-2">
                                         <ul class="list-unstyled">
-
                                             @foreach (var img in item.HistoryBerifImages)
                                             {
-                                                <li>
-                                                    <a class="fancybox"
-                                                       data-rel="gallery-@item.Id"
-                                                       title="@title"
-                                                       href="/TrainingHistory/GetImage?fileName=@img.ImagePath">
-                                                        <img class="img-responsive"
-                                                             src="/TrainingHistory/GetImage?fileName=@img.ImagePath"
-                                                             alt="">
-                                                        <span class="portfolio-box-v2-in"></span>
+                                                <li class="d-inline-block mr-2 mb-2 text-center">
+                                                    <a href="/TrainingHistory/GetImage?fileName=@img.ImagePath"
+                                                       class="thumbnail-link"
+                                                       title="@title">
+                                                        <i class="fa fa-search-plus fa-2x" style="color:#f60; cursor:pointer;"></i>
                                                     </a>
                                                 </li>
                                             }
-
                                         </ul>
                                     </div>
 
+
                                 </div>
 
-                                <!-- Text Section -->
+                                <!-- ================== Text Section ================== -->
                                 <div class="col-md-8">
-
                                     <div class="headline-center-v2 headline-center-v2-dark title">
                                         <h2 class="color-orange">@title</h2>
                                         <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
                                     </div>
 
-                                    <p class="bg margin-bottom-25">
+                                    <p class="bg margin-bottom-25" style="text-align:@(culture == "ar" ? "right" : "left")">
                                         @description
                                     </p>
-
                                 </div>
+
                             </div>
                         }
-
 
                     </fieldset>
                 </div>
@@ -111,3 +110,48 @@
         </div>
     </div>
 </div>
+
+<!-- ================== Modal لعرض الصورة ================== -->
+<div id="imageModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img id="modalImage" class="img-responsive" style="width:100%" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================== Scripts ================== -->
+<script src="~/ArAJax/jquery.min.js"></script>
+<script src="~/assets/ZoomImg/dist/remodal.js"></script>
+
+<script>
+    // دالة لفتح Modal عند الضغط على أي صورة
+    function openModal(imageUrl) {
+        $("#modalImage").attr("src", imageUrl);
+        $("#imageModal").modal("show");
+    }
+
+    $(document).ready(function () {
+        // التعامل مع الصور في Thumbnail Gallery
+        $(".thumbnail-link").click(function (e) {
+            e.preventDefault(); // منع الرابط الافتراضي
+            var src = $(this).attr("href");
+            openModal(src);
+        });
+
+        // تأكيد أن Carousel الصور قابلة للنقر
+        $(".carousel-inner img").css("cursor", "pointer").click(function () {
+            var src = $(this).attr("src");
+            openModal(src);
+        });
+    });
+
+        $(".thumbnail-link").click(function (e) {
+        e.preventDefault();
+        var src = $(this).attr("href");
+        openModal(src);
+    });
+
+</script>

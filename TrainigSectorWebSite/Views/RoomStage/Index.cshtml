@@ -31,48 +31,45 @@
                         </div>
 
 
-                        <div class="row" style="align-items: center; display: flex; direction: ltr;">
-                            @foreach (var project in Model)
-                            {
-                                <div class="col-md-4 ">
+                      @{
+    int count = 0;
+}
 
-                                    <section>
-                                        <!--=== Img V2 ===-->
+@foreach (var project in Model)
+{
+    if (count % 3 == 0)
+    {
+        @:<div class="row mb-4">
+    }
 
-                                        <div class="high-rated techs">
+    <div class="col-md-4 col-sm-8">
+        <section>
+            <div class="high-rated techs">
+                <div class="item">
+                    <img class="img-responsive img-bordered"
+                         alt=""
+                         src="/RoomStage/GetImage?fileName=@project.HallsImages.FirstOrDefault()?.ImagePath">
+                </div>
+            </div>
 
-                                            <div class="item">
-                                                <img class="img-responsive img-bordered " alt="" src="/RoomStage/GetImage?fileName=@project.HallsImages.FirstOrDefault()?.ImagePath">
-                                                <img class="img-responsive"  />
+            <div class="bg margin-bottom-25">
+                @((culture == "ar") ? project.DescriptionAr : project.DescriptionEn)
+            </div>
+        </section>
+    </div>
 
-                                            </div>
+    count++;
 
-                                        </div>
-                                        <div class="bg margin-bottom-25">
-                                            <div class="blog-twitter-inner">
-                                                <dl class="dl-horizontal">
+    if (count % 3 == 0)
+    {
+        @:</div>
+    }
+}
 
-                                                    <dd>
-                                                        @((culture == "ar") ? project.DescriptionAr : project.DescriptionEn)
-                                                    </dd>
-                                                </dl>
-                                            </div>
-                                        </div>
-
-                                        <!--=== End Img V2 ===-->
-                                    </section>
-
-
-
-                                </div>
-                            }
-                       
-
-                           
-
-
-
-                        </div>
+@if (count % 3 != 0)
+{
+    @:</div>
+}
 
 
 
