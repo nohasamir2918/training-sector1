@@ -36,9 +36,7 @@ namespace TrainigSectorWebSite.Controllers
          pageName: _localizer["NewsDetails"],
          activePage: _localizer["NewsDetails"]
 );
-            var projectImagesList = await _EntityImageService.FindAsync(
-          x => x.EntityImagesTableTypeId == 2 && x.IsDeleted != true);
-
+          
 
             var project = await _EntityImageService.GetByIdAsync(Id);
 
@@ -47,6 +45,8 @@ namespace TrainigSectorWebSite.Controllers
 
             var viewModelList = _mapper.Map<NewsVM>(project);
 
+            var projectImagesList = await _EntityImageService.FindAsync(
+        x => x.EntityImagesTableTypeId == 2 && x.IsDeleted != true);
 
 
             if (projectImagesList.Where(a => a.EntityId == viewModelList.Id).ToList().Count > 0)
