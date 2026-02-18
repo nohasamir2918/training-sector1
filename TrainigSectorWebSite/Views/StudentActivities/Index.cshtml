@@ -28,45 +28,47 @@
                         </div>
 
 
-                        <div class="row" style="align-items: center; display: flex; direction: ltr;">
-                            @foreach (var activity in Model)
-                            {
-                                <div class="col-md-4 ">
+                      @{
+    int count = 0;
+}
 
-                                    <section>
-                                        <!--=== Img V2 ===-->
+@foreach (var activity in Model)
+{
+    if (count % 3 == 0)
+    {
+        var dir = (culture == "ar") ? "rtl" : "ltr";
+     @:<div class="row mb-4" style="direction:@dir;">
+    }
 
-                                        <div class="high-rated techs">
+    <div class="col-md-4 col-sm-6">
+        <section>
+            <div class="high-rated techs">
+                <div class="item">
+                    <img class="img-responsive img-bordered"
+                         alt=""
+                         src="/StudentActivities/GetImage?fileName=@activity.ImagePath">
+                </div>
+            </div>
 
-                                            <div class="item">
-                                                <img class="img-responsive img-bordered " alt="" src="/StudentActivities/GetImage?fileName=@activity.ImagePath">
+       <div class="bg margin-bottom-25" style="text-align:@(culture == "ar" ? "right" : "left")">
+    @((culture == "ar") ? activity.DescriptionAr : activity.DescriptionEn)
+</div>
+        </section>
+    </div>
 
-                                            </div>
+    count++;
 
-                                        </div>
-                                        <div class="bg margin-bottom-25">
-                                            <div class="blog-twitter-inner">
-                                                <dl class="dl-horizontal">
+    if (count % 3 == 0)
+    {
+        @:</div>
+    }
+}
 
-                                                    <dd>
-                                                        @((culture == "ar") ? @activity.DescriptionAr : @activity.DescriptionEn)
-                                                    
-                                                    </dd>
-                                                </dl>
-                                            </div>
-                                        </div>
+@if (count % 3 != 0)
+{
+    @:</div>
+}
 
-                                        <!--=== End Img V2 ===-->
-                                    </section>
-
-
-
-                                </div>
-                            }
-                            
-
-
-                        </div>
 
 
 
