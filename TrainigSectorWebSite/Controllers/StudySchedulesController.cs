@@ -37,45 +37,88 @@ namespace TrainigSectorWebSite.Controllers
         }
 
         // Id = EducationalFacilitiesId
-        public async Task<IActionResult> Index(int Id = 0)
+        public async Task<IActionResult> Index(int Id = 0 , int IdType=0)
         {
-            if (Id == 1)
+            if (IdType==1)
             {
-                SetBreadcrumb(
-                 mapPath: _localizer["LeadershipDevelopmentCenter"],
-                 pageName: _localizer["StudySchedules"],
-                 activePage: _localizer["StudySchedules"]);
-            }
-            else if (Id == 2)
-            {
-                SetBreadcrumb(
-                mapPath: _localizer["AdvancedTechnicalInstituteForIndustries"],
-                pageName: _localizer["StudySchedules"],
-                activePage: _localizer["StudySchedules"]);
-            }
-            else if (Id == 3)
-            {
-                SetBreadcrumb(
-                mapPath: _localizer["ElSalamAppliedTechnologySecondarySchool"],
-                pageName: _localizer["StudySchedules"],
-                activePage: _localizer["StudySchedules"]);
+                if (Id == 1)
+                {
+                    SetBreadcrumb(
+                     mapPath: _localizer["LeadershipDevelopmentCenter"],
+                     pageName: _localizer["StudySchedules"],
+                     activePage: _localizer["StudySchedules"]);
+                }
+                else if (Id == 2)
+                {
+                    SetBreadcrumb(
+                    mapPath: _localizer["AdvancedTechnicalInstituteForIndustries"],
+                    pageName: _localizer["StudySchedules"],
+                    activePage: _localizer["StudySchedules"]);
+                }
+                else if (Id == 3)
+                {
+                    SetBreadcrumb(
+                    mapPath: _localizer["ElSalamAppliedTechnologySecondarySchool"],
+                    pageName: _localizer["StudySchedules"],
+                    activePage: _localizer["StudySchedules"]);
 
+                }
+                else if (Id == 4)
+                {
+                    SetBreadcrumb(
+                    mapPath: _localizer["HelwanSecondarySchoolForAppliedTechnology"],
+                    pageName: _localizer["StudySchedules"],
+                    activePage: _localizer["StudySchedules"]);
+                }
+                else
+                {
+                    SetBreadcrumb(
+                    mapPath: _localizer["TechnologicalCollege"],
+                    pageName: _localizer["StudySchedules"],
+                    activePage: _localizer["StudySchedules"]);
+                }
             }
-            else if (Id == 4)
+            else if (IdType == 2)
             {
-                SetBreadcrumb(
-                mapPath: _localizer["HelwanSecondarySchoolForAppliedTechnology"],
-                pageName: _localizer["StudySchedules"],
-                activePage: _localizer["StudySchedules"]);
+                if (Id == 1)
+                {
+                    SetBreadcrumb(
+                     mapPath: _localizer["LeadershipDevelopmentCenter"],
+                     pageName: _localizer["ExamSchedules"],
+                     activePage: _localizer["ExamSchedules"]);
+                }
+                else if (Id == 2)
+                {
+                    SetBreadcrumb(
+                    mapPath: _localizer["AdvancedTechnicalInstituteForIndustries"],
+                    pageName: _localizer["ExamSchedules"],
+                    activePage: _localizer["ExamSchedules"]);
+                }
+                else if (Id == 3)
+                {
+                    SetBreadcrumb(
+                    mapPath: _localizer["ElSalamAppliedTechnologySecondarySchool"],
+                    pageName: _localizer["ExamSchedules"],
+                    activePage: _localizer["ExamSchedules"]);
+
+                }
+                else if (Id == 4)
+                {
+                    SetBreadcrumb(
+                    mapPath: _localizer["HelwanSecondarySchoolForAppliedTechnology"],
+                    pageName: _localizer["ExamSchedules"],
+                    activePage: _localizer["ExamSchedules"]);
+                }
+                else
+                {
+                    SetBreadcrumb(
+                    mapPath: _localizer["TechnologicalCollege"],
+                    pageName: _localizer["ExamSchedules"],
+                    activePage: _localizer["ExamSchedules"]);
+                }
             }
-            else
-            {
-                SetBreadcrumb(
-                mapPath: _localizer["TechnologicalCollege"],
-                pageName: _localizer["StudySchedules"],
-                activePage: _localizer["StudySchedules"]);
-            }
-            bool isInstitute = (Id == 2);
+
+                bool isInstitute = (Id == 2);
             ViewBag.IsInstitute = isInstitute;
 
             // السنة الدراسية (متفلترة حسب الجهة)
@@ -108,8 +151,10 @@ namespace TrainigSectorWebSite.Controllers
 
             return View(new StudyScheduleVM
             {
-                EducationalFacilitiesId = Id
+                EducationalFacilitiesId = Id,
+                IdType = IdType
             });
+
         }
 
 
@@ -144,7 +189,7 @@ namespace TrainigSectorWebSite.Controllers
         //    );
 
 
-
+        private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change to your folder
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DownloadSchedule(StudyScheduleVM model)
@@ -164,6 +209,7 @@ namespace TrainigSectorWebSite.Controllers
                 ) &&
                 x.IsActive &&
                 x.IsDeleted != true
+                && x.TableTypeId == model.IdType
             );
 
             if (fileEntity == null || string.IsNullOrEmpty(fileEntity.FirstOrDefault().FilePath))
@@ -177,11 +223,8 @@ namespace TrainigSectorWebSite.Controllers
             //    "wwwroot",
             //    fileEntity.FilePath
             //);
-            var fullPath = Path.Combine(
-               Directory.GetCurrentDirectory(),
-               "wwwroot",
-               ""
-           );
+            var fullPath = Path.Combine(_basePath, fileEntity.FirstOrDefault().FilePath).Replace("\\", "/");
+          
             if (!System.IO.File.Exists(fullPath))
             {
                 TempData["Error"] = "الملف غير موجود";
@@ -227,7 +270,7 @@ namespace TrainigSectorWebSite.Controllers
     int educationalLevelId,
     int termId,
     int departmentsandbranchesId,
-    int specializationId = 0)
+    int specializationId = 0, int IdType=0)
         {
             if (educationalLevelId == 0 || termId == 0 || departmentsandbranchesId == 0)
                 return Json(new { exists = false });
@@ -237,7 +280,7 @@ namespace TrainigSectorWebSite.Controllers
                 x.TermsId == termId &&
                 x.DepartmentsandbranchesId == departmentsandbranchesId &&
                 (specializationId == 0 || x.SpecializationId == specializationId) &&
-                x.TableTypeId == 1 &&
+                x.TableTypeId == IdType &&
                 x.IsActive &&
                 x.IsDeleted != true
             );
