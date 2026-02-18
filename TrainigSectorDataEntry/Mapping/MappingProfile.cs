@@ -6,6 +6,7 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
+        CreateMap<CommunityAndInternationalEngagement, CommunityAndInternationalEngagementVm>().ReverseMap();
         CreateMap<AlertsAndAdvertisment, AlertsAndAdvertismentVM>().ReverseMap();
         CreateMap<ComplaintsAndSuggestion, ComplaintsAndSuggestionVM>().ReverseMap();
         CreateMap<ContactU, ContactUVM>().ReverseMap();
