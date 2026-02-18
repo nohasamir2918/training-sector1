@@ -18,6 +18,10 @@ public partial class TrainingSectorDbContext : DbContext
 
     public virtual DbSet<AlertsAndAdvertisment> AlertsAndAdvertisments { get; set; }
 
+    public virtual DbSet<CommunityAndInternationalEngagement> CommunityAndInternationalEngagements { get; set; }
+
+    public virtual DbSet<CommunityAndInternationalEngagementsImage> CommunityAndInternationalEngagementsImages { get; set; }
+
     public virtual DbSet<ComplaintsAndSuggestion> ComplaintsAndSuggestions { get; set; }
 
     public virtual DbSet<ContactU> ContactUs { get; set; }
@@ -31,6 +35,8 @@ public partial class TrainingSectorDbContext : DbContext
     public virtual DbSet<EducationalFacility> EducationalFacilities { get; set; }
 
     public virtual DbSet<EducationalLevel> EducationalLevels { get; set; }
+
+    public virtual DbSet<EntityImage> EntityImages { get; set; }
 
     public virtual DbSet<ExamSchedual> ExamScheduals { get; set; }
 
@@ -49,8 +55,6 @@ public partial class TrainingSectorDbContext : DbContext
     public virtual DbSet<QualityCertificate> QualityCertificates { get; set; }
 
     public virtual DbSet<Result> Results { get; set; }
-
-    public virtual DbSet<Service> Services { get; set; }
 
     public virtual DbSet<Slider> Sliders { get; set; }
 
@@ -95,7 +99,6 @@ public partial class TrainingSectorDbContext : DbContext
             //ignore
         }
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AlertsAndAdvertisment>(entity =>
@@ -108,6 +111,26 @@ public partial class TrainingSectorDbContext : DbContext
                 .HasForeignKey(d => d.EducationalFacilitiesId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AlertsAndAdvertisment_EducationalFacilities");
+        });
+
+        modelBuilder.Entity<CommunityAndInternationalEngagement>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_Services");
+
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
+            entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
+        });
+
+        modelBuilder.Entity<CommunityAndInternationalEngagementsImage>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.CommunityAndInternationalEngagements).WithMany(p => p.InverseCommunityAndInternationalEngagements)
+                .HasForeignKey(d => d.CommunityAndInternationalEngagementsId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_CommunityAndInternationalEngagementsImages_CommunityAndInternationalEngagementsImages");
         });
 
         modelBuilder.Entity<ComplaintsAndSuggestion>(entity =>
@@ -194,6 +217,14 @@ public partial class TrainingSectorDbContext : DbContext
                 .HasForeignKey(d => d.EducationalFacilitiesId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_EducationalLevel_EducationalFacilities");
+        });
+
+        modelBuilder.Entity<EntityImage>(entity =>
+        {
+            entity.Property(e => e.EntityType).HasMaxLength(50);
+            entity.Property(e => e.TitleAr).HasMaxLength(500);
+            entity.Property(e => e.TitleEn).HasMaxLength(500);
+            entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
         });
 
         modelBuilder.Entity<ExamSchedual>(entity =>
@@ -305,13 +336,6 @@ public partial class TrainingSectorDbContext : DbContext
                 .HasForeignKey(d => d.EducationalLevelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Results_EducationalLevel");
-        });
-
-        modelBuilder.Entity<Service>(entity =>
-        {
-            entity.Property(e => e.TitleAr).HasMaxLength(500);
-            entity.Property(e => e.TitleEn).HasMaxLength(500);
-            entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
         });
 
         modelBuilder.Entity<Slider>(entity =>

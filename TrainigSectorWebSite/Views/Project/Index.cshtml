@@ -34,7 +34,7 @@
                                 {
                                        <div class="col-md-4 sm-margin-bottom-30">
                                         <div class="news-v2-badge">
-                                            <img class="img-responsive" src="/News/GetImage?fileName=@project.ProjectImages.FirstOrDefault()?.ImagePath" />
+                                            <img class="img-responsive" src="/Project/GetImage?fileName=@project.ProjectImages.FirstOrDefault()?.ImagePath" />
                                             <p>
                                                 <span>@project.UserCreationDate?.Day</span>
                                                 <small>@project.UserCreationDate?.ToString("MMMM", new System.Globalization.CultureInfo(culture))</small>

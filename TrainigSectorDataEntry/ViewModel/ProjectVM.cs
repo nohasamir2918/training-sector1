@@ -51,7 +51,7 @@ namespace TrainigSectorDataEntry.ViewModel
 
         public virtual EducationalFacility? EducationalFacilities { get; set; } = null!;
 
-        public virtual ICollection<ProjectImage> ProjectImages { get; set; } = new List<ProjectImage>();
+        public virtual ICollection<EntityImage> ProjectImages { get; set; } = new List<EntityImage>();
         public List<IFormFile>? UploadedImages { get; set; }
         public List<int?> DeletedImageIds { get; set; } = new List<int?>();
     }

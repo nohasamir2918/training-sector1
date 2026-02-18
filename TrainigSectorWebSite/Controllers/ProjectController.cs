@@ -5,6 +5,7 @@ using Microsoft.Extensions.Localization;
 using TrainigSectorDataEntry.Interface;
 using TrainigSectorDataEntry.Logging;
 using TrainigSectorDataEntry.Models;
+using TrainigSectorDataEntry.Services;
 using TrainigSectorDataEntry.ViewModel;
 
 namespace TrainigSectorWebSite.Controllers
@@ -14,17 +15,17 @@ namespace TrainigSectorWebSite.Controllers
         
 
         private readonly IGenericService<Project> _ProjectsService;
-      
 
-    
+        private readonly IGenericService<EntityImage> _EntityImageService;
+
         IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
         private readonly ILoggerRepository _logger;
-        public ProjectController(IStringLocalizer<SharedResource> localizer, IGenericService<Project> ProjectsService, IMapper mapper, ILoggerRepository logger)
+        public ProjectController(IStringLocalizer<SharedResource> localizer, IGenericService<Project> ProjectsService, IMapper mapper, ILoggerRepository logger, IGenericService<EntityImage> EntityImageService)
         {
             _ProjectsService = ProjectsService;
-           
-            
+
+            _EntityImageService = EntityImageService;
             _localizer = localizer;
             _mapper = mapper;
             _logger = logger;
@@ -72,15 +73,25 @@ namespace TrainigSectorWebSite.Controllers
 
                 var projectsList = await _ProjectsService.GetAllAsyncByEducationalFacilitiesId(
                       false,
-                      Id,
-                      x => x.ProjectImages
+                      Id
 
                   );
+
+            var projectImagesList = await _EntityImageService.FindAsync(
+          x => x.EntityType == "Project" && x.IsDeleted != true);
 
 
             var viewModelList = _mapper.Map<List<ProjectVM>>(projectsList);
 
-        
+            foreach (var item in viewModelList)
+            {
+                if (projectImagesList.Where(a => a.EntityId == item.Id).ToList().Count > 0)
+                {
+
+                    item.ProjectImages = projectImagesList.Where(a => a.EntityId == item.Id).ToList();
+                }
+            }
+
 
             // === PAGINATION ===
             int totalItems = viewModelList.Count;
@@ -104,7 +115,8 @@ namespace TrainigSectorWebSite.Controllers
 
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = Path.Combine(_basePath, fileName);
+           
+            var fullPath = Path.Combine(_basePath, fileName).Replace("\\", "/");// @"D:\SharedStorageTrainigSector\" + fileName;
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();

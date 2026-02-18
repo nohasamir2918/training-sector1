@@ -53,6 +53,10 @@ namespace TrainigSectorDataEntry.Services
           bool includeDeleted = false,
           params Expression<Func<T, object>>[] includes)
           => _repository.GetByFilterAsync(filter, includeDeleted, includes);
+        public async Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _repository.FindAsync(predicate);
+        }
     }
 }
 

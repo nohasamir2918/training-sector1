@@ -388,8 +388,25 @@
                                       
                                             
                                             <ul class="dropdown-menu sub-width">
-                                            @await Component.InvokeAsync("Labs")
-                                            @await Component.InvokeAsync("ChemicalLab")
+                                            <li b-7yhwk8rkqa="" class="dropdown-submenu">
+                                                <a b-7yhwk8rkqa="" href="javascript:void(0);">معامل هندسية  </a>
+                                                <ul b-7yhwk8rkqa="" class="dropdown-menu sub-width">
+                                                    @await Component.InvokeAsync("Labs")
+                                                </ul>
+                                            </li>
+
+                                            <li b-7yhwk8rkqa="" class="dropdown-submenu">
+                                                <a b-7yhwk8rkqa="" href="javascript:void(0);">معامل كيميائية  </a>
+                                                <ul b-7yhwk8rkqa="" class="dropdown-menu sub-width">
+                                                    @await Component.InvokeAsync("ChemicalLab")
+                                                </ul>
+                                            </li>
+
+
+                                        
+
+
+                                           
                                                 @* <li><a href="/Labs/Index/">@Localizer["EngineeringLabs"]</a></li>
                                                 <li><a href="/Labs/Index">@Localizer["ChemicalLabs"]</a></li> *@
                                             </ul>

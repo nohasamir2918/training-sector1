@@ -25,6 +25,7 @@ namespace TrainigSectorDataEntry.Interface
       Expression<Func<T, bool>> filter,
       bool includeDeleted = false,
       params Expression<Func<T, object>>[] includes);
-
+        Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate);
     }
+
 }

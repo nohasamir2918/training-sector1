@@ -21,8 +21,9 @@ namespace TrainigSectorDataEntry.Interface
     bool isDeleted,
     int educationalFacilitiesId,
     Func<IQueryable<T>, IQueryable<T>> include = null
-);
 
+);
+        Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate);
 
     }
 }
