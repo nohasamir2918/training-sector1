@@ -42,22 +42,26 @@ namespace TrainigSectorWebSite.Controllers
 );
            
             var newsList = await _newsService.GetAllAsync(
-            
+             false
+           
          );
             var viewModelList = _mapper.Map<List<NewsVM>>(newsList);
 
-            var projectImagesList = await _EntityImageService.FindAsync(
-           x => x.EntityImagesTableTypeId == 2 && x.IsDeleted != true);
+
+            var NewsImagesList = await _EntityImageService.FindAsync(
+          x => x.EntityImagesTableTypeId == 1 && x.IsDeleted != true);
+
+
+           
 
             foreach (var item in viewModelList)
             {
-                if (projectImagesList.Where(a => a.EntityId == item.Id).ToList().Count > 0)
+                if (NewsImagesList.Where(a => a.EntityId == item.Id).ToList().Count > 0)
                 {
 
-                    item.NewsImages = projectImagesList.Where(a => a.EntityId == item.Id).ToList();
+                    item.NewsImages = NewsImagesList.Where(a => a.EntityId == item.Id).ToList();
                 }
             }
-
 
             // === PAGINATION ===
             int totalItems = viewModelList.Count;
@@ -75,21 +79,14 @@ namespace TrainigSectorWebSite.Controllers
 
         }
 
-        //public IActionResult Index()
-        //{
-        //    ViewData["Breadcrumb_MapPath"] = "معامل";
-        //    ViewData["Breadcrumb_PageName"] = "News";
-        //    ViewData["Breadcrumb_ActivePage"] = "معامل هندسية";
-        //    return View();
-        //}
-
+        
 
         private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change to your folder
 
 
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = Path.Combine(_basePath, fileName);
+            var fullPath = Path.Combine(_basePath, fileName).Replace("\\", "/");
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();

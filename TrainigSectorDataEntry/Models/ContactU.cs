@@ -11,7 +11,7 @@ public partial class ContactU
 
     public string Address { get; set; } = null!;
 
-    public int Telephone { get; set; }
+    public string Telephone { get; set; } = null!;
 
     public int Fax { get; set; }
 

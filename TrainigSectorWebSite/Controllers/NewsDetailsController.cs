@@ -36,17 +36,17 @@ namespace TrainigSectorWebSite.Controllers
          pageName: _localizer["NewsDetails"],
          activePage: _localizer["NewsDetails"]
 );
-            var projectImagesList = await _EntityImageService.FindAsync(
-          x => x.EntityImagesTableTypeId == 2 && x.IsDeleted != true);
+          
 
-
-            var project = await _EntityImageService.GetByIdAsync(Id);
+            var project = await _News.GetByIdAsync(Id);
 
             if (project == null)
                 return NotFound();
 
             var viewModelList = _mapper.Map<NewsVM>(project);
 
+            var projectImagesList = await _EntityImageService.FindAsync(
+        x => x.EntityImagesTableTypeId == 2 && x.IsDeleted != true);
 
 
             if (projectImagesList.Where(a => a.EntityId == viewModelList.Id).ToList().Count > 0)
@@ -66,7 +66,7 @@ namespace TrainigSectorWebSite.Controllers
 
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = Path.Combine(_basePath, fileName);
+            var fullPath = Path.Combine(_basePath, fileName).Replace("\\", "/");
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();
