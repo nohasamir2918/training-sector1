@@ -51,11 +51,12 @@ namespace TrainigSectorWebSite.Controllers
 
 
         }
-        private readonly string _basePath = @"D:\"; // Change to your folder
+        private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change to your folder
 
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = @"D:\" + fileName;
+
+            var fullPath = Path.Combine(_basePath, fileName).Replace("\\", "/");// @"D:\SharedStorageTrainigSector\" + fileName;
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();

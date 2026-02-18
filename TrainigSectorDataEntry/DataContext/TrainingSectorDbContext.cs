@@ -86,6 +86,7 @@ public partial class TrainingSectorDbContext : DbContext
 
     public virtual DbSet<TrainingSector> TrainingSectors { get; set; }
 
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         try
