@@ -2,6 +2,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Localization;
 using TrainigSectorDataEntry.Interface;
 using TrainigSectorDataEntry.Logging;
@@ -14,12 +15,13 @@ namespace TrainigSectorWebSite.Controllers
     {
         private readonly IGenericService<News> _newsService;
         private readonly IGenericService<NewsImage> _newsImagesService;
-
+        private readonly IGenericService<EntityImage> _EntityImageService;
         private readonly IGenericService<TrainingSector> _trainingSectorService;
         IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
         private readonly ILoggerRepository _logger;
-        public NewsController(IStringLocalizer<SharedResource> localizer, IGenericService<News> newsService, IGenericService<NewsImage> newsImagesService, IGenericService<TrainingSector> trainingSectorService, IMapper mapper, ILoggerRepository logger)
+        public NewsController(IStringLocalizer<SharedResource> localizer, IGenericService<News> newsService, IGenericService<NewsImage> newsImagesService, IGenericService<TrainingSector> trainingSectorService, IMapper mapper, 
+            ILoggerRepository logger, IGenericService<EntityImage> EntityImageService)
         {
             _newsService = newsService;
             _newsImagesService = newsImagesService;
@@ -27,6 +29,7 @@ namespace TrainigSectorWebSite.Controllers
             _localizer = localizer;
             _mapper = mapper;
             _logger = logger;
+            _EntityImageService = EntityImageService;
 
         }
 
@@ -39,12 +42,22 @@ namespace TrainigSectorWebSite.Controllers
 );
            
             var newsList = await _newsService.GetAllAsync(
-             false,
-             x => x.NewsImages
+            
          );
             var viewModelList = _mapper.Map<List<NewsVM>>(newsList);
 
-           
+            var projectImagesList = await _EntityImageService.FindAsync(
+           x => x.EntityImagesTableTypeId == 2 && x.IsDeleted != true);
+
+            foreach (var item in viewModelList)
+            {
+                if (projectImagesList.Where(a => a.EntityId == item.Id).ToList().Count > 0)
+                {
+
+                    item.NewsImages = projectImagesList.Where(a => a.EntityId == item.Id).ToList();
+                }
+            }
+
 
             // === PAGINATION ===
             int totalItems = viewModelList.Count;
@@ -69,21 +82,29 @@ namespace TrainigSectorWebSite.Controllers
         //    ViewData["Breadcrumb_ActivePage"] = "معامل هندسية";
         //    return View();
         //}
-        
 
-        private readonly string _basePath = @"D:\"; // Change to your folder
-       
+
+        private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change to your folder
+
+
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = @"D:\SharedStorageTrainigSector\" +  fileName;
+            var fullPath = Path.Combine(_basePath, fileName);
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();
 
+            var provider = new FileExtensionContentTypeProvider();
+
+            if (!provider.TryGetContentType(fullPath, out string contentType))
+            {
+                contentType = "application/octet-stream"; // default لو مش معروف
+            }
+
             var fileBytes = System.IO.File.ReadAllBytes(fullPath);
-            var contentType = "image/jpeg"; // Change if you have png/gif
             return File(fileBytes, contentType);
         }
+
     }
 }
 

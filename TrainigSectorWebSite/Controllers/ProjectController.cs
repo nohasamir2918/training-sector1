@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Localization;
 using TrainigSectorDataEntry.Interface;
 using TrainigSectorDataEntry.Logging;
@@ -113,17 +114,24 @@ namespace TrainigSectorWebSite.Controllers
 
         private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change to your folder
 
+
         public IActionResult GetImage(string fileName)
         {
-           
-            var fullPath = Path.Combine(_basePath, fileName).Replace("\\", "/");// @"D:\SharedStorageTrainigSector\" + fileName;
+            var fullPath = Path.Combine(_basePath, fileName);
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();
 
+            var provider = new FileExtensionContentTypeProvider();
+
+            if (!provider.TryGetContentType(fullPath, out string contentType))
+            {
+                contentType = "application/octet-stream"; // default لو مش معروف
+            }
+
             var fileBytes = System.IO.File.ReadAllBytes(fullPath);
-            var contentType = "image/jpeg"; // Change if you have png/gif
             return File(fileBytes, contentType);
         }
+
     }
 }

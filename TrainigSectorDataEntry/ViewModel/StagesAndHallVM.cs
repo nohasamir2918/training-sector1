@@ -42,5 +42,6 @@ namespace TrainigSectorDataEntry.ViewModel
         public virtual TrainingSector TrainigSector { get; set; } = null!;
         public IFormFile? UploadedImage { get; set; }
         public StagesAndHall Room { get; set; }
+        public virtual ICollection<EntityImage> HallsImages { get; set; } = new List<EntityImage>();
     }
 }
