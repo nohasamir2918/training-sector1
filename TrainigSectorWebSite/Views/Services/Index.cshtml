@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrainigSectorDataEntry.ViewModel.ServiceVM>
+﻿@model IEnumerable<TrainigSectorDataEntry.ViewModel.CommunityAndInternationalEngagementVm>
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @using Microsoft.Extensions.Localization
 
@@ -33,7 +33,7 @@
                                 <div class="easy-block-v1">
                                     <img class="img-responsive" src="/Services/GetImage?fileName=@Services.ImagePath" alt="">
                                     <div class="easy-block-v1-badge rgba-purple">
-                                        @((culture == "ar") ? Services.EducationalFacilities.NameAr : Services.EducationalFacilities.NameEn)
+                                        @((culture == "ar") ? Services.TitleAr : Services.TitleEn)
                                      @*    @Localizer["HelwanSecondarySchoolForAppliedTechnology"] *@
                                     </div>
                                 </div>

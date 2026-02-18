@@ -11,17 +11,17 @@ namespace TrainigSectorWebSite.Controllers
 {
     public class ServicesController : BaseController
     {
-        private readonly IGenericService<Service> _Services;
+        private readonly IGenericService<CommunityAndInternationalEngagement> _CommunityAndInternationalEngagement;
         private readonly IGenericService<EducationalFacility> _educationalFacilityService;
         private readonly IMapper _mapper;
         private readonly ILoggerRepository _logger;
         IStringLocalizer<SharedResource> _localizer;
 
-        public ServicesController(IStringLocalizer<SharedResource> localizer,IGenericService<Service> Services,
+        public ServicesController(IStringLocalizer<SharedResource> localizer,IGenericService<CommunityAndInternationalEngagement> CommunityAndInternationalEngagement,
             IGenericService<EducationalFacility> educationalFacilityService, IMapper mapper, ILoggerRepository logger)
         {
             _localizer = localizer;
-            _Services = Services;
+            _CommunityAndInternationalEngagement = CommunityAndInternationalEngagement;
             _educationalFacilityService = educationalFacilityService;
             _mapper = mapper;
             _logger = logger;
@@ -37,7 +37,7 @@ namespace TrainigSectorWebSite.Controllers
 
 
 
-            var services = await _Services.GetAllAsync(
+            var services = await _CommunityAndInternationalEngagement.GetAllAsync(
                     false
                 );
             //foreach (var item in viewModelList)
@@ -48,17 +48,18 @@ namespace TrainigSectorWebSite.Controllers
             //    item.EducationalFacilitiesNameEn = obj.NameEn;
 
             //}
-            var viewModelList = _mapper.Map<List<ServiceVM>>(services);
+            var viewModelList = _mapper.Map<List<CommunityAndInternationalEngagementVm>>(services);
             return View(viewModelList);
 
            
         }
 
-        private readonly string _basePath = @"D:\SharedStorageTrainigSector\"; // Change to your folder
+        private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change to your folder
 
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = Path.Combine(_basePath, fileName);
+
+            var fullPath = Path.Combine(_basePath, fileName).Replace("\\", "/");// @"D:\SharedStorageTrainigSector\" + fileName;
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();
