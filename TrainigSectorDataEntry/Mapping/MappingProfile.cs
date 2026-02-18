@@ -40,7 +40,11 @@ public class MappingProfile : Profile
                o => o.MapFrom(s => s.Specializations))
     .ForMember(d => d.DepartmentsandBranchesImages,
                o => o.MapFrom(s => s.DepartmentsandBranchesImages));
+     CreateMap<Departmentsandbranch, MenuVm>()
+            .ForMember(dest => dest.DepartmentNameAr,
+                opt => opt.MapFrom(src => src.DepatmentType.NameAr))
+            .ForMember(dest => dest.DepartmentNameEn,
+                opt => opt.MapFrom(src => src.DepatmentType.NameEn));
 
-       
     }
 }

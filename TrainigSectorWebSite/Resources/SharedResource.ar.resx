@@ -244,7 +244,7 @@
     <value>وزارة الإنتاج الحربي</value>
   </data>
   <data name="MinistryOfHigherEducation" xml:space="preserve">
-    <value>وزارة التعليم العالي</value>
+    <value>وزارة التعليم العالي و البحث العلمي </value>
   </data>
   <data name="MinistryOfEducation" xml:space="preserve">
     <value>وزارة التربية والتعليم</value>
@@ -322,7 +322,7 @@
     <value>تم إرسال رسالتك بنجاح</value>
   </data>
   <data name="Copyright" xml:space="preserve">
-    <value>حقوق النشر محفوظة</value>
+    <value>حقوق النشر</value>
   </data>
   <data name="InformationSystemsCenter" xml:space="preserve">
     <value>شركة نظم المعلومات والحواسب</value>
