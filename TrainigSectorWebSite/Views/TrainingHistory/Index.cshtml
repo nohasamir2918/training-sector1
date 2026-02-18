@@ -53,7 +53,7 @@
                                                         var img = item.HistoryBerifImages.ElementAt(i);
                                                         <div class="item @(i == 0 ? "active" : "")">
                                                             <img class="img-responsive img-bordered"
-                                                                 src="@img.ImagePath"
+                                                                 src="/TrainingHistory/GetImage?fileName=@img.ImagePath"
                                                                  alt="">
                                                         </div>
                                                     }
@@ -74,9 +74,9 @@
                                                     <a class="fancybox"
                                                        data-rel="gallery-@item.Id"
                                                        title="@title"
-                                                       href="@img.ImagePath">
+                                                       href="/TrainingHistory/GetImage?fileName=@img.ImagePath">
                                                         <img class="img-responsive"
-                                                             src="@img.ImagePath"
+                                                             src="/TrainingHistory/GetImage?fileName=@img.ImagePath"
                                                              alt="">
                                                         <span class="portfolio-box-v2-in"></span>
                                                     </a>

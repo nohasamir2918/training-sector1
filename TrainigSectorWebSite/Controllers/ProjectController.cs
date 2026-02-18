@@ -78,7 +78,7 @@ namespace TrainigSectorWebSite.Controllers
                   );
 
             var projectImagesList = await _EntityImageService.FindAsync(
-          x => x.EntityType == "Project" && x.IsDeleted != true);
+          x => x.EntityImagesTableTypeId == 1 && x.IsDeleted != true);
 
 
             var viewModelList = _mapper.Map<List<ProjectVM>>(projectsList);

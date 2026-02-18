@@ -38,6 +38,8 @@ public partial class TrainingSectorDbContext : DbContext
 
     public virtual DbSet<EntityImage> EntityImages { get; set; }
 
+    public virtual DbSet<EntityImagesTableType> EntityImagesTableTypes { get; set; }
+
     public virtual DbSet<ExamSchedual> ExamScheduals { get; set; }
 
     public virtual DbSet<HistoryBerifImage> HistoryBerifImages { get; set; }
@@ -83,6 +85,7 @@ public partial class TrainingSectorDbContext : DbContext
     public virtual DbSet<TrainingCoursesType> TrainingCoursesTypes { get; set; }
 
     public virtual DbSet<TrainingSector> TrainingSectors { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -221,10 +224,23 @@ public partial class TrainingSectorDbContext : DbContext
 
         modelBuilder.Entity<EntityImage>(entity =>
         {
-            entity.Property(e => e.EntityType).HasMaxLength(50);
             entity.Property(e => e.TitleAr).HasMaxLength(500);
             entity.Property(e => e.TitleEn).HasMaxLength(500);
             entity.Property(e => e.UserCreationDate).HasDefaultValueSql("(getdate())");
+
+            entity.HasOne(d => d.EntityImagesTableType).WithMany(p => p.EntityImages)
+                .HasForeignKey(d => d.EntityImagesTableTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_EntityImages_EntityImagesTableType");
+        });
+
+        modelBuilder.Entity<EntityImagesTableType>(entity =>
+        {
+            entity.ToTable("EntityImagesTableType");
+
+            entity.Property(e => e.Name)
+                .HasMaxLength(500)
+                .IsFixedLength();
         });
 
         modelBuilder.Entity<ExamSchedual>(entity =>
