@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrainigSectorDataEntry.ViewModel.ProjectVM>
+﻿@model TrainigSectorDataEntry.ViewModel.ProjectVM
 @using System.Globalization
 
 @{
@@ -10,8 +10,7 @@
 
 <div class="container content">
 
-    @foreach (var project in Model)
-    {
+    
         <div class="profile margin-bottom-40">
             <div class="profile-body">
                 <div class="row">
@@ -19,13 +18,13 @@
                     <!-- ================== الصور ================== -->
                     <div class="col-md-4">
 
-                        <div id="carousel-@project.Id" class="carousel slide carousel-v1">
+                        <div id="carousel-@Model.Id" class="carousel slide carousel-v1">
                             <div class="carousel-inner">
 
-                                @if (project.ProjectImages != null && project.ProjectImages.Any())
+                                @if (Model.ProjectImages != null && Model.ProjectImages.Any())
                                 {
                                     int i = 0;
-                                    foreach (var img in project.ProjectImages)
+                                    foreach (var img in Model.ProjectImages)
                                     {
                                         <div class="item @(i == 0 ? "active" : "")">
                                             <img class="img-responsive"
@@ -48,13 +47,13 @@
                             </div>
 
                             <a class="left carousel-control"
-                               href="#carousel-@project.Id"
+                               href="#carousel-@Model.Id"
                                data-slide="prev">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
                             <a class="right carousel-control"
-                               href="#carousel-@project.Id"
+                               href="#carousel-@Model.Id"
                                data-slide="next">
                                 <i class="fa fa-angle-right"></i>
                             </a>
@@ -68,15 +67,15 @@
                         <div class="headline">
                             <h3>
                                 @(culture.StartsWith("ar")
-                                    ? project.TitleAr
-                                    : project.TitleEn)
+                                    ? Model.TitleAr
+                                    : Model.TitleEn)
                             </h3>
                         </div>
 
                         <div class="margin-bottom-20">
                             @(culture.StartsWith("ar")
-                                ? project.DescriptionAr
-                                : project.DescriptionEn)
+                                ? Model.DescriptionAr
+                                : Model.DescriptionEn)
                         </div>
 
                     </div>
@@ -84,7 +83,7 @@
                 </div>
             </div>
         </div>
-    }
+    
 
 
    

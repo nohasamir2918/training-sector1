@@ -54,7 +54,7 @@ namespace TrainigSectorDataEntry.ViewModel
 
         public bool IsActive { get; set; }
 
-        public virtual ICollection<NewsImage> NewsImages { get; set; } = new List<NewsImage>();
+        public virtual ICollection<EntityImage> NewsImages { get; set; } = new List<EntityImage>();
 
         public virtual TrainingSector? TrainigSector { get; set; }
         public List<IFormFile>? UploadedImages { get; set; }

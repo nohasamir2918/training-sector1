@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Localization;
 using TrainigSectorDataEntry.Interface;
 using TrainigSectorDataEntry.Logging;
 using TrainigSectorDataEntry.Models;
 using TrainigSectorDataEntry.ViewModel;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace TrainigSectorWebSite.Controllers
 {
@@ -75,7 +77,7 @@ namespace TrainigSectorWebSite.Controllers
               );
 
             var projectImagesList = await _EntityImageService.FindAsync(
-          x => x.EntityType == "Project" && x.IsDeleted != true);
+          x => x.EntityImagesTableTypeId == 1 && x.IsDeleted != true);
 
 
             var project = await _ProjectsService.GetByIdAsync(Id);
@@ -104,19 +106,26 @@ namespace TrainigSectorWebSite.Controllers
 
         }
 
-        private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change to your folder
+private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change to your folder
 
-        public IActionResult GetImage(string fileName)
+
+public IActionResult GetImage(string fileName)
+    {
+        var fullPath = Path.Combine(_basePath, fileName);
+
+        if (!System.IO.File.Exists(fullPath))
+            return NotFound();
+
+        var provider = new FileExtensionContentTypeProvider();
+
+        if (!provider.TryGetContentType(fullPath, out string contentType))
         {
-
-            var fullPath = Path.Combine(_basePath, fileName).Replace("\\", "/");// @"D:\SharedStorageTrainigSector\" + fileName;
-
-            if (!System.IO.File.Exists(fullPath))
-                return NotFound();
-
-            var fileBytes = System.IO.File.ReadAllBytes(fullPath);
-            var contentType = "image/jpeg"; // Change if you have png/gif
-            return File(fileBytes, contentType);
+            contentType = "application/octet-stream"; // default لو مش معروف
         }
+
+        var fileBytes = System.IO.File.ReadAllBytes(fullPath);
+        return File(fileBytes, contentType);
     }
+
+}
 }
