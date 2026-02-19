@@ -9,29 +9,30 @@
     bool isAr = System.Threading.Thread.CurrentThread.CurrentCulture
                     .TwoLetterISOLanguageName == "ar";
 
-    var contact = Model.FirstOrDefault();
+    var contact = Model;
 }
 
 @if (contact != null)
 {
-<div class="container content height-500">
-<div class="profile">
-<div class="profile-body">
-<div class="profile-bio">
-<div id="sky-form3" class="sky-form">
-<fieldset>
+    <div class="container content height-500">
+        <div class="profile">
+            <div class="profile-body">
+                <div class="profile-bio">
+                    <div id="sky-form3" class="sky-form">
+                        <fieldset>
 
-<div class="row headline-center-v2 headline-center-v2-dark title">
-    <h2 class="color-orange">
-        @(isAr ? "اتصل بنا" : "Contact Us")
-    </h2>
-    <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
-</div>
+                            <div class="row headline-center-v2 headline-center-v2-dark title">
+                                <h2 class="color-orange">
+                                    @(isAr ? "اتصل بنا" : "Contact Us")
+                                </h2>
+                                <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
+                            </div>
 
-<div class="row margin-bottom-60">
+                           
 
-<!-- MAP -->
-<div class="col-md-4">
+                                @foreach (var item in contact)
+                                { <div class="row margin-bottom-60">
+                                    <div class="col-md-4">
                                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13796.188862653851!2d31.4367437!3d30.1786452!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145810904d51cffd%3A0x939d8fb26317df08!2sMinistry%20of%20Military%20Production%20Training%20Sector!5e0!3m2!1sen!2seg!4v1765696758451!5m2!1sen!2seg" class="map-size" style="position: relative; overflow: hidden;" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 
@@ -43,29 +44,29 @@
     <i class="fa fa-home"></i>
     <b class="b-color">@(isAr ? "العنوان:" : "Address:")</b>
     <b class="p-10 mail-color">
-        @(isAr ? contact.Address : contact.Address)
+                                                    @(isAr ? item.Address : item.Address)
     </b>
 </li>
 
 <li>
     <i class="fa fa-phone"></i>
     <b class="b-color">@(isAr ? "التليفون:" : "Telephone:")</b>
-    <b class="p-10 mail-color">@contact.Telephone</b>
+                                                <b class="p-10 mail-color">@item.Telephone</b>
 </li>
 
 <li>
     <i class="fa fa-fax"></i>
     <b class="b-color">@(isAr ? "الفاكس:" : "Fax:")</b>
-    <b class="p-10 mail-color">@contact.Fax</b>
+                                                <b class="p-10 mail-color">@item.Fax</b>
 </li>
 
 <li>
     <i class="fa fa-envelope"></i>
     <b class="b-color">@(isAr ? "البريد الإلكتروني:" : "Email:")</b>
     <b class="p-10">
-        <a href="mailto:@contact.Email" class="mail-color">
+                                                    <a href="mailto:@item.Email" class="mail-color">
 
-                                                    <span class="mail-color">   @contact.Email </span>
+                                                        <span class="mail-color">   @item.Email </span>
         </a>
     </b>
 </li>
@@ -74,6 +75,10 @@
 </div>
 
 </div>
+                                }
+
+                                    <!-- MAP -->
+
 </fieldset>
 </div>
 </div>
