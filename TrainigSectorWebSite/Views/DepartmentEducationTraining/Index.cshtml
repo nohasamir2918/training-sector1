@@ -22,42 +22,51 @@
 
                         @foreach (var dept in group)
                         {
-                            <div class="carousel slide carousel-v1 margin-bottom-30" id="carousel-@dept.Id">
-                                <div class="carousel-inner">
+                            if (dept.DepartmentsandBranchesImages != null
+                            && dept.DepartmentsandBranchesImages.Any())
+                            {
+                                <div class="carousel slide carousel-v1 margin-bottom-30" id="carousel-@dept.Id">
+                                    <div class="carousel-inner">
 
-                                    @for (int i = 0; i < dept.DepartmentsandBranchesImages.Count; i++)
-                                    {
-                                        var img = dept.DepartmentsandBranchesImages.ElementAt(i);
-                                        var activeClass = i == 0 ? "active" : "";
+                                        @for (int i = 0; i < dept.DepartmentsandBranchesImages.Count; i++)
+                                        {
+                                            var img = dept.DepartmentsandBranchesImages.ElementAt(i);
+                                            var activeClass = i == 0 ? "active" : "";
 
-                                        <div class="item @activeClass">
-                                            <center>
-                                                <img class="img-responsive" src="/DepartmentEducationTraining/GetImage?fileName=@img.ImagePath"
-                                                     height="302"
-                                                     width="600"
-                                                     alt="" />
-                                            </center>
+                                            <div class="item @activeClass">
+                                                <center>
+                                                    <img class="img-responsive"
+                                                         src="/DepartmentEducationTraining/GetImage?fileName=@img.ImagePath"
+                                                         height="302"
+                                                         width="600"
+                                                         alt="" />
+                                                </center>
 
-                                            <div class="carousel-caption">
-                                                <h4 class="color-orange">
-                                                    @(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ar")
-                                                        ? dept.NameAr
-                                                        : dept.NameEn)
-                                                </h4>
+                                                <div class="carousel-caption">
+                                                    <h4 class="color-orange">
+                                                        @(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ar")
+                                                            ? dept.NameAr
+                                                            : dept.NameEn)
+                                                    </h4>
+                                                </div>
                                             </div>
+                                        }
+                                    </div>
+
+                                    @* الأسهم تظهر فقط لو في أكتر من صورة *@
+                                    @if (dept.DepartmentsandBranchesImages.Count > 1)
+                                    {
+                                        <div class="carousel-arrow">
+                                            <a data-slide="prev" href="#carousel-@dept.Id" class="left carousel-control">
+                                                <i class="fa fa-angle-left"></i>
+                                            </a>
+                                            <a data-slide="next" href="#carousel-@dept.Id" class="right carousel-control">
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
                                         </div>
                                     }
                                 </div>
-
-                                <div class="carousel-arrow">
-                                    <a data-slide="prev" href="#carousel-@dept.Id" class="left carousel-control">
-                                        <i class="fa fa-angle-left"></i>
-                                    </a>
-                                    <a data-slide="next" href="#carousel-@dept.Id" class="right carousel-control">
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </div>
+                            }
                         }
                     </div>
 

@@ -1,6 +1,7 @@
 ﻿using System.Drawing.Printing;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using TrainigSectorDataEntry.DataContext;
@@ -57,11 +58,6 @@ namespace TrainigSectorWebSite.Controllers
            
 
 
-
-           
-
-
-
             // === PAGINATION ===
             int totalItems = vm.Count;
             int totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
@@ -77,17 +73,24 @@ namespace TrainigSectorWebSite.Controllers
             return View(pagedData);
 
         }
-        private readonly string _basePath = @"D:\SharedStorageTrainigSector\"; // Change to your folder
+        private readonly string _basePath = @"D:\SharedStorageTrainigSector"; // Change to your folder
+
 
         public IActionResult GetImage(string fileName)
         {
-            var fullPath = @"D:\" + fileName;
+            var fullPath = Path.Combine(_basePath, fileName).Replace("\\", "/");
 
             if (!System.IO.File.Exists(fullPath))
                 return NotFound();
 
+            var provider = new FileExtensionContentTypeProvider();
+
+            if (!provider.TryGetContentType(fullPath, out string contentType))
+            {
+                contentType = "application/octet-stream"; // default لو مش معروف
+            }
+
             var fileBytes = System.IO.File.ReadAllBytes(fullPath);
-            var contentType = "image/jpeg"; // Change if you have png/gif
             return File(fileBytes, contentType);
         }
     }

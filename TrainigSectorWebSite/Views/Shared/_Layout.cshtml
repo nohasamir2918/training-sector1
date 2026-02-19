@@ -270,8 +270,8 @@
                                                     <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
 
                                                     <ul class="dropdown-menu sub-width">
-                                                        <li><a href="/StudySchedules/Index/2">@Localizer["StudySchedules"]</a></li>
-                                                        <li><a href="/ExamSchedules/Index">@Localizer["ExamSchedules"]</a></li>
+                                                    <li><a href="/StudySchedules/Index?id=2&idType=1">@Localizer["StudySchedules"]</a></li>
+                                                    <li><a href="/StudySchedules/Index?id=2&idType=2">@Localizer["ExamSchedules"]</a></li>
                                                         <li><a href="/StudentActivities/Index/2">@Localizer["StudentActivities"]</a></li>
                                                         <li><a href="/Announcements/Index/2">@Localizer["AnnouncementsAlerts"]</a></li>
                                                         <li><a href="/StudentResults/Index">@Localizer["StudentResults"]</a></li>
@@ -299,8 +299,8 @@
                                                     <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
 
                                                     <ul class="dropdown-menu sub-width">
-                                                        <li><a href="/StudySchedules/Index/12">@Localizer["StudySchedules"]</a></li>
-                                                        <li><a href="/ExamSchedules/Index">@Localizer["ExamSchedules"]</a></li>
+                                                    <li><a href="/StudySchedules/Index?id=12&idType=1">@Localizer["StudySchedules"]</a></li>
+                                                    <li><a href="/StudySchedules/Index?id=12&idType=2">@Localizer["ExamSchedules"]</a></li>
                                                         <li><a href="/StudentActivities/Index/12">@Localizer["StudentActivities"]</a></li>
                                                         <li><a href="/Announcements/Index/12">@Localizer["AnnouncementsAlerts"]</a></li>
                                                         <li><a href="/StudentResults/Index">@Localizer["StudentResults"]</a></li>
@@ -323,8 +323,8 @@
                                                 <li class="dropdown-submenu">
                                                     <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
                                                     <ul class="dropdown-menu sub-width">
-                                                        <li><a href="/StudySchedules/Index/4">@Localizer["StudySchedules"]</a></li>
-                                                        <li><a href="/ExamSchedules/Index">@Localizer["ExamSchedules"]</a></li>
+                                                    <li><a href="/StudySchedules/Index?id=4&idType=1">@Localizer["StudySchedules"]</a></li>
+                                                    <li><a href="/StudySchedules/Index?id=4&idType=2">@Localizer["ExamSchedules"]</a></li>
                                                         <li><a href="/StudentActivities/Index/4">@Localizer["StudentActivities"]</a></li>
                                                         <li><a href="/Announcements/Index/4">@Localizer["AnnouncementsAlerts"]</a></li>
                                                         <li><a href="/StudentResults/Index">@Localizer["StudentResults"]</a></li>
@@ -348,8 +348,8 @@
                                                 <li class="dropdown-submenu">
                                                     <a href="javascript:void(0);">@Localizer["StudentServices"]</a>
                                                     <ul class="dropdown-menu sub-width">
-                                                        <li><a href="/StudySchedules/Index/3">@Localizer["StudySchedules"]</a></li>
-                                                        <li><a href="/ExamSchedules/Index">@Localizer["ExamSchedules"]</a></li>
+                                                    <li><a href="/StudySchedules/Index?id=3&idType=1">@Localizer["StudySchedules"]</a></li>
+                                                    <li><a href="/StudySchedules/Index?id=3&idType=2">@Localizer["ExamSchedules"]</a></li>
                                                         <li><a href="/StudentActivities/Index/3">@Localizer["StudentActivities"]</a></li>
                                                         <li><a href="/Announcements/Index/3">@Localizer["AnnouncementsAlerts"]</a></li>
                                                         <li><a href="/StudentResults/Index">@Localizer["StudentResults"]</a></li>
@@ -389,14 +389,15 @@
                                             
                                             <ul class="dropdown-menu sub-width">
                                             <li b-7yhwk8rkqa="" class="dropdown-submenu">
-                                                <a b-7yhwk8rkqa="" href="javascript:void(0);">معامل هندسية  </a>
+                                                <a b-7yhwk8rkqa="" href="javascript:void(0);">
+                                                    @Localizer["EngineeringLabs"]  </a>
                                                 <ul b-7yhwk8rkqa="" class="dropdown-menu sub-width">
                                                     @await Component.InvokeAsync("Labs")
                                                 </ul>
                                             </li>
 
                                             <li b-7yhwk8rkqa="" class="dropdown-submenu">
-                                                <a b-7yhwk8rkqa="" href="javascript:void(0);">معامل كيميائية  </a>
+                                                <a b-7yhwk8rkqa="" href="javascript:void(0);">@Localizer["ChemicalLabs"]  </a>
                                                 <ul b-7yhwk8rkqa="" class="dropdown-menu sub-width">
                                                     @await Component.InvokeAsync("ChemicalLab")
                                                 </ul>

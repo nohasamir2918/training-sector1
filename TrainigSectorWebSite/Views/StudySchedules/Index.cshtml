@@ -6,6 +6,7 @@
     <form asp-action="DownloadSchedule" method="post">
 
         <input type="hidden" asp-for="EducationalFacilitiesId" />
+        <input type="hidden" asp-for="IdType" />
 
         <!-- السنة -->
         <div class="form-group">
@@ -110,7 +111,8 @@
                     educationalLevelId: level,
                     termId: term,
                     departmentsandbranchesId: department,
-                    specializationId: specialization
+                    specializationId: specialization,
+                    idType: $('#IdType').val()
                 },
                 success: function (data) {
                     if (data.exists) {
