@@ -7,10 +7,6 @@ namespace TrainigSectorDataEntry.DataContext;
 
 public partial class TrainingSectorDbContext : DbContext
 {
-    public TrainingSectorDbContext()
-    {
-    }
-
     public TrainingSectorDbContext(DbContextOptions<TrainingSectorDbContext> options)
         : base(options)
     {
@@ -85,23 +81,6 @@ public partial class TrainingSectorDbContext : DbContext
     public virtual DbSet<TrainingCoursesType> TrainingCoursesTypes { get; set; }
 
     public virtual DbSet<TrainingSector> TrainingSectors { get; set; }
-
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        try
-        {
-            string c = Directory.GetCurrentDirectory();
-            IConfigurationRoot configuration =
-                new ConfigurationBuilder().SetBasePath(c).AddJsonFile("appsettings.json").Build();
-
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-        }
-        catch
-        {
-            //ignore
-        }
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -174,10 +174,12 @@
                                         <i class="fa fa-globe"></i>
                                       @*   <a href="#" onclick="SwitchToArabic()">English</a>
  *@
-                                        
-                                        <a href="@Url.Action("SetLanguage", "Home", new { culture = switchTo, returnUrl = Context.Request.Path })">
+
+                                    <a href="@Url.Action("SetLanguage", "Home",
+    new { culture = switchTo, returnUrl = Context.Request.Path + Context.Request.QueryString })">
                                             @switchText
                                         </a>
+                                   
 
 
                                     </li>
