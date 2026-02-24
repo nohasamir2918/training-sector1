@@ -80,11 +80,14 @@ namespace TrainigSectorWebSite.Controllers
                     Id = s.Id,
                     NameAr = s.NameAr,
                     NameEn = s.NameEn,
+                   
                     SpecializationImages = s.SpecializationImages
                         .Select(i => new SpecializationImageVM
                         {
                             Id = i.Id,
-                            ImagePath = i.ImagePath
+                            ImagePath = i.ImagePath,
+                            DescriptionAr=i.DescriptionAr,
+                            DescriptionEn=i.DescriptionEn
                         }).ToList()
                 }).ToList()
             }).ToList();

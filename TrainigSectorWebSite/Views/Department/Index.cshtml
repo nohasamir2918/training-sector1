@@ -58,6 +58,11 @@
                                                     <h4 class="color-orange">
                                                         @(culture == "ar" ? spec.NameAr : spec.NameEn)
                                                     </h4>
+                                                    <p>
+                                                        @(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ar")
+                                                            ? img.DescriptionAr
+                                                            : img.DescriptionEn)
+                                                    </p>
                                                 </div>
                                             </div>
 
@@ -86,6 +91,7 @@
                                 <h2 class="text-center f-w">
                                     @(culture == "ar" ? spec.NameAr : spec.NameEn)
                                 </h2>
+                               
                             </div>
 
                         </div>
