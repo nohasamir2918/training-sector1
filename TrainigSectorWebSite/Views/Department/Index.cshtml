@@ -6,6 +6,15 @@
     var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
     var firstDept = Model?.FirstOrDefault();
 }
+<style>
+    .rtl {
+        direction: rtl;
+    }
+
+    .ltr {
+        direction: ltr;
+    }
+</style>
 
 @if (firstDept != null)
 {
@@ -88,7 +97,8 @@
 
                             <!-- SPECIALIZATION NAME -->
                             <div class="col-md-3">
-                                <h2 class="text-center f-w">
+                                            <h2 class="text-center f-w" style="text-align:@(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ar") ? "right" : "left");
+               direction:@(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ar") ? "rtl" : "ltr");">
                                     @(culture == "ar" ? spec.NameAr : spec.NameEn)
                                 </h2>
                                

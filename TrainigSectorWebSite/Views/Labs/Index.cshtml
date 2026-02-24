@@ -44,6 +44,11 @@
                                                         ? dept.NameAr
                                                         : dept.NameEn)
                                                 </h4>
+                                                <p>
+                                                    @(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ar")
+                                                        ? img.DescriptionAr
+                                                        : img.DescriptionEn)
+                                                </p>
                                             </div>
                                         </div>
                                     }

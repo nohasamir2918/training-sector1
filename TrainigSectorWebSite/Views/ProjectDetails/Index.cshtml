@@ -65,7 +65,8 @@
                     <div class="col-md-8">
 
                         <div class="headline">
-                            <h3>
+                        <h3 style="text-align:@(culture.StartsWith("ar") ? "right" : "left");
+               direction:@(culture.StartsWith("ar") ? "rtl" : "ltr");">
                                 @(culture.StartsWith("ar")
                                     ? Model.TitleAr
                                     : Model.TitleEn)

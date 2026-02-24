@@ -24,8 +24,8 @@ namespace TrainigSectorWebSite.Controllers
         {
             SetBreadcrumb(
            mapPath: _localizer["MainPage"],
-           pageName: _localizer["دورات تدريبية"],
-           activePage: _localizer["دورات تدريبية"]
+           pageName: _localizer["TrainingCourses"],
+           activePage: _localizer["TrainingCourses"]
 );
 
 

@@ -6,7 +6,15 @@
 
 @inject IStringLocalizer<TrainigSectorWebSite.SharedResource> SharedLocalizer
 
+<style>
+    .rtl {
+        direction: rtl;
+    }
 
+    .ltr {
+        direction: ltr;
+    }
+</style>
 
 <div class="wrapper">
 
@@ -76,7 +84,8 @@
                     </div>
 
                     <div class="col-md-3">
-                        <h2 class="text-center color-orange f-w">
+                                <h2 class="text-center color-orange f-w" style="text-align:@(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ar") ? "right" : "left");
+               direction:@(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ar") ? "rtl" : "ltr");">
                             @(System.Threading.Thread.CurrentThread.CurrentCulture.Name.StartsWith("ar")
                                 ? @group.FirstOrDefault().NameAr
                                 : @group.FirstOrDefault().NameEn)
