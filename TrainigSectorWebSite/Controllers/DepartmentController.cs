@@ -47,8 +47,8 @@ namespace TrainigSectorWebSite.Controllers
 
 
 
-  var projectsList = await _context.Departmentsandbranches
- .Where(x => x.Id == Id &&x.DepatmentTypeID==2)
+            var projectsList = await _context.Departmentsandbranches
+ .Where(x => x.Id == Id &&x.DepatmentTypeID==2 && x.IsDeleted !=true)
  .Include(x=>x.DepartmentsandBranchesImages)
  .Include(x => x.Specializations)
      .ThenInclude(s => s.SpecializationImages)

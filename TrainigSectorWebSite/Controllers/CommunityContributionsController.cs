@@ -9,7 +9,7 @@ using TrainigSectorDataEntry.ViewModel;
 
 namespace TrainigSectorWebSite.Controllers
 {
-    public class ServicesController : BaseController
+    public class CommunityContributionsController : BaseController
     {
         private readonly IGenericService<CommunityAndInternationalEngagement> _CommunityAndInternationalEngagement;
         private readonly IGenericService<EducationalFacility> _educationalFacilityService;
@@ -17,7 +17,7 @@ namespace TrainigSectorWebSite.Controllers
         private readonly ILoggerRepository _logger;
         IStringLocalizer<SharedResource> _localizer;
 
-        public ServicesController(IStringLocalizer<SharedResource> localizer,IGenericService<CommunityAndInternationalEngagement> CommunityAndInternationalEngagement,
+        public CommunityContributionsController(IStringLocalizer<SharedResource> localizer,IGenericService<CommunityAndInternationalEngagement> CommunityAndInternationalEngagement,
             IGenericService<EducationalFacility> educationalFacilityService, IMapper mapper, ILoggerRepository logger)
         {
             _localizer = localizer;

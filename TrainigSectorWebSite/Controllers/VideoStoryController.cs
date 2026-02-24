@@ -32,8 +32,8 @@ namespace TrainigSectorWebSite.Controllers
         {
             SetBreadcrumb(
             mapPath: _localizer["MainPage"],
-            pageName: _localizer["TrainingHistory"],
-            activePage: _localizer["TrainingHistory"]
+            pageName: _localizer["SuccessStory"],
+            activePage: _localizer["SuccessStory"]
 );
             var result = await _SucessStory.GetAllAsyncByEducationalFacilitiesId(false, ID);
 

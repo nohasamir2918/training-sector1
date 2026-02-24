@@ -7,7 +7,7 @@ using TrainigSectorDataEntry.ViewModel;
 
 namespace TrainigSectorWebSite.Controllers
 {
-    public class OpinionController : Controller
+    public class OpinionController : BaseController
     {
         IStringLocalizer<SharedResource> _localizer;
         private readonly IGenericService<ComplaintsAndSuggestion> _ComplaintsAndSuggestion;
@@ -19,9 +19,12 @@ namespace TrainigSectorWebSite.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ViewData["Breadcrumb_MapPath"] = "معامل";
-            ViewData["Breadcrumb_PageName"] = "Opinion";
-            ViewData["Breadcrumb_ActivePage"] = "معامل هندسية";
+            SetBreadcrumb(
+          mapPath: _localizer["MainPage"],
+          pageName: _localizer["ComplaintsSuggestions"],
+          activePage: _localizer["ComplaintsSuggestions"]
+);
+            
             return View();
         }
 
