@@ -40,7 +40,7 @@ namespace TrainigSectorWebSite.Controllers
                 .Where(x => x.IsActive && x.IsDeleted != true && x.Id==Id)
                 .ToListAsync();
             
-             if (EducationFacility == 7&& departments.FirstOrDefault().DepatmentTypeID==1)
+             if (EducationFacility == 7&& (departments.FirstOrDefault().DepatmentTypeID==1|| departments.FirstOrDefault().DepatmentTypeID == 4))
             {
                 SetBreadcrumb(
                 mapPath: _localizer["TrainingFacilities"],

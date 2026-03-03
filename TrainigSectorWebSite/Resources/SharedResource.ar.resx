@@ -339,4 +339,10 @@
   <data name="TrainingSectorMoMP" xml:space="preserve">
     <value>قطاع التدريب – وزارة الإنتاج الحربي</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="select" xml:space="preserve">
+    <value>اختر</value>
+  </data>
 </root>
