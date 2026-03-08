@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using TrainigSectorDataEntry.Interface;
 using TrainigSectorDataEntry.Models;
+using TrainigSectorDataEntry.Services;
 using TrainigSectorDataEntry.ViewModel;
 
 namespace TrainigSectorWebSite.Controllers
@@ -11,10 +12,12 @@ namespace TrainigSectorWebSite.Controllers
     {
         IStringLocalizer<SharedResource> _localizer;
         private readonly IGenericService<ComplaintsAndSuggestion> _ComplaintsAndSuggestion;
-        public OpinionController(IGenericService<ComplaintsAndSuggestion> ComplaintsAndSuggestion, IStringLocalizer<SharedResource> localizer)
+        private readonly IFileStorageService _FileStorageService;
+        public OpinionController(IGenericService<ComplaintsAndSuggestion> ComplaintsAndSuggestion, IStringLocalizer<SharedResource> localizer, IFileStorageService FileStorageService)
         {
             _ComplaintsAndSuggestion = ComplaintsAndSuggestion;
             _localizer = localizer;
+            _FileStorageService = FileStorageService;
         }
         [HttpGet]
         public IActionResult Index()
@@ -46,6 +49,15 @@ namespace TrainigSectorWebSite.Controllers
 
             using var stream = new FileStream(path, FileMode.Create);
             await model.UploadedFile.CopyToAsync(stream);
+            string? imagePath = null;
+
+            if (model.UploadedFile != null)
+            {
+                imagePath = await _FileStorageService
+                    .UploadImageAsync(model.UploadedFile, "complaints");
+            }
+
+
 
             var entity = new ComplaintsAndSuggestion
             {
