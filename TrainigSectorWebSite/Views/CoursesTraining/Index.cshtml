@@ -22,10 +22,14 @@
                             <section class="col col-8 "> 
                                 <label class="input col col-9">
                                 <select class="form-control" id="courseTypeSelect">
-                                    <option value="0">-- اختر --</option>
+                                    <option value="0">--@SharedLocalizer["select"]--</option>
                                     @foreach (var item in Model)
                                     {
-                                        <option value="@item.Id">@item.NameAr</option>
+                                        <option value="@item.Id">
+                                            @(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "en"
+                                                ? item.NameEn
+                                                : item.NameAr)
+                                        </option>
                                     }
                                         </select> <i class="icon-append fa fa-chevron-circle-down"></i> </label>
                             <div class="label resault col col-3">@SharedLocalizer["TrainingCourseName"]</div>
@@ -40,7 +44,7 @@
                             <div class="panel panel-grey margin-bottom-40">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <i class="fa fa-globe"></i> اسم الدورة
+                                        <i class="fa fa-globe"></i> @SharedLocalizer["TrainingCourseName"]
                                     </h3>
                                 </div>
 
@@ -49,8 +53,8 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>اسم الدورة</th>
-                                                <th>تحميل</th>
+                                                <th>@SharedLocalizer["TrainingCourseName"]</th>
+                                                <th>@SharedLocalizer["Download"]</th>
                                             </tr>
                                         </thead>
                                         <tbody id="coursesTableBody">
@@ -79,54 +83,59 @@
 
 
 
-<script>
-    $('#courseTypeSelect').change(function () {
+    <script>
+       $('#courseTypeSelect').change(function () {
 
-        var typeId = $(this).val();
+           var typeId = $(this).val();
+           var lang = '@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName';
 
-        if (!typeId) {
-            $('#coursesSection').hide();
-            $('#coursesTableBody').empty();
-            return;
-        }
+           if (!typeId) {
+               $('#coursesSection').hide();
+               $('#coursesTableBody').empty();
+               return;
+           }
 
-        $.ajax({
-            url: '/CoursesTraining/GetCoursesByType',
-            type: 'GET',
-            data: { typeId: typeId },
-            success: function (data) {
+           $.ajax({
+               url: '/CoursesTraining/GetCoursesByType',
+               type: 'GET',
+               data: { typeId: typeId, lang: lang },
+               success: function (data) {
 
-                $('#coursesTableBody').empty();
+                   $('#coursesTableBody').empty();
 
-                if (data.length === 0) {
-                    $('#coursesTableBody').append(
-                        '<tr><td colspan="3" class="text-center">لا توجد دورات</td></tr>'
-                    );
-                } else {
-                    $.each(data, function (i, item) {
-                        $('#coursesTableBody').append(`
-                            <tr>
-                                <td class="td-color">${item.index}</td>
-                                <td class="f-w">${item.name}</td>
-                                <td>
-                                    <a href="/CoursesTraining/GetImage?fileName=${item.filePath}"
-                                       class="btn-u btn-u-xs btn-u-dark"
-                                       target="_blank">
-                                        <i class="fa fa-download"></i>
-                                        تحميل التفاصيل
-                                    </a>
+                   if (data.length === 0) {
 
-                                   
+                       var noDataText = lang === "en" ? "No courses found" : "لا توجد دورات";
 
-                                </td>
-                            </tr>
-                        `);
-                    });
-                }
+                       $('#coursesTableBody').append(
+                           `<tr><td colspan="3" class="text-center">${noDataText}</td></tr>`
+                       );
+                   } else {
 
-                $('#coursesSection').show();
-            }
-        });
-    });
+                       var downloadText = lang === "en" ? "Download Details" : "تحميل التفاصيل";
+
+                       $.each(data, function (i, item) {
+                           $('#coursesTableBody').append(`
+                               <tr>
+                                   <td class="td-color">${item.index}</td>
+                                   <td class="f-w">${item.name}</td>
+                                   <td>
+                                       <a href="/CoursesTraining/GetImage?fileName=${item.filePath}"
+                                          class="btn-u btn-u-xs btn-u-dark"
+                                          target="_blank">
+                                           <i class="fa fa-download"></i>
+                                           ${downloadText}
+                                       </a>
+                                   </td>
+                               </tr>
+                           `);
+                       });
+                   }
+
+                   $('#coursesSection').show();
+               }
+           });
+       });
 </script>
+
 

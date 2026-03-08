@@ -339,4 +339,10 @@
   <data name="TrainingSectorMoMP" xml:space="preserve">
     <value>Training Sector – Ministry of Military Production</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="select" xml:space="preserve">
+    <value>select</value>
+  </data>
 </root>

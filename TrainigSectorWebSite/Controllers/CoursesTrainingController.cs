@@ -43,17 +43,21 @@ namespace TrainigSectorWebSite.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> GetCoursesByType(int typeId)
+        public async Task<IActionResult> GetCoursesByType(int typeId, string lang = "ar")
         {
             var courses = await _TrainingCourse.GetAllAsync();
 
             var result = courses
-                .Where(x => x.TrainigCoursesTypesId == typeId )
+                .Where(x => x.TrainigCoursesTypesId == typeId)
                 .Select((x, index) => new
                 {
                     Index = index + 1,
-                    Name = x.NameAr,
-                    FilePath = x.FilePathAr
+                    Name = lang == "en"
+                            ? (x.NameEn ?? x.NameAr)
+                            : x.NameAr,
+                    FilePath = lang == "en"
+                            ? (x.FilePathEn ?? x.FilePathAr)
+                            : x.FilePathAr
                 });
 
             return Json(result);
