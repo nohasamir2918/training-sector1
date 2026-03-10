@@ -45,7 +45,15 @@
                                             <h3>
                                                 <a href="/ProjectDetails/Index/@project.Id" class="new-color">@((culture == "ar") ? project.TitleAr : project.TitleEn)</a>
                                             </h3>
-                                            <p>@((culture == "ar") ? project.DescriptionAr : project.DescriptionEn)</p>
+                                            @{
+                                                var description = (culture == "ar") ? project.DescriptionAr : project.DescriptionEn;
+                                                var words = description?.Split(' ');
+                                                var shortText = words != null && words.Length > 20
+                                                ? string.Join(" ", words.Take(20)) + " ..."
+                                                : description;
+                                            }
+
+                                            <p>@shortText</p>
                                         </div>
                                         
                                     </div>
