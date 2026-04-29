@@ -50,23 +50,23 @@ namespace TrainigSectorWebSite.Controllers
             {
                 SetBreadcrumb(
                 mapPath: _localizer["ElSalamAppliedTechnologySecondarySchool"],
-                pageName: _localizer["CampusDepartments"],
-                activePage: _localizer["CampusDepartments"]);
+                pageName: _localizer["DepartmentsDivisions"],
+                activePage: _localizer["DepartmentsDivisions"]);
 
             }
             else if (Id == 4)
             {
                 SetBreadcrumb(
                 mapPath: _localizer["HelwanSecondarySchoolForAppliedTechnology"],
-                pageName: _localizer["CampusDepartments"],
-                activePage: _localizer["CampusDepartments"]);
+                pageName: _localizer["DepartmentsDivisions"],
+                activePage: _localizer["DepartmentsDivisions"]);
             }
             else
             {
                 SetBreadcrumb(
                 mapPath: _localizer["TechnologicalCollege"],
-                pageName: _localizer["CampusDepartments"],
-                activePage: _localizer["CampusDepartments"]);
+                pageName: _localizer["DepartmentsDivisions"],
+                activePage: _localizer["DepartmentsDivisions"]);
             }
 
 
